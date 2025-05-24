@@ -94,10 +94,11 @@ const currentYear = new Date().getFullYear();
     margin: 0 auto;
   }
 
-  /* On Desktop, if it's a library page, offset the footer for the sidebar */
+  /* On Desktop, if it's a library page, the footer container will now behave like other pages (centered) */
+  /* The margin-left: 280px; rule has been removed to ensure consistent footer positioning. */
   .footer-container.library-page-footer {
     @media (min-width: 769px) { /* Desktop view */
-      margin-left: 280px; /* Offset for the sidebar area */
+      /* margin-left: 280px; /* Offset for the sidebar area */
       /* margin-right: auto; will be handled by the base 'margin: 0 auto' effectively */
     }
   }

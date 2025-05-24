@@ -52,6 +52,8 @@ const { currentPage = '' } = Astro.props; // To highlight active link later if n
     height: 100%;
     border-right: 1px solid #ddd;
     overflow-y: auto; /* For scrollable sidebar if content exceeds height */
+    display: flex; /* Added for better internal content management */
+    flex-direction: column; /* Added for better internal content management */
   }
   h4 {
     margin-top: 0;

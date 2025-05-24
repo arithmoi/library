@@ -37,7 +37,7 @@ const isLibraryPage = Astro.url.pathname.startsWith('/library');
     <div class="main-container">
         {isLibraryPage && <Sidebar />}
         <main class="content-area">
-            <div class="content-wrapper">
+            <div class:list={{ "content-wrapper": true, "library-content-wrapper": isLibraryPage }}>
                 <slot />
             </div>
         </main>
@@ -101,9 +101,9 @@ const isLibraryPage = Astro.url.pathname.startsWith('/library');
         width: 100%;
         position: relative; /* For positioning child elements like a sidebar toggle */
         display: flex; /* Always flex now */
-        padding-top: var(--navbar-height);
+        /* padding-top: var(--navbar-height); Removed: Handled by children now */
         box-sizing: border-box; /* Ensure padding is included in height calculations */
-        margin-bottom: 3rem; /* Add space above the footer */
+        /* margin-bottom: 3rem; /* Removed: Let footer's margin-top: auto handle spacing */
     }
 
     @media (min-width: 769px) { /* Desktop breakpoint */
@@ -113,19 +113,27 @@ const isLibraryPage = Astro.url.pathname.startsWith('/library');
             display: block; /* Ensure it's rendered as a block */
             position: sticky; /* Make it sticky within .main-container */
             top: var(--navbar-height); /* Stick below the navbar */
-            height: calc(100vh - var(--navbar-height)); /* Full viewport height minus navbar */
+            /* height: 100%; */ /* Removed, will use align-self */
+            align-self: stretch; /* Make sidebar stretch to fill .main-container height */
+            padding-top: 0 !important; /* Force remove top padding for desktop */
+            margin-top: 0; /* Explicitly remove any top margin */
             /* width: 280px; -- This is set in Sidebar.astro */
             /* overflow-y: auto; -- This is set in Sidebar.astro */
         }
 
-    body.library-page .content-area {
-        padding-top: 20px; /* Reset top padding for desktop library pages */
+    /* body.library-page .content-area { */
+        /* padding-top: 20px; /* Reset top padding for desktop library pages */
+    /* } */ /* Removed: Handled by general .content-area padding now */
+
+    .content-wrapper.library-content-wrapper {
+        margin-left: 0; /* Align to left on library pages with sidebar */
+        /* Or a small fixed value like margin-left: 20px; if some space is desired */
     }
     }
 
     .content-area {
         flex-grow: 1; /* Takes up remaining space in the flex container */
-        padding: 20px; /* Padding for the overall content area */
+        padding: var(--navbar-height) 20px 20px 20px; /* Top padding for navbar, others remain */
         display: flex; /* To help center the wrapper if needed, or just for structure */
         justify-content: center; /* Center .content-wrapper if .content-area is wider than .content-wrapper's max-width */
         box-sizing: border-box;
@@ -149,8 +157,8 @@ const isLibraryPage = Astro.url.pathname.startsWith('/library');
   /* Sidebar Toggle Button - similar to Navbar's hamburger */
   .sidebar-toggle {
     display: none; /* Hidden by default, shown on mobile */
-    position: fixed; 
-    top: 75px; /* Approx 60px navbar height + 15px margin */ 
+    position: fixed;
+    top: 75px; /* Approx 60px navbar height + 15px margin */
     left: 15px; 
     z-index: 1010; /* Ensure it's above other elements */ 
     cursor: pointer;

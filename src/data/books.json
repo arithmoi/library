@@ -14,5 +14,21 @@
     "author": "Jason Glowney",
     "summary": "An article on Lie groups and Lie algebras.",
     "pdfUrl": "/pdfs/glowney_jason_lie.pdf"
+  },
+  {
+    "type": "article",
+    "title": "An Imaginary Derivation of e",
+    "slug": "imaginary-derivation-e",
+    "author": "Jason Glowney",
+    "summary": "An article on an imaginary derivation of e and related concepts.",
+    "pdfUrl": "/pdfs/glowney_jason_An_Imaginary_Derivation_of_e_and_the_Com.pdf"
+  },
+  {
+    "type": "article",
+    "title": "Asymptotic Light Geometry",
+    "slug": "asymptotic-light-geometry",
+    "author": "Jason Glowney",
+    "summary": "An article on asymptotic light geometry and its relations.",
+    "pdfUrl": "/pdfs/glowney_jason_Asymptotic_Light_Geometry_and_its_Relati.pdf"
   }
 ]
