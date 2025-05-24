@@ -1,0 +1,75 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import booksData from '../../../data/books.json';
+---
+<Layout title="Books | Arithmoi Library" currentPage="/library/books/">
+  <div class="category-page">
+    <h1>Arithmoi Books</h1>
+    <p>Browse through our diverse collection of educational books, articles, and other written resources.</p>
+    
+    <div class="item-grid">
+      {booksData.map(book => (
+        <a href={`/library/books/${book.slug}`} class="item-card book-card">
+          <h4>{book.title}</h4>
+          {book.author && <p class="author"><em>By: {book.author}</em></p>}
+          <p class="summary">{book.summary.substring(0, 100)}{book.summary.length > 100 ? '...' : ''}</p>
+          <span class="read-more">Read More &rarr;</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .category-page h1 {
+    margin-bottom: 0.5rem;
+    font-size: 2.2em;
+  }
+  .category-page > p {
+    margin-bottom: 2rem;
+    font-size: 1.1em;
+    color: #555;
+  }
+  .item-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  .item-card {
+    display: block;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  }
+  .item-card:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transform: translateY(-5px);
+  }
+  .item-card h4 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1.3em;
+    color: #007bff;
+  }
+  .item-card .author {
+    font-size: 0.9em;
+    color: #6c757d;
+    margin-bottom: 0.75rem;
+  }
+  .item-card .summary {
+    font-size: 0.95em;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    color: #495057;
+  }
+  .read-more {
+    font-weight: 600;
+    color: #007bff;
+    font-size: 0.9em;
+  }
+</style>

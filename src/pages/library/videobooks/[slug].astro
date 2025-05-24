@@ -1,0 +1,67 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import videobooksData from '../../../data/videobooks.json';
+
+export async function getStaticPaths() {
+  return videobooksData.map(videobook => ({
+    params: { slug: videobook.slug },
+    props: { videobook },
+  }));
+}
+
+const { videobook } = Astro.props;
+const youtubeEmbedUrl = `https://www.youtube.com/embed/${videobook.youtubeId}`;
+---
+<Layout title={videobook.title + " | Arithmoi Library"} currentPage={`/library/videobooks/${videobook.slug}`}>
+  <article class="videobook-detail">
+    <h1>{videobook.title}</h1>
+    {videobook.presenter && <p class="presenter">Presented by: {videobook.presenter}</p>}
+    {videobook.duration && <p class="duration">Duration: {videobook.duration}</p>}
+
+    <div class="videobook-player">
+      <h3>Watch Now:</h3>
+      <iframe 
+        width="100%" 
+        style="aspect-ratio: 16 / 9;" 
+        src={youtubeEmbedUrl} 
+        title={videobook.title} 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen></iframe>
+    </div>
+    
+    {videobook.description && <p class="description">{videobook.description}</p>}
+  </article>
+</Layout>
+
+<style>
+  .videobook-detail {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+  .videobook-detail h1 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+  }
+  .presenter, .duration {
+    color: #555;
+    margin-bottom: 0.5rem;
+  }
+  .videobook-player {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: #000; /* Optional: for letterboxing if aspect ratio not perfect */
+  }
+  .videobook-player iframe {
+    display: block; /* Removes extra space below iframe */
+    border: none;
+    max-width: 800px; /* Max width for the video player */
+    margin: 0 auto; /* Center the player */
+  }
+  .description {
+    margin-top: 1.5rem;
+    line-height: 1.6;
+  }
+</style>

@@ -1,0 +1,18 @@
+[
+  {
+    "type": "article",
+    "title": "A Novel U(3) Group and Applications",
+    "slug": "novel-u3-group-applications",
+    "author": "Jason Glowney",
+    "summary": "An article discussing a novel U(3) group and its applications to quantum computing and other fields.",
+    "pdfUrl": "/pdfs/glowney_jason_A_Novel_U_3_Group_and_Applications_to_Qu.pdf"
+  },
+  {
+    "type": "article",
+    "title": "Lie Groups and Lie Algebras",
+    "slug": "lie-groups-algebras",
+    "author": "Jason Glowney",
+    "summary": "An article on Lie groups and Lie algebras.",
+    "pdfUrl": "/pdfs/glowney_jason_lie.pdf"
+  }
+]

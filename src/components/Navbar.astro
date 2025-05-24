@@ -1,0 +1,213 @@
+---
+// Navbar component
+---
+<nav>
+  <div class="nav-container">
+    <div class="logo">
+      <img src="/images/library_logo.png" alt="Arithmoi Library Logo" class="navbar-logo-img">
+      <a href="/">Arithmoi Library</a>
+    </div>
+    <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span class="hamburger-box">
+          <span class="hamburger-inner"></span>
+        </span>
+      </button>
+      <ul class="nav-links">
+      <li><a href="/" class:list={{ active: Astro.url.pathname === '/' }}>Home</a></li>
+      <li><a href="/library" class:list={{ active: Astro.url.pathname.startsWith('/library') }}>Library</a></li>
+      <li><a href="/about" class:list={{ active: Astro.url.pathname === '/about' }}>About</a></li>
+      <li><a href="/contact" class:list={{ active: Astro.url.pathname === '/contact' }}>Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<script>
+  const hamburger = document.querySelector('.hamburger');
+  const navLinks = document.querySelector('.nav-links');
+
+  hamburger.addEventListener('click', () => {
+    const isExpanded = hamburger.getAttribute('aria-expanded') === 'true' || false;
+    hamburger.setAttribute('aria-expanded', !isExpanded);
+    navLinks.classList.toggle('is-active');
+    hamburger.classList.toggle('is-active'); // For styling the hamburger itself (e.g., to X)
+  });
+</script>
+
+<style>
+  nav {
+    position: relative; /* For absolute positioning of logo and hamburger */
+    background-color: #ffffff; /* Lighter background */
+    color: #333; /* Darker text for contrast */
+    padding: 0; /* Remove padding from nav, apply to container */
+    min-height: 60px; /* Ensure navbar has a decent height on mobile */
+    border-bottom: 1px solid #e0e0e0; /* Softer border */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+  .nav-container {
+    max-width: 1200px; /* Max width for content */
+    margin: 0 auto; /* Center the container */
+    padding: 1rem 2rem; /* Padding inside the container */
+    display: flex;
+    justify-content: center; /* This will center the .nav-links ul */
+    align-items: center;
+  }
+  .logo {
+    display: flex; /* To align image and text */
+    align-items: center; /* Vertical alignment */
+    position: absolute;
+    left: 20px; /* Distance from the very left edge of the navbar */
+    top: 50%;
+    transform: translateY(-50%);
+    /* Ensure it's vertically centered if its height differs from links */
+    /* top: 50%; */
+    /* transform: translateY(-50%); */
+  }
+  .logo a {
+    color: #007bff; /* Brand color for logo */
+    text-decoration: none;
+    font-size: 1.6em;
+    font-weight: 700; /* Bolder logo */
+  }
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 25px; /* Increased gap */
+  }
+
+  .hamburger {
+    display: none; /* Hidden by default, shown on mobile */
+    cursor: pointer;
+    padding: 12px; /* Changed from 10px to match sidebar-toggle */
+    background: #fff; /* Copied from sidebar-toggle */
+    border: 1px solid #ccc; /* Copied from sidebar-toggle */
+    border-radius: 4px; /* Copied from sidebar-toggle */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Copied from sidebar-toggle */
+    z-index: 1001; /* Above nav-links if they overlap */
+    /* display: flex; Moved to media query */
+    /* align-items: center; Moved to media query */
+    /* justify-content: center; Moved to media query */
+  }
+  .hamburger .hamburger-box {
+    width: 32px; /* Slightly larger icon */
+    height: 26px;
+    display: block; /* Changed from inline-block, parent is flex */
+    position: relative;
+  }
+  .hamburger .hamburger-inner,
+  .hamburger .hamburger-inner::before,
+  .hamburger .hamburger-inner::after {
+    width: 100%;
+    height: 3.5px; /* Slightly thicker lines */
+    background-color: #333;
+    position: absolute;
+    left: 0; /* Added for consistency */
+    border-radius: 3px;
+    transition: transform 0.3s ease;
+  }
+  .hamburger .hamburger-inner {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .hamburger-inner::before,
+  .hamburger-inner::after {
+    content: '';
+    display: block;
+  }
+  .hamburger-inner::before {
+    top: -10px;
+  }
+  .hamburger-inner::after {
+    bottom: -10px;
+  }
+
+  /* Hamburger active state (transform to X) */
+  .hamburger.is-active .hamburger-inner {
+    transform: rotate(45deg);
+  }
+  .hamburger.is-active .hamburger-inner::before {
+    top: 0;
+    transform: rotate(90deg);
+  }
+  .hamburger.is-active .hamburger-inner::after {
+    bottom: 0;
+    transform: rotate(90deg);
+    /* Optionally hide one bar for a cleaner X */
+    opacity: 0;
+  }
+
+  /* Mobile Styles */
+    .navbar-logo-img {
+    height: 30px; /* Adjust as needed */
+    width: auto;
+    margin-right: 10px; /* Space between logo and text */
+  }
+
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none; /* Hidden by default on mobile */
+      position: absolute;
+      top: 100%; /* Position below the navbar */
+      left: 0;
+      right: 0;
+      background-color: #ffffff;
+      flex-direction: column;
+      width: 100%;
+      padding: 1rem 0;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+    .nav-links.is-active {
+      display: flex; /* Show when active */
+    }
+    .nav-links li {
+      width: 100%;
+      text-align: center;
+    }
+    .nav-links li a {
+      display: block;
+      padding: 1rem;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .nav-links li:last-child a {
+      border-bottom: none;
+    }
+    .hamburger {
+      display: flex; /* Changed from block to flex for centering */
+      align-items: center; /* Added for centering */
+      justify-content: center; /* Added for centering */
+      /* Ensure it's on the right, adjust if logo takes too much space or is also absolute */
+      position: absolute; 
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .nav-container {
+      /* Ensure logo and hamburger can coexist if logo is very wide */
+      /* justify-content: space-between; /* Revert for mobile if logo is not absolute */
+    }
+    .logo {
+        /* Adjust if it overlaps with hamburger. Since it's absolute left:0, it should be fine */
+        /* If logo was not absolute, we might need to ensure it doesn't push hamburger off */
+    }
+  }
+  li a {
+    color: #333; /* Standard link color */
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: 500; /* Slightly bolder nav links */
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  li a:hover {
+    background-color: #f0f0f0; /* Subtle hover background */
+    color: #0056b3; /* Darker blue on hover */
+  }
+  li a.active {
+    background-color: #007bff;
+    color: white;
+    font-weight: 600;
+  }
+</style>

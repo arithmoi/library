@@ -1,0 +1,74 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import audiobooksData from '../../../data/audiobooks.json';
+
+export async function getStaticPaths() {
+  return audiobooksData.map(audiobook => ({
+    params: { slug: audiobook.slug },
+    props: { audiobook },
+  }));
+}
+
+const { audiobook } = Astro.props;
+const youtubeEmbedUrl = `https://www.youtube.com/embed/${audiobook.youtubeId}`;
+---
+<Layout title={audiobook.title + " | Arithmoi Library"} currentPage={`/library/audiobooks/${audiobook.slug}`}>
+  <article class="audiobook-detail">
+    <h1>{audiobook.title}</h1>
+    {audiobook.narrator && <p class="narrator">Narrated by: {audiobook.narrator}</p>}
+    {audiobook.duration && <p class="duration">Duration: {audiobook.duration}</p>}
+
+    <div class="audiobook-player">
+      <h3>Listen Now:</h3>
+      {audiobook.coverImageUrl && <img src={audiobook.coverImageUrl} alt={`Cover for ${audiobook.title}`} class="cover-image" />}
+      <iframe 
+        width="560" 
+        height="315" 
+        src={youtubeEmbedUrl} 
+        title={audiobook.title} 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen></iframe>
+    </div>
+    
+    {audiobook.description && <p class="description">{audiobook.description}</p>}
+  </article>
+</Layout>
+
+<style>
+  .audiobook-detail {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+  .audiobook-detail h1 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+  }
+  .narrator, .duration {
+    color: #555;
+    margin-bottom: 0.5rem;
+  }
+  .audiobook-player {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center; /* Center the player elements */
+  }
+  .audiobook-player .cover-image {
+    max-width: 300px;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .audiobook-player iframe {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .description {
+    margin-top: 1.5rem;
+    line-height: 1.6;
+  }
+</style>

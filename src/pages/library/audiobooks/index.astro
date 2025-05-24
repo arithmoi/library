@@ -1,0 +1,85 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import audiobooksData from '../../../data/audiobooks.json';
+---
+<Layout title="Audiobooks | Arithmoi Library" currentPage="/library/audiobooks/">
+  <div class="category-page">
+    <h1>Audiobook Library</h1>
+    <p>Listen to our collection of audiobooks, perfect for learning on the go.</p>
+    
+    <div class="item-grid">
+      {audiobooksData.map(audiobook => (
+        <a href={`/library/audiobooks/${audiobook.slug}`} class="item-card audiobook-card">
+          {audiobook.coverImageUrl && <img src={audiobook.coverImageUrl} alt={`Cover for ${audiobook.title}`} class="item-cover"/>}
+          <h4>{audiobook.title}</h4>
+          {audiobook.narrator && <p class="narrator"><em>Narrated by: {audiobook.narrator}</em></p>}
+          <p class="summary">{audiobook.description ? (audiobook.description.substring(0, 100) + (audiobook.description.length > 100 ? '...' : '')) : 'No description available.'}</p>
+          <span class="listen-now">Listen Now &rarr;</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</Layout>
+
+<style>
+  /* Shared styles with books/index.astro can be moved to a global scope or component if desired */
+  .category-page h1 {
+    margin-bottom: 0.5rem;
+    font-size: 2.2em;
+  }
+  .category-page > p {
+    margin-bottom: 2rem;
+    font-size: 1.1em;
+    color: #555;
+  }
+  .item-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Slightly smaller minmax for audiobooks */
+    gap: 1.5rem;
+  }
+  .item-card {
+    display: block;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    text-align: center; /* Center content for audiobook cards */
+  }
+  .item-card:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transform: translateY(-5px);
+  }
+  .item-card .item-cover {
+    max-width: 150px; /* Control cover image size */
+    height: auto;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  .item-card h4 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1.2em; /* Slightly smaller title for cards */
+    color: #007bff;
+  }
+  .item-card .narrator {
+    font-size: 0.9em;
+    color: #6c757d;
+    margin-bottom: 0.75rem;
+  }
+  .item-card .summary {
+    font-size: 0.9em;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    color: #495057;
+  }
+  .listen-now {
+    font-weight: 600;
+    color: #007bff;
+    font-size: 0.9em;
+  }
+</style>

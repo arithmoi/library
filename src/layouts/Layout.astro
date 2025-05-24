@@ -1,22 +1,257 @@
+---
+import Navbar from '../components/Navbar.astro';
+import Sidebar from '../components/Sidebar.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+const { title = "Arithmoi Library" } = Astro.props;
+const isLibraryPage = Astro.url.pathname.startsWith('/library');
+---
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+<html lang="en" class:list={{ 'library-layout-active': isLibraryPage }}>
+<head>
+  <style is:global>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+  </style>
+    <meta charset="UTF-8" />
+    <meta name="description" content="A knowledge library for the school" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/png" href="/images/library_logo.png" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <Navbar />
+      {isLibraryPage && (
+      <button class="sidebar-toggle" aria-label="Toggle sidebar" aria-expanded="false">
+        <span class="hamburger-box">
+          <span class="hamburger-inner"></span>
+        </span>
+      </button>
+    )}
+    <div class="main-container">
+        {isLibraryPage && <Sidebar />}
+        <main class="content-area">
+            <div class="content-wrapper">
+                <slot />
+            </div>
+        </main>
+    </div>
+    <Footer isLibraryPage={isLibraryPage} />
+
+<script>
+  const sidebarToggle = document.querySelector('.sidebar-toggle');
+  const sidebar = document.getElementById('sidebar'); // ID is in Sidebar.astro
+  const body = document.body;
+
+  if (sidebarToggle && sidebar) {
+    sidebarToggle.addEventListener('click', () => {
+      const isExpanded = sidebarToggle.getAttribute('aria-expanded') === 'true' || false;
+      sidebarToggle.setAttribute('aria-expanded', String(!isExpanded));
+      sidebar.classList.toggle('is-active');
+      sidebarToggle.classList.toggle('is-active');
+      // Uncomment below to use body overlay
+      // body.classList.toggle('sidebar-open-overlay'); 
+    });
+  }
+
+  // Optional: Close sidebar if user clicks outside of it on mobile
+  document.addEventListener('click', function(event) {
+    if (sidebar && sidebarToggle && sidebar.classList.contains('is-active')) {
+      const isClickInsideSidebar = sidebar.contains(event.target);
+      const isClickOnToggler = sidebarToggle.contains(event.target);
+
+      if (!isClickInsideSidebar && !isClickOnToggler) {
+        sidebar.classList.remove('is-active');
+        sidebarToggle.classList.remove('is-active');
+        sidebarToggle.setAttribute('aria-expanded', 'false');
+        // Uncomment below to use body overlay
+        // body.classList.remove('sidebar-open-overlay');
+      }
+    }
+  });
+</script>
+
+</body>
 </html>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+<style is:global>
+  :root {
+    --navbar-height: 60px; /* Standard height of the Navbar */
+  }
+
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        font-family: 'Inter', sans-serif;
+        color: #333; /* Default text color */
+    }
+
+    .main-container {
+        flex: 1 0 auto; /* Allows footer to stick to bottom */
+        width: 100%;
+        position: relative; /* For positioning child elements like a sidebar toggle */
+        display: flex; /* Always flex now */
+        padding-top: var(--navbar-height);
+        box-sizing: border-box; /* Ensure padding is included in height calculations */
+        margin-bottom: 3rem; /* Add space above the footer */
+    }
+
+    @media (min-width: 769px) { /* Desktop breakpoint */
+        /* Sidebar itself needs flex-shrink: 0 if not already set */
+        #sidebar {
+            flex-shrink: 0;
+            display: block; /* Ensure it's rendered as a block */
+            position: sticky; /* Make it sticky within .main-container */
+            top: var(--navbar-height); /* Stick below the navbar */
+            height: calc(100vh - var(--navbar-height)); /* Full viewport height minus navbar */
+            /* width: 280px; -- This is set in Sidebar.astro */
+            /* overflow-y: auto; -- This is set in Sidebar.astro */
+        }
+
+    body.library-page .content-area {
+        padding-top: 20px; /* Reset top padding for desktop library pages */
+    }
+    }
+
+    .content-area {
+        flex-grow: 1; /* Takes up remaining space in the flex container */
+        padding: 20px; /* Padding for the overall content area */
+        display: flex; /* To help center the wrapper if needed, or just for structure */
+        justify-content: center; /* Center .content-wrapper if .content-area is wider than .content-wrapper's max-width */
+        box-sizing: border-box;
+    }
+
+    .content-wrapper {
+        width: 100%; /* Takes full width of .content-area by default */
+        max-width: 1100px; /* Actual content block max-width */
+        margin: 0 auto; /* Centers the wrapper if its parent (.content-area) is wider */
+        padding: 0 20px; /* Add some padding so justified text doesn't touch edges */
+        text-align: justify;
+        /* Any specific styling for the direct content's background/border would go here */
+    }
+
+    /* Ensure footer doesn't overlap content if body isn't full height */
+    /* Footer styling will be handled by Footer.astro component internally for centering */
+    body > footer {
+      flex-shrink: 0;
+    }
+
+  /* Sidebar Toggle Button - similar to Navbar's hamburger */
+  .sidebar-toggle {
+    display: none; /* Hidden by default, shown on mobile */
+    position: fixed; 
+    top: 75px; /* Approx 60px navbar height + 15px margin */ 
+    left: 15px; 
+    z-index: 1010; /* Ensure it's above other elements */ 
+    cursor: pointer;
+    padding: 12px; /* Slightly larger touch area */
+    background: #fff; 
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    /* display: flex; Moved to media query */
+    /* align-items: center; Moved to media query */
+    /* justify-content: center; Moved to media query */
+  }
+  .sidebar-toggle .hamburger-box {
+    width: 32px; /* Slightly larger icon */
+    height: 26px;
+    display: block; /* Or inline-block; block is fine since parent is flex */
+    position: relative;
+  }
+  .sidebar-toggle .hamburger-inner,
+  .sidebar-toggle .hamburger-inner::before,
+  .sidebar-toggle .hamburger-inner::after {
+    width: 100%;
+    height: 3.5px; /* Slightly thicker lines */
+    background-color: #333;
+    position: absolute;
+    left: 0; /* Ensure alignment to the left of .hamburger-box */
+    border-radius: 3px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  .sidebar-toggle .hamburger-inner {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .sidebar-toggle .hamburger-inner::before,
+  .sidebar-toggle .hamburger-inner::after {
+    content: '';
+    display: block;
+  }
+  .sidebar-toggle .hamburger-inner::before {
+    top: -10px;
+  }
+  .sidebar-toggle .hamburger-inner::after {
+    bottom: -10px;
+  }
+  /* Active state for sidebar toggle (X icon) */
+  .sidebar-toggle.is-active .hamburger-inner {
+    transform: translateY(-50%) rotate(45deg);
+  }
+  .sidebar-toggle.is-active .hamburger-inner::before {
+    top: 0;
+    transform: rotate(90deg);
+    opacity: 0; /* Hide to form X */
+  }
+  .sidebar-toggle.is-active .hamburger-inner::after {
+    bottom: 0;
+    transform: translateY(0) rotate(-90deg);
+  }
+
+  /* Responsive Sidebar Styles */
+  @media (max-width: 768px) {
+    #sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0; /* Extend to screen bottom */
+      transform: translateX(-100%);
+      transition: transform 0.3s ease-in-out;
+      z-index: 1002; 
+      background-color: #f0f0f0; 
+      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+      /* padding-top: 60px; */ /* Optional: if navbar is fixed and has this height */
+      width: 280px; /* Should match Sidebar.astro's width */
+      overflow-y: auto;
+    }
+    #sidebar.is-active {
+      transform: translateX(0);
+    }
+    .sidebar-toggle {
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+    }
+    #sidebar {
+      padding-top: 135px; /* Ensure content is below the toggle button (75px top + 50px height + 10px margin) */
+      /* top: 0; /* This should already be set in Sidebar.astro or base #sidebar style */
+    }
+    /* Optional: Darken main content when sidebar is open */
+
+    body.library-page .content-area {
+      /* Original padding is 20px all around. We only adjust top for mobile library pages. */
+      /* Navbar is ~60px. sidebar-toggle bottom is ~125px from viewport top. */
+      /* Desired content start: 135px. So, 135px - 60px (navbar) = 75px padding-top. */
+      padding-top: 75px;
+    }
+
+    body.sidebar-open-overlay::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(0,0,0,0.5);
+      z-index: 1001; 
+    }
+  }
 </style>

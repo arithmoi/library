@@ -1,0 +1,104 @@
+---
+// Footer component
+const { isLibraryPage = false } = Astro.props;
+const currentYear = new Date().getFullYear();
+---
+<footer>
+  <div class="footer-container" class:list={{ 'library-page-footer': isLibraryPage }}>
+    <div class="footer-columns">
+      <div class="column">
+        <h5>Menu</h5>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/library/">Library</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </div>
+      <div class="column">
+        <h5>References</h5>
+        <ul>
+          <li><a href="https://arithmoi.org">Arithmoi Website</a></li>
+          <li><a href="/privacy-policy/">Privacy Policy</a></li>
+          <li><a href="/terms-conditions/">Terms and Conditions</a></li>
+          <li><a href="/social/">Social Links</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+    <p>&copy; {currentYear} Arithmoi Foundation. All rights reserved.</p>
+  </div>
+</footer>
+
+<style>
+  footer {
+    background-color: #f8f9fa; /* Lighter footer background */
+    color: #495057; /* Darker text for footer */
+    padding: 3rem 1rem; /* Increased padding */
+    margin-top: auto;
+    border-top: 1px solid #e0e0e0; /* Softer top border */
+  }
+  /* .footer-container styling is now consolidated below */
+  .footer-columns {
+    display: flex;
+    justify-content: center; /* Center columns as a group */
+    flex-wrap: wrap;
+    margin-bottom: 2rem; /* More space before copyright */
+    gap: 100px; /* Significantly increased gap for testing */
+  }
+  .column {
+    flex-grow: 0; /* Prevent columns from expanding to fill space */
+    min-width: 180px; /* Slightly wider min-width for columns */
+    margin: 0.5rem 0; /* Vertical margin only */
+    padding: 0 15px; /* Padding within columns */
+  }
+  .column h5 {
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 1rem; /* More space below title */
+    color: #007bff; /* Brand color for titles */
+  }
+  .column ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  .column li {
+    margin-bottom: 0.6rem; /* Space between links */
+  }
+  .column li a {
+    color: #495057;
+    text-decoration: none;
+    font-size: 0.95em;
+    transition: color 0.2s ease;
+  }
+  .column li a:hover {
+    color: #0056b3; /* Darker blue on hover */
+    text-decoration: underline;
+  }
+  .copyright {
+    text-align: center;
+    font-size: 0.9em;
+    color: #6c757d; /* Muted color for copyright */
+    border-top: 1px solid #e0e0e0;
+    padding-top: 1.5rem;
+  }
+
+  .footer-container {
+    max-width: 1100px; /* Max width for footer content */
+    margin: 0 auto; /* Center the container by default */
+
+    /* Base styles: centered with max-width */
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* On Desktop, if it's a library page, offset the footer for the sidebar */
+  .footer-container.library-page-footer {
+    @media (min-width: 769px) { /* Desktop view */
+      margin-left: 280px; /* Offset for the sidebar area */
+      /* margin-right: auto; will be handled by the base 'margin: 0 auto' effectively */
+    }
+  }
+</style>

@@ -1,0 +1,110 @@
+---
+import books from '../data/books.json';
+import audiobooks from '../data/audiobooks.json';
+import videobooks from '../data/videobooks.json';
+
+const { currentPage = '' } = Astro.props; // To highlight active link later if needed
+---
+<aside id="sidebar">
+  <h4>Library Navigation</h4>
+  <ul>
+    <li><a href="/library/" class:list={{ active: currentPage === '/library/' }}>Welcome</a></li>
+    
+    <li>
+      <a href="/library/books/" class="category-title" class:list={{ active: currentPage.startsWith('/library/books') && !currentPage.split('/').pop().includes('.') }}>Books</a>
+      <ul class="submenu">
+        {books.filter(book => book.type === 'article').map(book => (
+          <li><a href={`/library/books/${book.slug}`} class:list={{ active: currentPage === `/library/books/${book.slug}` }}>{book.title} (Article)</a></li>
+        ))}
+        {books.filter(book => book.type !== 'article').map(book => (
+          <li><a href={`/library/books/${book.slug}`} class:list={{ active: currentPage === `/library/books/${book.slug}` }}>{book.title}</a></li>
+        ))}
+      </ul>
+    </li>
+
+    <!-- <li>
+      <a href="/library/audiobooks/" class="category-title" class:list={{ active: currentPage.startsWith('/library/audiobooks') && !currentPage.split('/').pop().includes('.') }}>Audiobooks</a>
+      <ul class="submenu">
+        {audiobooks.map(audiobook => (
+          <li><a href={`/library/audiobooks/${audiobook.slug}`} class:list={{ active: currentPage === `/library/audiobooks/${audiobook.slug}` }}>{audiobook.title}</a></li>
+        ))}
+      </ul>
+    </li> -->
+
+    <!-- <li>
+      <a href="/library/videobooks/" class="category-title" class:list={{ active: currentPage.startsWith('/library/videobooks') && !currentPage.split('/').pop().includes('.') }}>Videobooks</a>
+      <ul class="submenu">
+        {videobooks.map(videobook => (
+          <li><a href={`/library/videobooks/${videobook.slug}`} class:list={{ active: currentPage === `/library/videobooks/${videobook.slug}` }}>{videobook.title}</a></li>
+        ))}
+      </ul>
+    </li> -->
+
+    <li><a href="/library/cta" class:list={{ active: currentPage === '/library/cta' }}>More</a></li>
+  </ul>
+</aside>
+
+<style>
+  aside {
+    background-color: #f0f0f0;
+    padding: 0 1rem; /* No top/bottom padding, 1rem left/right */
+    width: 280px; /* Adjusted width */
+    height: 100%;
+    border-right: 1px solid #ddd;
+    overflow-y: auto; /* For scrollable sidebar if content exceeds height */
+  }
+  h4 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  li > a, a.category-title {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    padding: 0.6rem 0;
+    font-weight: 500;
+  }
+  li > a:hover {
+    color: #007bff;
+  }
+  li > a.active {
+    color: #007bff;
+    font-weight: bold;
+  }
+  a.category-title {
+    font-weight: bold;
+    color: #555;
+    margin-top: 0.5rem;
+    padding-left: 0; /* Align with top-level links */
+    display: block;
+    text-decoration: none;
+  }
+  a.category-title:hover {
+    color: #007bff;
+  }
+  a.category-title.active {
+    color: #007bff;
+    font-weight: bold;
+  }
+  .submenu {
+    padding-left: 1rem; /* Indent submenu items */
+  }
+  .submenu li a {
+    padding: 0.4rem 0;
+    font-weight: normal;
+    font-size: 0.9rem;
+  }
+  .submenu li a:hover {
+    color: #0056b3;
+  }
+  .submenu li a.active {
+    font-weight: 600;
+    color: #0056b3;
+  }
+</style>

@@ -1,11 +1,65 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Home | Arithmoi Library">
+  <h1>Welcome to the Arithmoi Library</h1>
+  <img src="/images/library_logo.png" alt="Arithmoi Foundation Logo" class="home-logo">
+  <p class="intro-text">
+    An initiative of The Arithmoi Foundation, this library is dedicated to resources supporting the study of mathematics, physics, and metaphysics from an ontological standpoint. Explore fundamental questions about the nature of reality through our curated collection.
+  </p>
+  <p class="intro-text">
+    Our digital shelves offer access to texts, articles, and other materials for those engaged in rigorous mathematical and philosophical inquiry.
+  </p>
+  <div class="cta-container">
+    <a href="/library" class="cta-button">Explore the Library</a>
+  </div>
 </Layout>
+
+<style>
+  h1 {
+    color: #333;
+    font-size: 2.8em;
+    margin-bottom: 0.5em;
+    text-align: center;
+  }
+  .intro-text {
+    font-size: 1.2em;
+    color: #555;
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto 2em auto;
+    text-align: center;
+  }
+  .cta-container {
+    text-align: center;
+    margin-top: 2em;
+  }
+  .cta-button {
+    display: inline-block;
+    background-color: #007bff; /* Primary blue */
+    color: white;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  .cta-button:hover, .cta-button:focus {
+    background-color: #0056b3; /* Darker blue */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  }
+
+  .home-logo {
+    display: block;
+    width: 200px; /* Increased size */
+    height: 200px; /* Increased size */
+    border-radius: 50%; /* Makes it a circle */
+    object-fit: cover; /* Ensures the image covers the area without distortion */
+    margin: 1em auto 1.5em auto; /* Centers it and adds some margin */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Optional: adds a subtle shadow */
+  }
+</style>

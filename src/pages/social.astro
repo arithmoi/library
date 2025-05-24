@@ -1,0 +1,49 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const socialLinks = [
+  { name: 'Youtube', url: 'https://youtube.com/@TheArithmoiFoundation' },
+  { name: 'Substack', url: 'https://substack.com/@thearithmoifoundation' },
+  { name: 'X (Twitter)', url: 'https://x.com/LearnArithmoi' },
+  { name: 'Medium', url: 'https://medium.com/@thearithmoifoundation' },
+  { name: 'GitHub', url: 'https://github.com/arithmoi' }
+];
+---
+
+<Layout title="Social Links | Arithmoi Library">
+  <style>
+    .social-links-container {
+      padding: 20px;
+    }
+    .social-links-list {
+      list-style-type: none;
+      padding: 0;
+    }
+    .social-links-list li {
+      margin-bottom: 15px;
+      font-size: 1.1em;
+    }
+    .social-links-list li a {
+      text-decoration: none;
+      color: #007bff;
+      transition: color 0.3s ease;
+    }
+    .social-links-list li a:hover {
+      color: #0056b3;
+      text-decoration: underline;
+    }
+  </style>
+  <div class="social-links-container">
+    <h1>Our Social Channels & Communities</h1>
+    <p>Connect with us on various platforms:</p>
+    <ul class="social-links-list">
+      {socialLinks.map(link => (
+        <li>
+          <a href={link.url} target="_blank" rel="noopener noreferrer">
+            {link.name}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</Layout>
