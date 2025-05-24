@@ -1,48 +1,40 @@
-# Astro Starter Kit: Basics
+# Arithmoi Library
 
-```sh
-npm create astro@latest -- --template basics
-```
+Welcome to the Arithmoi Library, an initiative of The Arithmoi Foundation. This digital library is dedicated to providing resources that support the study of mathematics, physics, and metaphysics from an ontological perspective. Our collection aims to help users explore fundamental questions about the nature of reality.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+## About The Arithmoi Foundation
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+The Arithmoi Foundation focuses on advancing research and understanding in foundational mathematics, theoretical physics, and their intersection with metaphysics. This library is a key component of our mission to disseminate knowledge and foster inquiry in these critical areas.
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+## Project Structure
 
-## 🚀 Project Structure
+This website is built using [Astro](https://astro.build/), a modern static site generator. Key directories include:
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+-   `/public/`: Contains static assets like images (including the site logo `library_logo.png`) and PDF documents.
+-   `/src/`: Contains the source code for the website.
+    -   `/components/`: Reusable Astro components (e.g., `Navbar.astro`, `Sidebar.astro`, `Footer.astro`).
+    -   `/data/`: JSON files that may store structured data for books, articles, etc. (e.g., `books.json`).
+    -   `/layouts/`: Base layout components, primarily `Layout.astro`.
+    -   `/pages/`: Astro files that define the routes and content for each page of the site.
+        -   `/library/`: Contains pages specific to the library section, including dynamic routes for book details.
+    -   `/styles/`: Global CSS styles.
+-   `LICENSE`: Contains the copyright and licensing information for this project. All rights are reserved by the Arithmoi Foundation.
 
 ## 🧞 Commands
 
 All commands are run from the root of the project, from a terminal:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+| Command           | Action                                         |
+| :---------------- | :--------------------------------------------- |
+| `npm install`     | Installs dependencies                          |
+| `npm run dev`     | Starts local dev server at `localhost:4321`    |
+| `npm run build`   | Builds your production site to `./dist/`       |
+| `npm run preview` | Previews your build locally, before deploying  |
 
-## 👀 Want to learn more?
+## ⚖️ License
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+The content and code of this website are under the copyright of The Arithmoi Foundation. All Rights Reserved. Please see the `LICENSE` file for more details.
+
+## 📞 Contact
+
+For inquiries related to The Arithmoi Foundation or this library, please contact `admin@arithmoi.org`.
