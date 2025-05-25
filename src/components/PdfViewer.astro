@@ -1,0 +1,203 @@
+---
+// src/components/PdfViewer.astro
+export interface Props {
+  pdfUrl: string;
+}
+
+const { pdfUrl } = Astro.props;
+
+// Construct the worker URL. This is crucial for PDF.js.
+// It assumes pdf.worker.min.mjs is available relative to the built assets.
+// Astro typically places files from node_modules in /node_modules/ after build,
+// but for development, we might need a more direct path or ensure it's copied.
+// For now, let's aim for a path that works in production.
+// We'll need to ensure the worker file is correctly served.
+// This path assumes pdf.worker.min.mjs has been copied to the public directory.
+const pdfjsWorkerSrc = `/pdf.worker.min.mjs`;
+
+---
+<div id="pdf-viewer-container" class="pdf-viewer-container">
+  <div class="canvas-wrapper">
+    <canvas id="pdf-canvas"></canvas>
+  </div>
+  <div class="pdf-controls">
+    <button id="prev-page">Previous</button>
+    <span id="page-num"></span> / <span id="page-count"></span>
+    <button id="next-page">Next</button>
+    <span class="spacer"></span>
+    <button id="zoom-out">-</button>
+    <span id="zoom-level">100%</span>
+    <button id="zoom-in">+</button>
+  </div>
+</div>
+
+<script define:vars={{ pdfUrl, pdfjsWorkerSrc }}>
+  // Dynamically import pdfjs-dist to keep initial load small
+  import('/pdf.min.mjs').then(async (pdfjsLib) => {
+    if (!pdfjsLib.GlobalWorkerOptions.workerSrc && pdfjsWorkerSrc) {
+      pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorkerSrc;
+    }
+
+    const loadingTask = pdfjsLib.getDocument(pdfUrl);
+    const pdfDoc = await loadingTask.promise;
+
+    const pageNumElement = document.getElementById('page-num');
+    const pageCountElement = document.getElementById('page-count');
+    const prevButton = document.getElementById('prev-page');
+    const nextButton = document.getElementById('next-page');
+    const zoomOutButton = document.getElementById('zoom-out');
+    const zoomInButton = document.getElementById('zoom-in');
+    const zoomLevelElement = document.getElementById('zoom-level');
+    const canvas = document.getElementById('pdf-canvas');
+    const ctx = canvas.getContext('2d');
+
+    let currentPageNum = 1;
+    let currentScale = 1.5; // Initial scale
+    const totalPages = pdfDoc.numPages;
+    pageCountElement.textContent = totalPages.toString();
+
+    function updateZoomLevelDisplay() {
+      zoomLevelElement.textContent = `${Math.round(currentScale * 100)}%`;
+    }
+
+    async function renderPage(num) {
+      const page = await pdfDoc.getPage(num);
+      const viewport = page.getViewport({ scale: currentScale });
+
+      canvas.height = viewport.height;
+      canvas.width = viewport.width;
+      // Set the CSS display size of the canvas to match its drawing resolution
+      canvas.style.width = viewport.width + 'px';
+      canvas.style.height = viewport.height + 'px';
+
+      const renderContext = {
+        canvasContext: ctx,
+        viewport: viewport,
+      };
+      await page.render(renderContext).promise;
+      pageNumElement.textContent = num.toString();
+
+      // Update button states
+      prevButton.disabled = num <= 1;
+      nextButton.disabled = num >= totalPages;
+      // Consider disabling zoom buttons at min/max scale if desired
+    }
+
+    prevButton.addEventListener('click', () => {
+      if (currentPageNum <= 1) return;
+      currentPageNum--;
+      renderPage(currentPageNum);
+    });
+
+    nextButton.addEventListener('click', () => {
+      if (currentPageNum >= totalPages) return;
+      currentPageNum++;
+      renderPage(currentPageNum);
+    });
+
+    renderPage(currentPageNum);
+    updateZoomLevelDisplay(); // Initial display
+
+    zoomInButton.addEventListener('click', () => {
+      currentScale += 0.25;
+      renderPage(currentPageNum);
+      updateZoomLevelDisplay();
+    });
+
+    zoomOutButton.addEventListener('click', () => {
+      if (currentScale <= 0.25) return; // Minimum scale
+      currentScale -= 0.25;
+      renderPage(currentPageNum);
+      updateZoomLevelDisplay();
+    });
+
+  }).catch(error => {
+    console.error("Error loading or rendering PDF:", error);
+    const container = document.getElementById('pdf-viewer-container');
+    if (container) {
+      container.innerHTML = `<p>Error loading PDF: ${error.message}. <a href="${pdfUrl}" target="_blank">Open PDF directly</a>.</p>`;
+    }
+  });
+</script>
+
+<style>
+  .pdf-viewer-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    padding: 10px;
+    box-sizing: border-box;
+    /* Ensure it respects the parent's height constraints */
+    height: 100%; 
+    overflow: hidden; /* Hide canvas overflow if any */
+  }
+
+  #pdf-canvas {
+    border: 1px solid #bbb;
+    /* max-width: 100%; */ /* Let canvas size be determined by PDF.js viewport */
+    /* Height will be set by PDF.js based on page dimensions and scale */
+    /* We'll make the canvas scrollable if it's taller than its container */
+    display: block; /* Remove extra space below canvas */
+    margin-bottom: 10px;
+    flex-shrink: 0; /* Prevent canvas from shrinking within its flex parent (.canvas-wrapper) */
+  }
+  
+  /* Make the canvas container scrollable if PDF page is tall */
+  .pdf-viewer-container > #pdf-canvas {
+      overflow-y: auto; /* This won't work directly on canvas, need a wrapper or adjust container */
+      /* For now, let's assume the main container will handle scrolling if needed,
+         or the canvas itself will be sized to fit.
+         A better approach for tall pages is to put canvas in a scrollable div.
+         Let's adjust the container to be scrollable for the canvas.
+      */
+  }
+
+  /* Let's create a dedicated scrollable area for the canvas */
+  .canvas-wrapper {
+    width: 100%;
+    flex-grow: 1; /* Takes up available vertical space */
+    overflow-y: auto; /* Allows scrolling for tall PDF pages */
+    overflow-x: auto; /* Allows scrolling for wide PDF pages (zoomed in) */
+    display: flex;
+    justify-content: center; /* Center canvas if it's narrower than wrapper */
+    margin-bottom: 10px;
+  }
+
+
+  .pdf-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+    background-color: #eee;
+    width: 100%;
+    box-sizing: border-box;
+    flex-shrink: 0; /* Prevent controls from shrinking */
+  }
+
+  .pdf-controls button {
+    padding: 8px 12px;
+    margin: 0 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .pdf-controls button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+
+  .pdf-controls span {
+    margin: 0 5px;
+    font-size: 1em;
+  }
+  .spacer {
+    margin: 0 10px; /* Adds some space before zoom controls */
+  }
+</style>

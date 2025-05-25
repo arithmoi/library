@@ -1,5 +1,6 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
+import PdfViewer from '../../../components/PdfViewer.astro';
 import booksData from '../../../data/books.json';
 
 export async function getStaticPaths() {
@@ -19,8 +20,7 @@ const { book } = Astro.props;
 
     {book.pdfUrl && (
       <div class="pdf-embed-container">
-        <iframe src={book.pdfUrl} width="100%" height="800px" title={book.title} allowfullscreen></iframe>
-        <p><a href={book.pdfUrl} target="_blank" rel="noopener noreferrer">Open PDF in new tab</a></p>
+        <PdfViewer pdfUrl={book.pdfUrl} />
       </div>
     )}
     
@@ -53,12 +53,20 @@ const { book } = Astro.props;
   .pdf-embed-container {
     margin-top: 20px;
     border: 1px solid #ddd;
+    height: 75vh; /* Responsive height */
+    display: flex;
+    flex-direction: column; /* Stack iframe and link */
   }
-  .pdf-embed-container iframe {
-    border: none;
+  /* Styles for iframe are no longer needed here, PdfViewer.astro handles its internal styling. */
+  /* Ensure .pdf-embed-container provides enough height for PdfViewer.astro */
+  .pdf-embed-container {
+    /* ... existing styles like height: 75vh, display: flex, flex-direction: column should be fine ... */
+    /* We might need to ensure the PdfViewer component itself stretches if it's not the only child. */
+    /* If PdfViewer is a direct child and we want it to take all space from flex-grow: */
   }
-  .pdf-embed-container p {
-    text-align: center;
-    margin-top: 10px;
+  .pdf-embed-container > :global(.pdf-viewer-container) { /* Target the root div of PdfViewer */
+    flex-grow: 1; /* Make PdfViewer fill available space in the flex column */
+    min-height: 0; /* Important for flex children to shrink properly if needed and then grow */
   }
+  /* .pdf-embed-container p styling is no longer needed as the <p> tag was removed */
 </style>
