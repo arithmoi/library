@@ -13,7 +13,7 @@
     "slug": "lie-groups-algebras",
     "author": "Jason Glowney",
     "summary": "An article on Lie groups and Lie algebras.",
-    "pdfUrl": "/pdfs/glowney_jason_lie.pdf"
+    "pdfUrl": "/pdfs/glowney_jason_lie_representation_complex_unit_sphere.pdf"
   },
   {
     "type": "article",
@@ -30,5 +30,62 @@
     "author": "Jason Glowney",
     "summary": "An article on asymptotic light geometry and its relations.",
     "pdfUrl": "/pdfs/glowney_jason_Asymptotic_Light_Geometry_and_its_Relati.pdf"
+  }
+,
+  {
+    "type": "article",
+    "title": "Derivation of the Complex Unit Sphere",
+    "slug": "derivation-complex-unit-sphere",
+    "author": "Jason Glowney",
+    "summary": "An article on the derivation of the complex unit sphere.",
+    "pdfUrl": "/pdfs/glowney_jason_Derivation_of_the_Complex_Unit_Sphere_an.pdf"
+  },
+  {
+    "type": "article",
+    "title": "Geometric Thoughts with Guest Algebra",
+    "slug": "geometric-thoughts-guest-algebra",
+    "author": "Jason Glowney",
+    "summary": "An article on geometric thoughts with guest algebra.",
+    "pdfUrl": "/pdfs/glowney_jason_Geometric_Thoughts_with_Guest_Algebra_i.pdf"
+  },
+  {
+    "type": "article",
+    "title": "Gravitational Wave Signal Processing",
+    "slug": "gravitational-wave-signal-processing",
+    "author": "Jason Glowney",
+    "summary": "An article on gravitational wave signal processing.",
+    "pdfUrl": "/pdfs/glowney_jason_Gravitational_Wave_Signal_Processing.pdf"
+  },
+  {
+    "type": "article",
+    "title": "Imaginary Angles and the Connection Between",
+    "slug": "imaginary-angles-connection-between",
+    "author": "Jason Glowney",
+    "summary": "An article on imaginary angles and the connection between related concepts.",
+    "pdfUrl": "/pdfs/glowney_jason_Imaginary_Angles_and_the_Connection_betw.pdf"
+  },
+  {
+    "type": "article",
+    "title": "Light Cone and SR",
+    "slug": "light-cone-sr",
+    "author": "Jason Glowney",
+    "summary": "An article on the light cone and Special Relativity.",
+    "pdfUrl": "/pdfs/glowney_jason_Light_Cone_and_SR_pdf.pdf"
+  },
+  {
+    "type": "article",
+    "title": "Pascal's Tetrahedron, Combinatorics, and Theory",
+    "slug": "pascals-tetrahedron-combinatorics-theory",
+    "author": "Jason Glowney",
+    "summary": "An article on Pascal's Tetrahedron, combinatorics, and related theory.",
+    "pdfUrl": "/pdfs/glowney_jason_Pascals_Tetrahedron_Combinatorics_and_th.pdf"
+  },
+  {
+    "type": "article",
+    "title": "The Strange Attractor of the Lorenz System",
+    "slug": "strange-attractor-lorenz-system",
+    "author": "Jason Glowney",
+    "summary": "An article on the strange attractor of the Lorenz system.",
+    "pdfUrl": "/pdfs/glowney_jason_The_Strange_Attractor_of_the_Lorenz_Syst.pdf"
   }
 ]
