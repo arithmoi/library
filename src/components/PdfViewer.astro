@@ -239,7 +239,7 @@ const pdfjsWorkerSrc = `/pdf.worker.min.mjs`;
     console.error("Error loading or rendering PDF:", error);
     const container = document.getElementById('pdf-viewer-container');
     if (container) {
-      container.innerHTML = `<p>Error loading PDF: ${error.message}. <a href="${pdfUrl}" target="_blank">Open PDF directly</a>.</p>`;
+      container.innerHTML = `<p>Error loading PDF: ${error.message}.</p>`;
     }
   });
 </script>
