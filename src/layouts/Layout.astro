@@ -4,7 +4,7 @@ import Sidebar from '../components/Sidebar.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
-const { title = "Arithmoi Library" } = Astro.props;
+const { title = "Arithmoi Library", isBookDetailPage = false } = Astro.props;
 const isLibraryPage = Astro.url.pathname.startsWith('/library');
 ---
 <!doctype html>
@@ -37,7 +37,7 @@ const isLibraryPage = Astro.url.pathname.startsWith('/library');
     <div class="main-container">
         {isLibraryPage && <Sidebar />}
         <main class="content-area">
-            <div class:list={{ "content-wrapper": true, "library-content-wrapper": isLibraryPage }}>
+            <div class:list={{ "content-wrapper": true, "library-content-wrapper": isLibraryPage, "book-detail-active": isBookDetailPage }}>
                 <slot />
             </div>
         </main>
@@ -146,6 +146,12 @@ const isLibraryPage = Astro.url.pathname.startsWith('/library');
         padding: 0 20px; /* Add some padding so justified text doesn't touch edges */
         text-align: justify;
         /* Any specific styling for the direct content's background/border would go here */
+    }
+
+    .content-wrapper.book-detail-active {
+        max-width: 95vw; /* Allow book detail pages to be wider */
+        padding-left: 0;  /* Remove side padding for wider content */
+        padding-right: 0; /* Remove side padding for wider content */
     }
 
     /* Ensure footer doesn't overlap content if body isn't full height */

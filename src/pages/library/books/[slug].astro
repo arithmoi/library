@@ -11,7 +11,7 @@ export async function getStaticPaths() {
 
 const { book } = Astro.props;
 ---
-<Layout title={book.title + " | Arithmoi Library"} currentPage={`/library/books/${book.slug}`}>
+<Layout title={book.title + " | Arithmoi Library"} currentPage={`/library/books/${book.slug}`} isBookDetailPage={true}>
   <article class="book-detail">
     <h1>{book.title}</h1>
     {book.author && <p class="author">By: {book.author}</p>}
