@@ -15,8 +15,8 @@
       <ul class="nav-links">
       <li><a href="/" class:list={{ active: Astro.url.pathname === '/' }}>Home</a></li>
       <li><a href="/library" class:list={{ active: Astro.url.pathname.startsWith('/library') }}>Library</a></li>
-      <li><a href="/about" class:list={{ active: Astro.url.pathname === '/about' }}>About</a></li>
-      <li><a href="/contact" class:list={{ active: Astro.url.pathname === '/contact' }}>Contact</a></li>
+      <li><a href="/about" class:list={{ active: Astro.url.pathname.startsWith('/about') }}>About</a></li>
+      <li><a href="/contact" class:list={{ active: Astro.url.pathname.startsWith('/contact') }}>Contact</a></li>
     </ul>
   </div>
 </nav>
