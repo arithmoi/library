@@ -21,13 +21,24 @@ const pdfjsWorkerSrc = `/pdf.worker.min.mjs`;
     <canvas id="pdf-canvas"></canvas>
   </div>
   <div class="pdf-controls">
-    <button id="prev-page">Previous</button>
+    <button id="prev-page">
+      <span class="icon"><</span>
+      <span class="text">Previous</span>
+    </button>
     <span id="page-num"></span> / <span id="page-count"></span>
-    <button id="next-page">Next</button>
+    <button id="next-page">
+      <span class="icon">></span>
+      <span class="text">Next</span>
+    </button>
     <span class="spacer"></span>
-    <button id="zoom-out">-</button>
-    <span id="zoom-level">100%</span>
-    <button id="zoom-in">+</button>
+    <button id="zoom-out" class="zoom-button">-</button>
+    <span id="zoom-level" class="zoom-level-display">100%</span>
+    <button id="zoom-in" class="zoom-button">+</button>
+    <span class="spacer"></span>
+    <button id="fullscreen-btn">
+      <span class="icon">&#x2922;</span> <!-- Unicode for fullscreen icon ⤢ -->
+      <span class="text" style="display: none;">Full Screen</span> <!-- Text always hidden -->
+    </button>
   </div>
 </div>
 
@@ -48,6 +59,8 @@ const pdfjsWorkerSrc = `/pdf.worker.min.mjs`;
     const zoomOutButton = document.getElementById('zoom-out');
     const zoomInButton = document.getElementById('zoom-in');
     const zoomLevelElement = document.getElementById('zoom-level');
+    const fullscreenButton = document.getElementById('fullscreen-btn');
+    const pdfViewerContainer = document.getElementById('pdf-viewer-container');
     const canvas = document.getElementById('pdf-canvas');
     const ctx = canvas.getContext('2d');
 
@@ -109,6 +122,25 @@ const pdfjsWorkerSrc = `/pdf.worker.min.mjs`;
       currentScale -= 0.25;
       renderPage(currentPageNum);
       updateZoomLevelDisplay();
+    });
+
+    fullscreenButton.addEventListener('click', () => {
+      if (!document.fullscreenElement) {
+        pdfViewerContainer.requestFullscreen().catch(err => {
+          alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+        });
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    });
+
+    // Listen for fullscreen changes to update button text/icon if needed
+    document.addEventListener('fullscreenchange', () => {
+      // For now, we don't change the button appearance based on state,
+      // but this is where you could do it.
+      // For example, change "Full Screen" to "Exit Full Screen"
     });
 
   }).catch(error => {
@@ -198,6 +230,57 @@ const pdfjsWorkerSrc = `/pdf.worker.min.mjs`;
     font-size: 1em;
   }
   .spacer {
-    margin: 0 10px; /* Adds some space before zoom controls */
+    margin: 0 10px; /* Adds some space */
+  }
+
+  .pdf-controls button .icon {
+    display: none; /* Hidden by default, shown on mobile for prev/next */
+    font-weight: bold; /* Make icons bold by default if they are shown */
+  }
+  .pdf-controls button .text {
+    display: inline; /* Shown by default, hidden on mobile for specified buttons */
+  }
+
+  /* Fullscreen button icon always visible */
+  .pdf-controls button#fullscreen-btn .icon {
+    display: inline;
+    font-size: 1.2em; /* Make icon a bit larger */
+  }
+   /* Fullscreen button text always hidden (already set inline, but good for clarity) */
+  .pdf-controls button#fullscreen-btn .text {
+    display: none !important;
+  }
+
+
+  /* Mobile styles */
+  @media (max-width: 768px) {
+    .pdf-controls button#prev-page .text,
+    .pdf-controls button#next-page .text { /* Fullscreen text already handled */
+      display: none;
+    }
+
+    .pdf-controls button#prev-page .icon,
+    .pdf-controls button#next-page .icon { /* Fullscreen icon already handled */
+      display: inline;
+    }
+    
+    /* Zoom buttons on mobile */
+    .pdf-controls button.zoom-button {
+      font-weight: bold;
+      padding: 8px; /* Make it more square-like and consistent with other mobile icon buttons */
+    }
+
+    .zoom-level-display {
+      display: none; /* Hide zoom percentage on mobile */
+    }
+
+    .pdf-controls button {
+      padding: 8px; /* Default padding for icon buttons on mobile */
+      margin: 0 5px;
+    }
+     /* Ensure fullscreen icon button has consistent padding on mobile */
+    .pdf-controls button#fullscreen-btn {
+        padding: 8px 10px;
+    }
   }
 </style>

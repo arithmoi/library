@@ -145,6 +145,11 @@
   }
 
   @media (max-width: 768px) {
+    nav { /* Ensure nav itself behaves consistently on mobile */
+      display: flex; /* Make nav a flex container */
+      align-items: center; /* Vertically center its direct child (.nav-container) */
+      min-height: 66px; /* Adjusted for a shorter, consistent mobile navbar height */
+    }
     .nav-links {
       display: none; /* Hidden by default on mobile */
       position: absolute;
@@ -178,18 +183,25 @@
       align-items: center; /* Added for centering */
       justify-content: center; /* Added for centering */
       /* Ensure it's on the right, adjust if logo takes too much space or is also absolute */
-      position: absolute; 
-      right: 20px;
-      top: 50%;
-      transform: translateY(-50%);
+      /* position: absolute;  Removed for flex layout */
+      /* right: 20px; Removed for flex layout */
+      /* top: 50%; Removed for flex layout */
+      /* transform: translateY(-50%); Removed for flex layout */
+      position: static; /* Become a flex item */
+      transform: none; /* Reset transform */
     }
     .nav-container {
       /* Ensure logo and hamburger can coexist if logo is very wide */
-      /* justify-content: space-between; /* Revert for mobile if logo is not absolute */
+      justify-content: space-between; /* Distribute space between logo and hamburger */
+      width: 100%; /* Ensure full width for space-between to work effectively */
+      padding-top: 0.5rem; /* Reduced top padding for a shorter navbar */
+      padding-bottom: 0.5rem; /* Reduced bottom padding for a shorter navbar */
     }
     .logo {
         /* Adjust if it overlaps with hamburger. Since it's absolute left:0, it should be fine */
         /* If logo was not absolute, we might need to ensure it doesn't push hamburger off */
+        position: static; /* Become a flex item, overriding base style's absolute */
+        transform: none; /* Reset transform, vertical centering by flex align-items */
     }
   }
   li a {
