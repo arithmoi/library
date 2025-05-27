@@ -1,26 +1,32 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import booksData from '../../../data/books.json';
+import libraryContent from '../../../data/library_content.json';
+const insights = Array.isArray(libraryContent.insights) ? libraryContent.insights : [];
 ---
-<Layout title="Books | Arithmoi Library" currentPage="/library/books/">
+<Layout title="Insights | Arithmoi Library" currentPage="/library/insights/">
   <div class="category-page">
-    <h1>Arithmoi Books</h1>
-    <p>Browse through our diverse collection of educational books, articles, and other written resources.</p>
+    <h1>Insights</h1>
+    <p><em>Igniting curiosity and wonder.</em></p>
+    <p>Introducing mathematical knowledge with light-hearted and intuitive mathematical writings.</p>
     
     <div class="item-grid">
-      {booksData.map(book => (
-        <a href={`/library/books/${book.slug}`} class="item-card book-card">
-          <h4>{book.title}</h4>
-          {book.author && <p class="author"><em>By: {book.author}</em></p>}
-          <p class="summary">{book.summary.substring(0, 100)}{book.summary.length > 100 ? '...' : ''}</p>
+      {insights.map(item => (
+        <a href={`/library/insights/${item.slug}`} class="item-card book-card">
+          <h4>{item.title}</h4>
+          {item.author && <p class="author"><em>By: {item.author}</em></p>}
+          <p class="summary">{item.summary.substring(0, 100)}{item.summary.length > 100 ? '...' : ''}</p>
           <span class="read-more">Read More &rarr;</span>
         </a>
       ))}
+      {insights.length === 0 && (
+        <p>No insights available at the moment. Please check back later.</p>
+      )}
     </div>
   </div>
 </Layout>
 
 <style>
+  /* Styles are identical to explorations/index.astro, can be shared via a global stylesheet or component in a real project */
   .category-page h1 {
     margin-bottom: 0.5rem;
     font-size: 2.2em;

@@ -1,0 +1,214 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import libraryContent from '../../../data/library_content.json';
+const masteries = Array.isArray(libraryContent.masteries) ? libraryContent.masteries : [];
+// Note: The 'masteries' variable is for listing individual PDF items if they are added to the 'masteries' array in library_content.json.
+// The content below is static and based on the old cta.astro page, focusing on the main Arithmoi book.
+---
+
+<Layout title="Masteries | Arithmoi Library" currentPage="/library/masteries/">
+  <div class="page-container masteries-page">
+    <header class="page-header">
+      <h1>Masteries</h1>
+      <p class="page-intro"><em>Learning cohesive mathematics for physics and metaphysics.</em></p>
+      <p class="page-intro">Advanced, integrative works that unite mathematical thought across disciplines. Guided by our comprehensive book, discover how deep mathematical structures illuminate the unity of science, philosophy, and the cosmos.</p>
+    </header>
+
+    <section class="book-feature-container">
+      <h2>Featured Publication: <em>Arithmoí Book 1</em></h2>
+      <p class="book-subtitle">A Study of Mathematical Cohesiveness in Physics and Metaphysics</p>
+      
+      <div class="book-content">
+        <div class="book-description">
+          <h3>About the Book</h3>
+          <p>Essential to the undertaking is that mathematics be the means of conveying the topic. The synthesis presented in the book starts by first bringing to light the historical human biases pervasive in mathematics, physics, and metaphysics subject matter. Anthropomorphism, meaning attributing human emotions, traits, and intents to non-human forms, is a deeply rooted inclination in the human psyche. Evidence for this abounds when we consider religion and mythos, where divine entities took human forms, traits, and qualities. How the human sensorium interprets phenomena lends itself to the tendency to overemphasize what is physically perceived while abandoning the concern of understanding the holos. Anthropocentrism, also known as homocentrism, is another closely related belief system that places humans at the center of the Universe. A prime example of this in the past was the geocentric model, which put the Earth at the center of the solar system during a time that preceded any understanding of what galaxies and the Universe were. Some still believe that the observer plays a fundamental role in the observed quantum mechanical system, and this should be considered a form of anthropocentrism.</p>
+        </div>
+        
+        <div class="book-cta">
+          <h3>Support Our Work & Deepen Your Understanding</h3>
+          <p>By acquiring the first book of the Arithmoí series, you not only gain access to pivotal research but also directly support the ongoing efforts of The Arithmoí Foundation. Explore these ideas further:</p>
+          <a href="https://www.amazon.com/dp/B0CKB2XRST?ref_=cm_sw_r_cp_ud_dp_0GN3DCMF0F11EHVY4083" target="_blank" rel="noopener noreferrer" class="cta-button">
+            View on Amazon
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section for listing other Masteries PDFs if they exist -->
+    {masteries.length > 0 && (
+      <section class="additional-masteries">
+        <h2>Further Masteries</h2>
+        <div class="item-grid">
+          {masteries.map(item => (
+            <a href={`/library/masteries/${item.slug}`} class="item-card book-card">
+              <h4>{item.title}</h4>
+              {item.author && <p class="author"><em>By: {item.author}</em></p>}
+              <p class="summary">{item.summary.substring(0, 100)}{item.summary.length > 100 ? '...' : ''}</p>
+              <span class="read-more">Read More &rarr;</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+  </div>
+</Layout>
+
+<style>
+  /* Styles adapted from the old cta.astro and combined with category-page styles */
+  .page-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 1rem; 
+  }
+
+  .page-header {
+    text-align: center;
+    margin-bottom: 2rem; /* Adjusted from 3rem */
+  }
+
+  .page-header h1 {
+    font-size: 2.6em;
+    color: #2c3e50; 
+    margin-bottom: 0.5em;
+    font-weight: 600;
+  }
+
+  .page-intro {
+    font-size: 1.15em;
+    color: #555;
+    line-height: 1.7;
+    max-width: 750px;
+    margin: 0 auto 1.5rem auto; /* Added bottom margin */
+  }
+
+  .book-feature-container {
+    padding: 2rem;
+    background-color: #fdfdfd;
+    border-radius: 8px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+    border: 1px solid #eee;
+    margin-bottom: 2rem; /* Added margin for separation if other masteries are listed */
+  }
+
+  .book-feature-container h2 {
+    font-size: 2em; 
+    color: #333;
+    margin-bottom: 0.2em;
+    text-align: center;
+    font-weight: 500;
+  }
+
+  .book-subtitle {
+    font-size: 1.1em;
+    color: #666;
+    text-align: center;
+    margin-bottom: 2em;
+    font-style: italic;
+  }
+
+  .book-description h3, .book-cta h3 {
+    font-size: 1.4em;
+    color: #333;
+    margin-top: 1.5em;
+    margin-bottom: 0.7em;
+    border-bottom: 1px solid #eaeaea;
+    padding-bottom: 0.4em;
+    font-weight: 500;
+  }
+  
+  .book-description p {
+    font-size: 1.05em;
+    line-height: 1.75;
+    color: #444;
+    text-align: justify;
+    margin-bottom: 1em;
+  }
+
+  .book-cta {
+    margin-top: 2em;
+    padding-top: 1.5em;
+    border-top: 1px solid #eee;
+    text-align: center;
+  }
+  
+  .book-cta p {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 1.2em;
+  }
+
+  .cta-button {
+    display: inline-block;
+    padding: 12px 25px; 
+    background-color: #007bff; 
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1.1em; 
+    transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .cta-button:hover,
+  .cta-button:focus {
+    background-color: #0056b3; 
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    outline: none;
+  }
+
+  /* Styles for listing additional masteries (from generic category page) */
+  .additional-masteries h2 {
+    font-size: 2em;
+    color: #333;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-weight: 500;
+  }
+
+  .item-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  .item-card {
+    display: block;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  }
+  .item-card:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transform: translateY(-5px);
+  }
+  .item-card h4 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1.3em;
+    color: #007bff;
+  }
+  .item-card .author {
+    font-size: 0.9em;
+    color: #6c757d;
+    margin-bottom: 0.75rem;
+  }
+  .item-card .summary {
+    font-size: 0.95em;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    color: #495057;
+  }
+  .read-more {
+    font-weight: 600;
+    color: #007bff;
+    font-size: 0.9em;
+  }
+</style>

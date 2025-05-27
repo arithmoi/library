@@ -1,0 +1,80 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import libraryContent from '../../../data/library_content.json';
+const explorations = libraryContent.explorations;
+---
+<Layout title="Explorations | Arithmoi Library" currentPage="/library/explorations/">
+  <div class="category-page">
+    <h1>Explorations</h1>
+    <p><em>Venturing into deeper waters of mathematical discovery.</em></p>
+    <p>In-depth articles, extended studies, and research papers for those ready to explore.</p>
+    
+    <div class="item-grid">
+      {explorations.map(item => (
+        <a href={`/library/explorations/${item.slug}`} class="item-card book-card">
+          <h4>{item.title}</h4>
+          {item.author && <p class="author"><em>By: {item.author}</em></p>}
+          <p class="summary">{item.summary.substring(0, 100)}{item.summary.length > 100 ? '...' : ''}</p>
+          <span class="read-more">Read More &rarr;</span>
+        </a>
+      ))}
+      {explorations.length === 0 && (
+        <p>No explorations available at the moment. Please check back later.</p>
+      )}
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .category-page h1 {
+    margin-bottom: 0.5rem;
+    font-size: 2.2em;
+  }
+  .category-page > p {
+    margin-bottom: 2rem;
+    font-size: 1.1em;
+    color: #555;
+  }
+  .item-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  .item-card {
+    display: block;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  }
+  .item-card:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transform: translateY(-5px);
+  }
+  .item-card h4 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1.3em;
+    color: #007bff;
+  }
+  .item-card .author {
+    font-size: 0.9em;
+    color: #6c757d;
+    margin-bottom: 0.75rem;
+  }
+  .item-card .summary {
+    font-size: 0.95em;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    color: #495057;
+  }
+  .read-more {
+    font-weight: 600;
+    color: #007bff;
+    font-size: 0.9em;
+  }
+</style>
