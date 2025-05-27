@@ -1,7 +1,5 @@
 ---
-import books from '../data/books.json';
-import audiobooks from '../data/audiobooks.json';
-import videobooks from '../data/videobooks.json';
+import libraryContent from '../data/library_content.json';
 
 const { currentPage = '' } = Astro.props; // To highlight active link later if needed
 ---
@@ -11,36 +9,48 @@ const { currentPage = '' } = Astro.props; // To highlight active link later if n
     <li><a href="/library/" class:list={{ active: currentPage === '/library/' }}>Welcome</a></li>
     
     <li>
-      <a href="/library/books/" class="category-title" class:list={{ active: currentPage.startsWith('/library/books') && !currentPage.split('/').pop().includes('.') }}>Books</a>
-      <ul class="submenu">
-        {books.filter(book => book.type === 'article').map(book => (
-          <li><a href={`/library/books/${book.slug}`} class:list={{ active: currentPage === `/library/books/${book.slug}` }}>{book.title} (Article)</a></li>
-        ))}
-        {books.filter(book => book.type !== 'article').map(book => (
-          <li><a href={`/library/books/${book.slug}`} class:list={{ active: currentPage === `/library/books/${book.slug}` }}>{book.title}</a></li>
-        ))}
-      </ul>
+      <a href="/library/insights/" class="category-title" class:list={{ active: currentPage.startsWith('/library/insights') && !currentPage.split('/').pop().includes('.') }}>Insights</a>
+      {libraryContent.insights && libraryContent.insights.length > 0 && (
+        <ul class="submenu">
+          {libraryContent.insights.map(item => (
+            <li><a href={`/library/insights/${item.slug}`} class:list={{ active: currentPage === `/library/insights/${item.slug}` }}>{item.title}</a></li>
+          ))}
+        </ul>
+      )}
     </li>
 
-    <!-- <li>
-      <a href="/library/audiobooks/" class="category-title" class:list={{ active: currentPage.startsWith('/library/audiobooks') && !currentPage.split('/').pop().includes('.') }}>Audiobooks</a>
-      <ul class="submenu">
-        {audiobooks.map(audiobook => (
-          <li><a href={`/library/audiobooks/${audiobook.slug}`} class:list={{ active: currentPage === `/library/audiobooks/${audiobook.slug}` }}>{audiobook.title}</a></li>
-        ))}
-      </ul>
-    </li> -->
+    <li>
+      <a href="/library/foundations/" class="category-title" class:list={{ active: currentPage.startsWith('/library/foundations') && !currentPage.split('/').pop().includes('.') }}>Foundations</a>
+      {libraryContent.foundations && libraryContent.foundations.length > 0 && (
+        <ul class="submenu">
+          {libraryContent.foundations.map(item => (
+            <li><a href={`/library/foundations/${item.slug}`} class:list={{ active: currentPage === `/library/foundations/${item.slug}` }}>{item.title}</a></li>
+          ))}
+        </ul>
+      )}
+    </li>
 
-    <!-- <li>
-      <a href="/library/videobooks/" class="category-title" class:list={{ active: currentPage.startsWith('/library/videobooks') && !currentPage.split('/').pop().includes('.') }}>Videobooks</a>
-      <ul class="submenu">
-        {videobooks.map(videobook => (
-          <li><a href={`/library/videobooks/${videobook.slug}`} class:list={{ active: currentPage === `/library/videobooks/${videobook.slug}` }}>{videobook.title}</a></li>
-        ))}
-      </ul>
-    </li> -->
+    <li>
+      <a href="/library/explorations/" class="category-title" class:list={{ active: currentPage.startsWith('/library/explorations') && !currentPage.split('/').pop().includes('.') }}>Explorations</a>
+      {libraryContent.explorations && libraryContent.explorations.length > 0 && (
+        <ul class="submenu">
+          {libraryContent.explorations.map(item => (
+            <li><a href={`/library/explorations/${item.slug}`} class:list={{ active: currentPage === `/library/explorations/${item.slug}` }}>{item.title}</a></li>
+          ))}
+        </ul>
+      )}
+    </li>
 
-    <li><a href="/library/cta" class:list={{ active: currentPage === '/library/cta' }}>More</a></li>
+    <li>
+      <a href="/library/masteries/" class="category-title" class:list={{ active: currentPage.startsWith('/library/masteries') && !currentPage.split('/').pop().includes('.') }}>Masteries</a>
+      {libraryContent.masteries && libraryContent.masteries.length > 0 && (
+        <ul class="submenu">
+          {libraryContent.masteries.map(item => (
+            <li><a href={`/library/masteries/${item.slug}`} class:list={{ active: currentPage === `/library/masteries/${item.slug}` }}>{item.title}</a></li>
+          ))}
+        </ul>
+      )}
+    </li>
   </ul>
 </aside>
 

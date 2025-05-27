@@ -1,0 +1,169 @@
+{
+  "insights": [
+    {
+      "type": "article",
+      "title": "The Power of Mathematics and Numbers",
+      "slug": "power-of-mathematics-and-numbers",
+      "author": "Arithmoi Foundation",
+      "summary": "The power of numbers can be unlocked with the right mindset and approach.",
+      "pdfUrl": "/pdfs/insights/3_6_9_guide.pdf"
+    },
+    {
+      "type": "article",
+      "title": "The Alchemy of Symmetry and Anti-Symmetry",
+      "slug": "alchemy-of-symmetry-and-anti-symmetry",
+      "author": "Arithmoi Foundation",
+      "summary": "The doors of knowledge can lead you to a place of infinite power.",
+      "pdfUrl": "/pdfs/insights/alchemy.pdf"
+    },
+    {
+      "type": "article",
+      "title": "The Bridge of Thought",
+      "slug": "bridge-of-thought",
+      "author": "Arithmoi Foundation",
+      "summary": "There is a way to understand the universe thanks to mathematics.",
+      "pdfUrl": "/pdfs/insights/bridge.pdf"
+    },
+    {
+      "type": "article",
+      "title": "Foundations for Mathematical Reality",
+      "slug": "foundations-for-mathematical-reality",
+      "author": "Arithmoi Foundation",
+      "summary": "Mathematics is the foundation of reality.",
+      "pdfUrl": "/pdfs/insights/foundation.pdf"
+    },
+    {
+      "type": "article",
+      "title": "Pondering on the God Equation",
+      "slug": "pondering-on-the-god-equation",
+      "author": "Arithmoi Foundation",
+      "summary": "There is an equation so sublime and elegant, it is said to be the God Equation.",
+      "pdfUrl": "/pdfs/insights/god_equation.pdf"
+    },
+    {
+      "type": "article",
+      "title": "The Mystical Dance of Symmetry and Anti-Symmetry",
+      "slug": "mystical-dance-of-symmetry-and-anti-symmetry",
+      "author": "Arithmoi Foundation",
+      "summary": "Dancing numbers in the realm of symmetry and anti-symmetry.",
+      "pdfUrl": "/pdfs/insights/lie_algebra.pdf"
+    },
+    {
+      "type": "article",
+      "title": "The Mathematical and Medical Alliance",
+      "slug": "mathematical-and-medical-alliance",
+      "author": "Arithmoi Foundation",
+      "summary": "The medical and mathematical fields can grow together.",
+      "pdfUrl": "/pdfs/insights/math-medi-alliance.pdf"
+    },
+    {
+      "type": "article",
+      "title": "Ontological Mathematics and Eastern Philosophy",
+      "slug": "ontological-mathematics-and-eastern-philosophy",
+      "author": "Arithmoi Foundation",
+      "summary": "The seers and philosophers of old have long known the power of numbers.",
+      "pdfUrl": "/pdfs/insights/math_east_vision.pdf"
+    }
+  ],
+  "foundations": [
+    {
+      "type": "article",
+      "title": "Essential Calculus Theorems",
+      "slug": "essential-calculus-theorems",
+      "author": "Arithmoi Foundation",
+      "summary": "Calculus theorems are essential to a strong mathematical education.",
+      "pdfUrl": "/pdfs/foundations/calculus_theorems.pdf"
+    },
+    {
+      "type": "article",
+      "title": "Real and Complex Mathematical Analysis",
+      "slug": "real-and-complex-mathematical-analysis",
+      "author": "Arithmoi Foundation",
+      "summary": "Analysis is the foundation of modern mathematics.",
+      "pdfUrl": "/pdfs/foundations/analysis.pdf"
+    }
+  ],
+  "explorations": [
+    {
+      "type": "article",
+      "title": "A Novel U(3) Group and Applications",
+      "slug": "novel-u3-group-applications",
+      "author": "Jason Glowney",
+      "summary": "An article discussing a novel U(3) group and its applications to quantum computing and other fields.",
+      "pdfUrl": "/pdfs/explorations/glowney_jason_A_Novel_U_3_Group_and_Applications_to_Qu.pdf"
+    },
+    {
+      "type": "article",
+      "title": "Lie Groups and Lie Algebras",
+      "slug": "lie-groups-algebras",
+      "author": "Jason Glowney",
+      "summary": "An article on Lie groups and Lie algebras.",
+      "pdfUrl": "/pdfs/explorations/glowney_jason_lie_representation_complex_unit_sphere.pdf"
+    },
+    {
+      "type": "article",
+      "title": "An Imaginary Derivation of e",
+      "slug": "imaginary-derivation-e",
+      "author": "Jason Glowney",
+      "summary": "An article on an imaginary derivation of e and related concepts.",
+      "pdfUrl": "/pdfs/explorations/glowney_jason_An_Imaginary_Derivation_of_e_and_the_Com.pdf"
+    },
+    {
+      "type": "article",
+      "title": "Asymptotic Light Geometry",
+      "slug": "asymptotic-light-geometry",
+      "author": "Jason Glowney",
+      "summary": "An article on asymptotic light geometry and its relations.",
+      "pdfUrl": "/pdfs/explorations/glowney_jason_Asymptotic_Light_Geometry_and_its_Relati.pdf"
+    },
+    {
+      "type": "article",
+      "title": "Derivation of the Complex Unit Sphere",
+      "slug": "derivation-complex-unit-sphere",
+      "author": "Jason Glowney",
+      "summary": "An article on the derivation of the complex unit sphere.",
+      "pdfUrl": "/pdfs/explorations/glowney_jason_Derivation_of_the_Complex_Unit_Sphere_an.pdf"
+    },
+    {
+      "type": "article",
+      "title": "Geometric Thoughts with Guest Algebra",
+      "slug": "geometric-thoughts-guest-algebra",
+      "author": "Jason Glowney",
+      "summary": "An article on geometric thoughts with guest algebra.",
+      "pdfUrl": "/pdfs/explorations/glowney_jason_Geometric_Thoughts_with_Guest_Algebra_i.pdf"
+    },
+    {
+      "type": "article",
+      "title": "Gravitational Wave Signal Processing",
+      "slug": "gravitational-wave-signal-processing",
+      "author": "Jason Glowney",
+      "summary": "An article on gravitational wave signal processing.",
+      "pdfUrl": "/pdfs/explorations/glowney_jason_Gravitational_Wave_Signal_Processing.pdf"
+    },
+    {
+      "type": "article",
+      "title": "Imaginary Angles and the Connection Between",
+      "slug": "imaginary-angles-connection-between",
+      "author": "Jason Glowney",
+      "summary": "An article on imaginary angles and the connection between related concepts.",
+      "pdfUrl": "/pdfs/explorations/glowney_jason_Imaginary_Angles_and_the_Connection_betw.pdf"
+    },
+    {
+      "type": "article",
+      "title": "Pascal's Tetrahedron, Combinatorics, and Theory",
+      "slug": "pascals-tetrahedron-combinatorics-theory",
+      "author": "Jason Glowney",
+      "summary": "An article on Pascal's Tetrahedron, combinatorics, and related theory.",
+      "pdfUrl": "/pdfs/explorations/glowney_jason_Pascals_Tetrahedron_Combinatorics_and_th.pdf"
+    },
+    {
+      "type": "article",
+      "title": "The Strange Attractor of the Lorenz System",
+      "slug": "strange-attractor-lorenz-system",
+      "author": "Jason Glowney",
+      "summary": "An article on the strange attractor of the Lorenz system.",
+      "pdfUrl": "/pdfs/explorations/glowney_jason_The_Strange_Attractor_of_the_Lorenz_Syst.pdf"
+    }
+  ],
+  "masteries": []
+}
