@@ -6,8 +6,8 @@ const insights = Array.isArray(libraryContent.insights) ? libraryContent.insight
 <Layout title="Insights | Arithmoi Library" currentPage="/library/insights/">
   <div class="category-page">
     <h1>Insights</h1>
-    <p><em>Igniting curiosity and wonder.</em></p>
-    <p>Introducing mathematical knowledge with light-hearted and intuitive mathematical writings.</p>
+    <p class="intro-text"><em>Igniting curiosity and wonder.</em></p>
+    <p class="intro-text">Introducing mathematical knowledge with light-hearted and intuitive mathematical writings.</p>
     
     <div class="item-grid">
       {insights.map(item => (
@@ -28,13 +28,23 @@ const insights = Array.isArray(libraryContent.insights) ? libraryContent.insight
 <style>
   /* Styles are identical to explorations/index.astro, can be shared via a global stylesheet or component in a real project */
   .category-page h1 {
-    margin-bottom: 0.5rem;
-    font-size: 2.2em;
+    margin-bottom: 1.5rem; /* Increased bottom margin */
+    font-size: 2.4em; /* Slightly larger heading */
+    text-align: center; /* Center the main heading */
+    color: #222; /* Darker heading color */
   }
-  .category-page > p {
-    margin-bottom: 2rem;
-    font-size: 1.1em;
-    color: #555;
+  .category-page .intro-text {
+    margin-bottom: 1.5rem; 
+    font-size: 1.15em; /* Slightly larger intro text */
+    color: #444; /* Slightly lighter than heading, but still dark */
+    max-width: 75ch; /* Optimal line length for readability */ 
+    margin-left: auto; 
+    margin-right: auto; 
+    text-align: center; /* Center the introductory paragraphs */
+    line-height: 1.7; /* Improved line spacing for readability */
+  }
+  .category-page .intro-text:nth-of-type(2) { /* Target the second intro paragraph specifically for bottom margin */
+    margin-bottom: 2.5rem; /* More space before item grid */
   }
   .item-grid {
     display: grid;
