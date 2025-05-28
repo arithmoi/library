@@ -1,69 +1,107 @@
 ---
 import libraryContent from '../data/library_content.json';
+const { currentPage = '' } = Astro.props;
 
-const { currentPage = '' } = Astro.props; // To highlight active link later if needed
+// Helper function to determine if a category should be expanded by default
+const isCategoryExpanded = (categoryPath) => {
+  if (!currentPage || !categoryPath) return false;
+  // Expand if current page is the category's main page or a sub-page within it
+  return currentPage.startsWith(categoryPath);
+};
+
+const categories = [
+  {
+    name: 'Insights',
+    path: '/library/insights/', // Ensure trailing slash
+    content: libraryContent.insights,
+  },
+  {
+    name: 'Foundations',
+    path: '/library/foundations/', // Ensure trailing slash
+    content: libraryContent.foundations,
+  },
+  {
+    name: 'Explorations',
+    path: '/library/explorations/', // Ensure trailing slash
+    content: libraryContent.explorations,
+  },
+  {
+    name: 'Masteries',
+    path: '/library/masteries/', // Ensure trailing slash
+    content: libraryContent.masteries,
+  },
+];
 ---
+
 <aside id="sidebar">
   <h4>Library Navigation</h4>
   <ul>
-    <li><a href="/library/" class:list={{ active: currentPage === '/library/' }}>Welcome</a></li>
-    
-    <li>
-      <a href="/library/insights/" class="category-title" class:list={{ active: currentPage.startsWith('/library/insights') && !currentPage.split('/').pop().includes('.') }}>Insights</a>
-      {libraryContent.insights && libraryContent.insights.length > 0 && (
-        <ul class="submenu">
-          {libraryContent.insights.map(item => (
-            <li><a href={`/library/insights/${item.slug}`} class:list={{ active: currentPage === `/library/insights/${item.slug}` }}>{item.title}</a></li>
-          ))}
-        </ul>
-      )}
-    </li>
+    <li><a href="/library/" class="sidebar-nav-item" class:list={{ active: currentPage === '/library/' }}>Welcome</a></li>
 
-    <li>
-      <a href="/library/foundations/" class="category-title" class:list={{ active: currentPage.startsWith('/library/foundations') && !currentPage.split('/').pop().includes('.') }}>Foundations</a>
-      {libraryContent.foundations && libraryContent.foundations.length > 0 && (
-        <ul class="submenu">
-          {libraryContent.foundations.map(item => (
-            <li><a href={`/library/foundations/${item.slug}`} class:list={{ active: currentPage === `/library/foundations/${item.slug}` }}>{item.title}</a></li>
-          ))}
-        </ul>
-      )}
-    </li>
-
-    <li>
-      <a href="/library/explorations/" class="category-title" class:list={{ active: currentPage.startsWith('/library/explorations') && !currentPage.split('/').pop().includes('.') }}>Explorations</a>
-      {libraryContent.explorations && libraryContent.explorations.length > 0 && (
-        <ul class="submenu">
-          {libraryContent.explorations.map(item => (
-            <li><a href={`/library/explorations/${item.slug}`} class:list={{ active: currentPage === `/library/explorations/${item.slug}` }}>{item.title}</a></li>
-          ))}
-        </ul>
-      )}
-    </li>
-
-    <li>
-      <a href="/library/masteries/" class="category-title" class:list={{ active: currentPage.startsWith('/library/masteries') && !currentPage.split('/').pop().includes('.') }}>Masteries</a>
-      {libraryContent.masteries && libraryContent.masteries.length > 0 && (
-        <ul class="submenu">
-          {libraryContent.masteries.map(item => (
-            <li><a href={`/library/masteries/${item.slug}`} class:list={{ active: currentPage === `/library/masteries/${item.slug}` }}>{item.title}</a></li>
-          ))}
-        </ul>
-      )}
-    </li>
+    {categories.map(category => {
+      if (category.name === 'Masteries') {
+        return (
+          <li>
+            <a 
+              href={category.path} 
+              class="sidebar-nav-item category-title-like" 
+              class:list={{ active: currentPage.startsWith(category.path) }}
+            >
+              {category.name}
+            </a>
+          </li>
+        );
+      } else {
+        return (
+          <li
+            class:list={['collapsible-category', { 'is-expanded': isCategoryExpanded(category.path) }]}
+            data-category-path={category.path}
+          >
+            <div class="category-header">
+              <span class="dropdown-indicator">
+                <svg class="chevron-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                </svg>
+              </span>
+              <a
+                href={category.path}
+                class="category-title-link"
+                class:list={{ active: currentPage === category.path }}
+              >
+                {category.name}
+              </a>
+            </div>
+            {category.content && category.content.length > 0 && (
+              <ul class="submenu">
+                {category.content.map(item => (
+                  <li>
+                    <a
+                      href={`${category.path}${item.slug}`}
+                      class:list={{ active: currentPage === `${category.path}${item.slug}` }}
+                    >
+                      {item.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        );
+      }
+    })}
   </ul>
 </aside>
 
 <style>
   aside {
     background-color: #f0f0f0;
-    padding: 0 1rem; /* No top/bottom padding, 1rem left/right */
-    width: 280px; /* Adjusted width */
+    padding: 0 1rem;
+    width: 280px;
     height: 100%;
     border-right: 1px solid #ddd;
-    overflow-y: auto; /* For scrollable sidebar if content exceeds height */
-    display: flex; /* Added for better internal content management */
-    flex-direction: column; /* Added for better internal content management */
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
   }
   h4 {
     margin-top: 1.5rem;
@@ -74,41 +112,97 @@ const { currentPage = '' } = Astro.props; // To highlight active link later if n
     list-style-type: none;
     padding: 0;
     margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   }
-  li > a, a.category-title {
+
+  /* Common style for direct navigation links (Welcome, Masteries) */
+  .sidebar-nav-item {
+    text-decoration: none;
+    color: #333; /* Default color for Welcome */
+    display: block;
+    padding: 0.6rem 0; /* Base padding, same as category-header */
+    font-weight: 500; /* Default weight for Welcome */
+  }
+
+  .sidebar-nav-item.category-title-like {
+    color: #555; /* Match category title color */
+    font-weight: bold; /* Match category title weight */
+     /* No extra padding needed here, alignment is handled by parent li and this link's block display */
+  }
+
+  .sidebar-nav-item:hover {
+    color: #007bff;
+  }
+  .sidebar-nav-item.active {
+    color: #007bff;
+    font-weight: bold; /* Ensure active Welcome/Masteries is bold */
+  }
+  
+  /* Ensure Masteries (when active) also gets the bold font if not already applied by .category-title-like */
+  .sidebar-nav-item.category-title-like.active {
+    font-weight: bold;
+  }
+
+  .collapsible-category {
+    /* Main list item for a category */
+  }
+
+  .category-header {
+    display: flex;
+    align-items: center; /* Vertical alignment for indicator and title */
+    cursor: pointer;
+    padding: 0.6rem 0; /* Consistent padding with other links */
+  }
+
+  .dropdown-indicator {
+    margin-right: 8px; /* Space between indicator and title text */
+    display: inline-flex; /* Helps with SVG alignment */
+    align-items: center;
+    transition: transform 0.2s ease-in-out;
+  }
+  .chevron-icon {
+    width: 1em; /* Control size via font-size of parent or specific CSS */
+    height: 1em;
+    fill: currentColor; /* Use text color for the icon */
+  }
+
+  /* Rotate indicator when category is expanded */
+  .collapsible-category.is-expanded .dropdown-indicator {
+    transform: rotate(90deg);
+  }
+
+  .category-title-link {
+    text-decoration: none;
+    color: #555; /* Distinct color for category titles */
+    font-weight: bold;
+    flex-grow: 1; /* Title takes available space */
+  }
+  .category-title-link:hover {
+    color: #007bff;
+  }
+  .category-title-link.active {
+    color: #007bff; /* Active state for category title (when on its main page) */
+  }
+
+  .submenu {
+    /* Indent submenu items relative to the start of the category title text */
+    padding-left: calc(1em + 8px + 0.2rem); /* icon width (approx 1em) + icon margin (8px) + small extra indent */
+    list-style-type: none;
+    margin: 0;
+    overflow: hidden; /* Can be used for animations if desired */
+    display: none; /* Collapsed by default */
+  }
+
+  /* Show submenu when category is expanded */
+  .collapsible-category.is-expanded .submenu {
+    display: block;
+  }
+
+  .submenu li a {
+    display: block;
+    padding: 0.4rem 0;
     text-decoration: none;
     color: #333;
-    display: block;
-    padding: 0.6rem 0;
-    font-weight: 500;
-  }
-  li > a:hover {
-    color: #007bff;
-  }
-  li > a.active {
-    color: #007bff;
-    font-weight: bold;
-  }
-  a.category-title {
-    font-weight: bold;
-    color: #555;
-    margin-top: 0.5rem;
-    padding-left: 0; /* Align with top-level links */
-    display: block;
-    text-decoration: none;
-  }
-  a.category-title:hover {
-    color: #007bff;
-  }
-  a.category-title.active {
-    color: #007bff;
-    font-weight: bold;
-  }
-  .submenu {
-    padding-left: 1rem; /* Indent submenu items */
-  }
-  .submenu li a {
-    padding: 0.4rem 0;
     font-weight: normal;
     font-size: 0.9rem;
   }
@@ -120,3 +214,40 @@ const { currentPage = '' } = Astro.props; // To highlight active link later if n
     color: #0056b3;
   }
 </style>
+
+<script define:vars={{ currentPage }}>
+  document.addEventListener('DOMContentLoaded', () => {
+    const categoryItems = document.querySelectorAll('.collapsible-category');
+
+    categoryItems.forEach(item => {
+      const header = item.querySelector('.category-header');
+      const titleLink = item.querySelector('.category-title-link');
+      // const categoryPath = item.dataset.categoryPath; // Already used by SSR for initial state
+
+      if (header) {
+        header.addEventListener('click', (event) => {
+          // Determine if the click was on the title link itself or elsewhere in the header (e.g., indicator)
+          const isTitleLinkClicked = titleLink && titleLink.contains(event.target);
+
+          if (isTitleLinkClicked) {
+            // Clicked directly on the category title link
+            if (currentPage === titleLink.getAttribute('href')) {
+              // If on the category's main page, toggle dropdown and prevent navigation
+              event.preventDefault();
+              item.classList.toggle('is-expanded');
+            } else {
+              // If on a different page, allow default navigation to the category page.
+              // The page will reload, and server-side logic will set the 'is-expanded' state.
+              return; // Do nothing here, let the link navigate
+            }
+          } else {
+            // Clicked on the header but not directly on the title link (e.g., on indicator or padding)
+            // Always toggle the dropdown in this case.
+            item.classList.toggle('is-expanded');
+          }
+        });
+      }
+    });
+  });
+</script>
+
