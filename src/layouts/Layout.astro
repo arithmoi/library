@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar.astro';
 import Sidebar from '../components/Sidebar.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
+import { ViewTransitions } from 'astro:transitions';
 
 const { title = "Arithmoi Library", isBookDetailPage = false } = Astro.props;
 const isLibraryPage = Astro.url.pathname.startsWith('/library');
@@ -20,6 +21,7 @@ const isLibraryPage = Astro.url.pathname.startsWith('/library');
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/png" href="/images/library_logo.png" />
     <meta name="generator" content={Astro.generator} />
+    <ViewTransitions />
     <title>{title}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,7 +46,7 @@ const isLibraryPage = Astro.url.pathname.startsWith('/library');
     </div>
     <Footer isLibraryPage={isLibraryPage} />
 
-<script>
+<script is:inline>
   const sidebarToggle = document.querySelector('.sidebar-toggle');
   const sidebar = document.getElementById('sidebar'); // ID is in Sidebar.astro
   const body = document.body;
