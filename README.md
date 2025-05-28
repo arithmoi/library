@@ -38,3 +38,7 @@ The content and code of this website are under the copyright of The Arithmoi Fou
 ## 📞 Contact
 
 For inquiries related to The Arithmoi Foundation or this library, please contact `admin@arithmoi.org`.
+
+## Code
+
+For an open-source version of the Library, check the [UCLI-Tools Library](https://github.com/ucli-tools/library).
