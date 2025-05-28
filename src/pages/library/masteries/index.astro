@@ -57,8 +57,8 @@ const masteries = Array.isArray(libraryContent.masteries) ? libraryContent.maste
   /* Styles adapted from the old cta.astro and combined with category-page styles */
   .page-container {
     max-width: 900px;
-    margin: 2rem auto;
-    padding: 1rem; 
+    margin: 0 auto 2rem auto; /* Top margin set to 0 */
+    padding: 0 1rem 1rem 1rem; /* Top padding set to 0 */ 
   }
 
   .page-header {
@@ -67,18 +67,24 @@ const masteries = Array.isArray(libraryContent.masteries) ? libraryContent.maste
   }
 
   .page-header h1 {
-    font-size: 2.6em;
-    color: #2c3e50; 
-    margin-bottom: 0.5em;
-    font-weight: 600;
+    font-size: 2.4em; /* Consistent with other category pages */
+    color: #222; /* Consistent with other category pages */
+    margin-bottom: 1.5rem; /* Consistent with other category pages */
+    font-weight: 600; /* Retained from original masteries style as it's more specific */
+    /* text-align: center; is inherited from .page-header */
   }
 
   .page-intro {
-    font-size: 1.15em;
-    color: #555;
-    line-height: 1.7;
-    max-width: 750px;
-    margin: 0 auto 1.5rem auto; /* Added bottom margin */
+    font-size: 1.15em; /* Consistent with other category pages */
+    color: #444; /* Consistent with other category pages */
+    line-height: 1.7; /* Consistent with other category pages */
+    max-width: 75ch; /* Consistent with other category pages for optimal readability */
+    margin: 0 auto 1.5rem auto; /* Default margin for intro paragraphs */
+    /* text-align: center; is inherited from .page-header */
+  }
+
+  .page-header > p.page-intro:nth-of-type(2) { /* Target the second intro paragraph specifically */
+    margin-bottom: 2.5rem; /* More space before the book feature section, consistent with other pages */
   }
 
   .book-feature-container {

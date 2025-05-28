@@ -6,8 +6,8 @@ const explorations = libraryContent.explorations;
 <Layout title="Explorations | Arithmoi Library" currentPage="/library/explorations/">
   <div class="category-page">
     <h1>Explorations</h1>
-    <p><em>Venturing into deeper waters of mathematical discovery.</em></p>
-    <p>In-depth articles, extended studies, and research papers for those ready to explore.</p>
+    <p class="intro-text"><em>Venturing into deeper waters of mathematical discovery.</em></p>
+    <p class="intro-text">In-depth articles, extended studies, and research papers for those ready to explore.</p>
     
     <div class="item-grid">
       {explorations.map(item => (
@@ -27,13 +27,23 @@ const explorations = libraryContent.explorations;
 
 <style>
   .category-page h1 {
-    margin-bottom: 0.5rem;
-    font-size: 2.2em;
+    margin-bottom: 1.5rem; /* Increased bottom margin */
+    font-size: 2.4em; /* Slightly larger heading */
+    text-align: center; /* Center the main heading */
+    color: #222; /* Darker heading color */
   }
-  .category-page > p {
-    margin-bottom: 2rem;
-    font-size: 1.1em;
-    color: #555;
+  .category-page .intro-text {
+    margin-bottom: 1.5rem; 
+    font-size: 1.15em; /* Slightly larger intro text */
+    color: #444; /* Slightly lighter than heading, but still dark */
+    max-width: 75ch; /* Optimal line length for readability */ 
+    margin-left: auto; 
+    margin-right: auto; 
+    text-align: center; /* Center the introductory paragraphs */
+    line-height: 1.7; /* Improved line spacing for readability */
+  }
+  .category-page .intro-text:nth-of-type(2) { /* Target the second intro paragraph specifically for bottom margin */
+    margin-bottom: 2.5rem; /* More space before item grid */
   }
   .item-grid {
     display: grid;

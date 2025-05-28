@@ -35,7 +35,7 @@ const isLibraryPage = Astro.url.pathname.startsWith('/library');
       </button>
     )}
     <div class="main-container">
-        {isLibraryPage && <Sidebar />}
+        {isLibraryPage && <Sidebar currentPage={Astro.url.pathname} />}
         <main class="content-area">
             <div class:list={{ "content-wrapper": true, "library-content-wrapper": isLibraryPage, "book-detail-active": isBookDetailPage }}>
                 <slot />

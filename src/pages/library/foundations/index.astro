@@ -6,8 +6,8 @@ const foundations = Array.isArray(libraryContent.foundations) ? libraryContent.f
 <Layout title="Foundations | Arithmoi Library" currentPage="/library/foundations/">
   <div class="category-page">
     <h1>Foundations</h1>
-    <p><em>Deepening your grasp of mathematics.</em></p>
-    <p>Foundational concepts, definitions, theorems, and didactical lessons for the curious minds.</p>
+    <p class="intro-text"><em>Deepening your grasp of mathematics.</em></p>
+    <p class="intro-text">Foundational concepts, definitions, theorems, and didactical lessons for the curious minds.</p>
     
     <div class="item-grid">
       {foundations.map(item => (
@@ -28,13 +28,23 @@ const foundations = Array.isArray(libraryContent.foundations) ? libraryContent.f
 <style>
   /* Styles are identical to explorations/index.astro */
   .category-page h1 {
-    margin-bottom: 0.5rem;
-    font-size: 2.2em;
+    margin-bottom: 1.5rem; /* Increased bottom margin */
+    font-size: 2.4em; /* Slightly larger heading */
+    text-align: center; /* Center the main heading */
+    color: #222; /* Darker heading color */
   }
-  .category-page > p {
-    margin-bottom: 2rem;
-    font-size: 1.1em;
-    color: #555;
+  .category-page .intro-text {
+    margin-bottom: 1.5rem; 
+    font-size: 1.15em; /* Slightly larger intro text */
+    color: #444; /* Slightly lighter than heading, but still dark */
+    max-width: 75ch; /* Optimal line length for readability */ 
+    margin-left: auto; 
+    margin-right: auto; 
+    text-align: center; /* Center the introductory paragraphs */
+    line-height: 1.7; /* Improved line spacing for readability */
+  }
+  .category-page .intro-text:nth-of-type(2) { /* Target the second intro paragraph specifically for bottom margin */
+    margin-bottom: 2.5rem; /* More space before item grid */
   }
   .item-grid {
     display: grid;
