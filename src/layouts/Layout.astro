@@ -47,36 +47,59 @@ const isLibraryPage = Astro.url.pathname.startsWith('/library');
     <Footer isLibraryPage={isLibraryPage} />
 
 <script is:inline>
-  const sidebarToggle = document.querySelector('.sidebar-toggle');
-  const sidebar = document.getElementById('sidebar'); // ID is in Sidebar.astro
-  const body = document.body;
+  function initializeSidebar() {
+    const sidebarToggle = document.querySelector('.sidebar-toggle');
+    const sidebar = document.getElementById('sidebar'); // ID is in Sidebar.astro
+    const body = document.body;
 
-  if (sidebarToggle && sidebar) {
-    sidebarToggle.addEventListener('click', () => {
-      const isExpanded = sidebarToggle.getAttribute('aria-expanded') === 'true' || false;
-      sidebarToggle.setAttribute('aria-expanded', String(!isExpanded));
-      sidebar.classList.toggle('is-active');
-      sidebarToggle.classList.toggle('is-active');
-      // Uncomment below to use body overlay
-      // body.classList.toggle('sidebar-open-overlay'); 
-    });
+    if (sidebarToggle && sidebar) {
+      // Remove existing listeners by cloning the element
+      const newSidebarToggle = sidebarToggle.cloneNode(true);
+      sidebarToggle.parentNode.replaceChild(newSidebarToggle, sidebarToggle);
+      
+      newSidebarToggle.addEventListener('click', () => {
+        const isExpanded = newSidebarToggle.getAttribute('aria-expanded') === 'true' || false;
+        newSidebarToggle.setAttribute('aria-expanded', String(!isExpanded));
+        sidebar.classList.toggle('is-active');
+        newSidebarToggle.classList.toggle('is-active');
+        // Uncomment below to use body overlay
+        // body.classList.toggle('sidebar-open-overlay');
+      });
+    }
+
+    // Remove existing click listener and add new one
+    const existingClickHandler = window.sidebarClickHandler;
+    if (existingClickHandler) {
+      document.removeEventListener('click', existingClickHandler);
+    }
+
+    // Optional: Close sidebar if user clicks outside of it on mobile
+    window.sidebarClickHandler = function(event) {
+      const currentSidebar = document.getElementById('sidebar');
+      const currentSidebarToggle = document.querySelector('.sidebar-toggle');
+      
+      if (currentSidebar && currentSidebarToggle && currentSidebar.classList.contains('is-active')) {
+        const isClickInsideSidebar = currentSidebar.contains(event.target);
+        const isClickOnToggler = currentSidebarToggle.contains(event.target);
+
+        if (!isClickInsideSidebar && !isClickOnToggler) {
+          currentSidebar.classList.remove('is-active');
+          currentSidebarToggle.classList.remove('is-active');
+          currentSidebarToggle.setAttribute('aria-expanded', 'false');
+          // Uncomment below to use body overlay
+          // body.classList.remove('sidebar-open-overlay');
+        }
+      }
+    };
+    
+    document.addEventListener('click', window.sidebarClickHandler);
   }
 
-  // Optional: Close sidebar if user clicks outside of it on mobile
-  document.addEventListener('click', function(event) {
-    if (sidebar && sidebarToggle && sidebar.classList.contains('is-active')) {
-      const isClickInsideSidebar = sidebar.contains(event.target);
-      const isClickOnToggler = sidebarToggle.contains(event.target);
+  // Initialize on page load
+  initializeSidebar();
 
-      if (!isClickInsideSidebar && !isClickOnToggler) {
-        sidebar.classList.remove('is-active');
-        sidebarToggle.classList.remove('is-active');
-        sidebarToggle.setAttribute('aria-expanded', 'false');
-        // Uncomment below to use body overlay
-        // body.classList.remove('sidebar-open-overlay');
-      }
-    }
-  });
+  // Reinitialize after view transitions
+  document.addEventListener('astro:page-load', initializeSidebar);
 </script>
 
 </body>

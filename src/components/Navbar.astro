@@ -22,15 +22,29 @@
 </nav>
 
 <script>
-  const hamburger = document.querySelector('.hamburger');
-  const navLinks = document.querySelector('.nav-links');
+  function initializeHamburgerMenu() {
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
 
-  hamburger.addEventListener('click', () => {
-    const isExpanded = hamburger.getAttribute('aria-expanded') === 'true' || false;
-    hamburger.setAttribute('aria-expanded', !isExpanded);
-    navLinks.classList.toggle('is-active');
-    hamburger.classList.toggle('is-active'); // For styling the hamburger itself (e.g., to X)
-  });
+    if (hamburger && navLinks) {
+      // Remove any existing listeners to prevent duplicates
+      hamburger.replaceWith(hamburger.cloneNode(true));
+      const newHamburger = document.querySelector('.hamburger');
+      
+      newHamburger.addEventListener('click', () => {
+        const isExpanded = newHamburger.getAttribute('aria-expanded') === 'true' || false;
+        newHamburger.setAttribute('aria-expanded', !isExpanded);
+        navLinks.classList.toggle('is-active');
+        newHamburger.classList.toggle('is-active'); // For styling the hamburger itself (e.g., to X)
+      });
+    }
+  }
+
+  // Initialize on page load
+  initializeHamburgerMenu();
+
+  // Reinitialize after view transitions
+  document.addEventListener('astro:page-load', initializeHamburgerMenu);
 </script>
 
 <style>
