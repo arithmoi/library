@@ -15,10 +15,11 @@ import PdfViewer from '../../components/PdfViewer.astro';
       <h3>🧪 Testing Instructions:</h3>
       <ol>
         <li><strong>Open Developer Console</strong> (F12) to see TTS loading messages</li>
-        <li><strong>Upload a PDF file</strong> using the file input below</li>
         <li><strong>Click the hamburger menu</strong> (☰) in the PDF viewer</li>
         <li><strong>Switch to "Audio" or "Video" mode</strong></li>
         <li><strong>Click the Play button</strong> (▶️) to test TTS</li>
+        <li><strong>🎛️ Test Speed Control:</strong> Change the speed selector (0.5x, 1.25x, 2x) while audio is playing</li>
+        <li><strong>✅ Expected:</strong> Audio speed should change immediately without restarting</li>
       </ol>
       
       <div class="expected-output">
@@ -34,7 +35,7 @@ Voice selector populated with 12 voices
     </div>
     
     <div class="pdf-viewer-container">
-      <PdfViewer />
+      <PdfViewer pdfUrl="/pdfs/foundations/analysis.pdf" />
     </div>
   </div>
 </Layout>

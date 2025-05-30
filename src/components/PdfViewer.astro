@@ -1685,7 +1685,33 @@ const pdfjsWorkerSrc = `/pdf.worker.min.mjs`;
         if (speedSelector) {
           speedSelector.addEventListener('change', (e) => {
             speechRate = parseFloat(e.target.value);
+            console.log(`🎛️ Speed changed to ${speechRate}x`);
             savePreferences();
+            
+            // If currently playing, try to update speed without restarting
+            if (isPlaying && (currentReadingMode === 'audio' || currentReadingMode === 'video')) {
+              if (cloudTtsManager && cloudTtsManager.setPlaybackRate) {
+                // Try to update playback rate of current audio
+                const updated = cloudTtsManager.setPlaybackRate(speechRate);
+                if (updated) {
+                  console.log('✅ Speed updated during playback');
+                } else {
+                  // Fallback: restart TTS with new speed
+                  console.log('🔄 Restarting TTS with new speed...');
+                  stopTTS();
+                  setTimeout(() => {
+                    startTTS();
+                  }, 500);
+                }
+              } else {
+                // Fallback for system TTS or if cloud TTS doesn't support live updates
+                console.log('🔄 Restarting TTS with new speed...');
+                stopTTS();
+                setTimeout(() => {
+                  startTTS();
+                }, 500);
+              }
+            }
           });
         }
 

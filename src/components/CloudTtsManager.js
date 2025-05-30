@@ -113,9 +113,10 @@ class CloudTtsManager {
     try {
       // Use StreamElements free TTS API (no API key required)
       const voice = options.voice || 'Brian'; // Default voice
+      const rate = options.rate || 1.0; // Speed control
       const url = `https://api.streamelements.com/kappa/v2/speech?voice=${voice}&text=${encodeURIComponent(text)}`;
       
-      this.log(`🔊 Generating speech with Free TTS API...`);
+      this.log(`🔊 Generating speech with Free TTS API... (rate: ${rate}x)`);
       
       // Create audio element
       const audio = new Audio(url);
@@ -126,12 +127,15 @@ class CloudTtsManager {
 
       audio.oncanplay = () => {
         this.log('✅ Audio ready to play');
+        // Apply speed control using HTML5 Audio playbackRate
+        audio.playbackRate = rate;
+        this.log(`🎛️ Playback rate set to ${rate}x`);
       };
 
       audio.onplay = () => {
         this.isPlaying = true;
         this.onStatusChange?.({ isPlaying: true, provider: 'Free Cloud TTS' });
-        this.log('🔊 Audio playing');
+        this.log(`🔊 Audio playing at ${rate}x speed`);
       };
 
       audio.onended = () => {
@@ -173,15 +177,23 @@ class CloudTtsManager {
     try {
       // Use Google Translate TTS (free, no API key)
       const lang = options.lang || 'en';
+      const rate = options.rate || 1.0; // Speed control
       const url = `https://translate.google.com/translate_tts?ie=UTF-8&tl=${lang}&client=tw-ob&q=${encodeURIComponent(text)}`;
       
-      this.log(`🔊 Generating speech with Google TTS...`);
+      this.log(`🔊 Generating speech with Google TTS... (rate: ${rate}x)`);
       
       const audio = new Audio(url);
+      
+      audio.oncanplay = () => {
+        // Apply speed control using HTML5 Audio playbackRate
+        audio.playbackRate = rate;
+        this.log(`🎛️ Playback rate set to ${rate}x`);
+      };
       
       audio.onplay = () => {
         this.isPlaying = true;
         this.onStatusChange?.({ isPlaying: true, provider: 'Alternative Cloud TTS' });
+        this.log(`🔊 Audio playing at ${rate}x speed`);
       };
 
       audio.onended = () => {
@@ -480,6 +492,16 @@ class CloudTtsManager {
       currentProvider: this.currentProvider?.name || null,
       availableProviders: this.providers.map(p => p.name)
     };
+  }
+
+  // Update playback rate of currently playing audio
+  setPlaybackRate(rate) {
+    if (this.currentAudio && !this.currentAudio.paused) {
+      this.currentAudio.playbackRate = rate;
+      this.log(`🎛️ Playback rate updated to ${rate}x during playback`);
+      return true;
+    }
+    return false;
   }
 }
 
