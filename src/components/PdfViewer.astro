@@ -137,12 +137,6 @@ const pdfjsWorkerSrc = `/pdf.worker.min.mjs`;
               <label class="control-label">🌈 Highlight:</label>
               <input type="color" id="highlight-color" value="#ffff00" class="color-picker">
             </div>
-            <div class="control-row">
-              <label class="menu-option">
-                <input type="checkbox" id="dark-mode">
-                <span class="option-text">🌙 Dark Mode</span>
-              </label>
-            </div>
           </div>
         </div>
       </div>
@@ -166,7 +160,7 @@ const pdfjsWorkerSrc = `/pdf.worker.min.mjs`;
   // Global menu variables - moved to global scope to fix variable access issues
   let menuBtn, menuOverlay, menuModal, menuCloseBtn, ttsMenuSection, readingModeInputs;
   let ttsPlayPauseBtn, ttsStopBtn, voiceSelector, speedSelector;
-  let autoAdvanceCheckbox, highlightColorInput, darkModeCheckbox;
+  let autoAdvanceCheckbox, highlightColorInput;
   let menuInitialized = false;
   let lastToggleTime = 0;
 
@@ -180,7 +174,6 @@ const pdfjsWorkerSrc = `/pdf.worker.min.mjs`;
   let speechRate = 1.0;
   let autoAdvance = false;
   let highlightColor = '#ffff00';
-  let darkMode = false;
 
   // Cleanup function to remove existing event listeners
   function cleanupPdfViewer() {
@@ -692,7 +685,6 @@ const pdfjsWorkerSrc = `/pdf.worker.min.mjs`;
         speedSelector = document.getElementById('speed-selector');
         autoAdvanceCheckbox = document.getElementById('auto-advance');
         highlightColorInput = document.getElementById('highlight-color');
-        darkModeCheckbox = document.getElementById('dark-mode');
 
         console.log('Menu elements found:', {
           menuBtn: !!menuBtn,
@@ -1518,8 +1510,7 @@ const pdfjsWorkerSrc = `/pdf.worker.min.mjs`;
           voice: voiceSelector ? voiceSelector.value : '',
           speed: speechRate,
           autoAdvance: autoAdvance,
-          highlightColor: highlightColor,
-          darkMode: darkMode
+          highlightColor: highlightColor
         };
         
         localStorage.setItem('pdfViewerPreferences', JSON.stringify(preferences));
@@ -1568,27 +1559,9 @@ const pdfjsWorkerSrc = `/pdf.worker.min.mjs`;
               highlightColorInput.value = preferences.highlightColor;
             }
             
-            // Apply dark mode
-            if (preferences.darkMode !== undefined && darkModeCheckbox) {
-              darkMode = preferences.darkMode;
-              darkModeCheckbox.checked = preferences.darkMode;
-              applyDarkMode(preferences.darkMode);
-            }
           }
         } catch (error) {
           console.error('Error loading preferences:', error);
-        }
-      }
-
-      // Apply dark mode
-      function applyDarkMode(enabled) {
-        const container = document.getElementById('pdf-viewer-container');
-        if (container) {
-          if (enabled) {
-            container.classList.add('dark-mode');
-          } else {
-            container.classList.remove('dark-mode');
-          }
         }
       }
 
@@ -1747,13 +1720,6 @@ const pdfjsWorkerSrc = `/pdf.worker.min.mjs`;
           });
         }
 
-        if (darkModeCheckbox) {
-          darkModeCheckbox.addEventListener('change', (e) => {
-            darkMode = e.target.checked;
-            applyDarkMode(darkMode);
-            savePreferences();
-          });
-        }
       }
 
       // Initialize TTS when PDF is loaded
@@ -2252,54 +2218,4 @@ const pdfjsWorkerSrc = `/pdf.worker.min.mjs`;
     border-radius: 4px !important;
   }
 
-  /* Dark Mode Styles */
-  .pdf-viewer-container.dark-mode {
-    background-color: #2d3748;
-    color: #e2e8f0;
-    border-color: #4a5568;
-  }
-
-  .pdf-viewer-container.dark-mode .pdf-controls {
-    background-color: #4a5568;
-  }
-
-  .pdf-viewer-container.dark-mode #pdf-canvas {
-    border-color: #718096;
-  }
-
-  .dark-mode .pdf-menu-modal {
-    background: #2d3748 !important;
-    color: #e2e8f0 !important;
-  }
-
-  .dark-mode .menu-header {
-    background: #4a5568 !important;
-    border-bottom-color: #718096 !important;
-  }
-
-  .dark-mode .menu-section {
-    border-bottom-color: #4a5568 !important;
-  }
-
-  .dark-mode .menu-section-title {
-    color: #e2e8f0 !important;
-  }
-
-  .dark-mode .option-text {
-    color: #e2e8f0 !important;
-  }
-
-  .dark-mode .control-label {
-    color: #cbd5e0 !important;
-  }
-
-  .dark-mode .menu-option:hover {
-    background-color: #4a5568 !important;
-  }
-
-  .dark-mode .menu-select {
-    background: #4a5568 !important;
-    border-color: #718096 !important;
-    color: #e2e8f0 !important;
-  }
 </style>

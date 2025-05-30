@@ -18,6 +18,12 @@
       <li><a href="/about" class:list={{ active: Astro.url.pathname.startsWith('/about') }}>About</a></li>
       <li><a href="/contact" class:list={{ active: Astro.url.pathname.startsWith('/contact') }}>Contact</a></li>
     </ul>
+    
+    <!-- Global Dark Mode Toggle -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark/light mode">
+      <span class="theme-icon light-icon">☀️</span>
+      <span class="theme-icon dark-icon">🌙</span>
+    </button>
   </div>
 </nav>
 
@@ -40,11 +46,45 @@
     }
   }
 
+  function initializeThemeToggle() {
+    const themeToggle = document.getElementById('theme-toggle');
+    if (!themeToggle) return;
+
+    // Remove existing listeners to prevent duplicates
+    themeToggle.replaceWith(themeToggle.cloneNode(true));
+    const newThemeToggle = document.getElementById('theme-toggle');
+
+    // Load saved theme preference or default to light
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    applyTheme(savedTheme);
+
+    newThemeToggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      
+      applyTheme(newTheme);
+      localStorage.setItem('theme', newTheme);
+    });
+  }
+
+  function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+      themeToggle.classList.toggle('dark-active', theme === 'dark');
+    }
+  }
+
   // Initialize on page load
   initializeHamburgerMenu();
+  initializeThemeToggle();
 
   // Reinitialize after view transitions
-  document.addEventListener('astro:page-load', initializeHamburgerMenu);
+  document.addEventListener('astro:page-load', () => {
+    initializeHamburgerMenu();
+    initializeThemeToggle();
+  });
 </script>
 
 <style>
@@ -64,6 +104,7 @@
     display: flex;
     justify-content: center; /* This will center the .nav-links ul */
     align-items: center;
+    position: relative; /* For absolute positioning of theme toggle */
   }
   .logo {
     display: flex; /* To align image and text */
@@ -151,6 +192,59 @@
     opacity: 0;
   }
 
+  /* Theme Toggle Styles */
+  .theme-toggle {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: 2px solid #e0e0e0;
+    border-radius: 50px;
+    padding: 8px 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    min-width: 60px;
+    justify-content: center;
+  }
+
+  .theme-toggle:hover {
+    border-color: #007bff;
+    background-color: rgba(0, 123, 255, 0.05);
+  }
+
+  .theme-icon {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    display: inline-block;
+  }
+
+  .theme-toggle .dark-icon {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .theme-toggle .light-icon {
+    opacity: 0;
+    transform: scale(0.8);
+    position: absolute;
+  }
+
+  .theme-toggle.dark-active .dark-icon {
+    opacity: 0;
+    transform: scale(0.8);
+    position: absolute;
+  }
+
+  .theme-toggle.dark-active .light-icon {
+    opacity: 1;
+    transform: scale(1);
+    position: relative;
+  }
+
   /* Mobile Styles */
     .navbar-logo-img {
     height: 30px; /* Adjust as needed */
@@ -205,8 +299,8 @@
       transform: none; /* Reset transform */
     }
     .nav-container {
-      /* Ensure logo and hamburger can coexist if logo is very wide */
-      justify-content: space-between; /* Distribute space between logo and hamburger */
+      /* Ensure logo, hamburger, and theme toggle can coexist */
+      justify-content: space-between; /* Distribute space between elements */
       width: 100%; /* Ensure full width for space-between to work effectively */
       padding-top: 0.5rem; /* Reduced top padding for a shorter navbar */
       padding-bottom: 0.5rem; /* Reduced bottom padding for a shorter navbar */
@@ -216,6 +310,20 @@
         /* If logo was not absolute, we might need to ensure it doesn't push hamburger off */
         position: static; /* Become a flex item, overriding base style's absolute */
         transform: none; /* Reset transform, vertical centering by flex align-items */
+    }
+    
+    .theme-toggle {
+      position: static; /* Become a flex item on mobile */
+      transform: none; /* Reset transform */
+      order: 3; /* Place after hamburger */
+      margin-left: 10px; /* Small gap from hamburger */
+      min-width: 50px; /* Slightly smaller on mobile */
+      padding: 6px 10px; /* Slightly smaller padding */
+    }
+    
+    /* Adjust hamburger order */
+    .hamburger {
+      order: 2; /* Place before theme toggle */
     }
   }
   li a {
