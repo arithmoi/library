@@ -95,6 +95,19 @@ body {
   background-color: var(--text-color) !important;
 }
 
+/* Mobile Theme Toggle Dark Mode */
+[data-theme="dark"] .mobile-theme-toggle {
+  border-top-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .theme-toggle-mobile {
+  color: var(--text-color) !important;
+}
+
+[data-theme="dark"] .theme-toggle-mobile:hover {
+  background-color: var(--button-hover-bg) !important;
+}
+
 [data-theme="dark"] .sidebar-toggle {
   background: var(--button-bg) !important;
   border-color: var(--button-border) !important;

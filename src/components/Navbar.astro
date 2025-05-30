@@ -17,9 +17,17 @@
       <li><a href="/library" class:list={{ active: Astro.url.pathname.startsWith('/library') }}>Library</a></li>
       <li><a href="/about" class:list={{ active: Astro.url.pathname.startsWith('/about') }}>About</a></li>
       <li><a href="/contact" class:list={{ active: Astro.url.pathname.startsWith('/contact') }}>Contact</a></li>
+      <!-- Theme toggle in mobile menu -->
+      <li class="mobile-theme-toggle">
+        <button id="theme-toggle-mobile" class="theme-toggle-mobile" aria-label="Toggle dark mode" title="Toggle dark/light mode">
+          <span class="theme-icon light-icon">☀️</span>
+          <span class="theme-icon dark-icon">🌙</span>
+          <span class="toggle-text">Dark Mode</span>
+        </button>
+      </li>
     </ul>
     
-    <!-- Global Dark Mode Toggle -->
+    <!-- Global Dark Mode Toggle - Desktop Only -->
     <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark/light mode">
       <span class="theme-icon light-icon">☀️</span>
       <span class="theme-icon dark-icon">🌙</span>
@@ -48,31 +56,61 @@
 
   function initializeThemeToggle() {
     const themeToggle = document.getElementById('theme-toggle');
-    if (!themeToggle) return;
-
-    // Remove existing listeners to prevent duplicates
-    themeToggle.replaceWith(themeToggle.cloneNode(true));
-    const newThemeToggle = document.getElementById('theme-toggle');
+    const themeToggleMobile = document.getElementById('theme-toggle-mobile');
 
     // Load saved theme preference or default to light
     const savedTheme = localStorage.getItem('theme') || 'light';
     applyTheme(savedTheme);
 
-    newThemeToggle.addEventListener('click', () => {
-      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
-      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    // Handle desktop theme toggle
+    if (themeToggle) {
+      themeToggle.replaceWith(themeToggle.cloneNode(true));
+      const newThemeToggle = document.getElementById('theme-toggle');
       
-      applyTheme(newTheme);
-      localStorage.setItem('theme', newTheme);
-    });
+      newThemeToggle.addEventListener('click', () => {
+        toggleTheme();
+      });
+    }
+
+    // Handle mobile theme toggle
+    if (themeToggleMobile) {
+      themeToggleMobile.replaceWith(themeToggleMobile.cloneNode(true));
+      const newThemeToggleMobile = document.getElementById('theme-toggle-mobile');
+      
+      newThemeToggleMobile.addEventListener('click', () => {
+        toggleTheme();
+        // Close mobile menu after theme change
+        const navLinks = document.querySelector('.nav-links');
+        const hamburger = document.querySelector('.hamburger');
+        if (navLinks && hamburger) {
+          navLinks.classList.remove('is-active');
+          hamburger.classList.remove('is-active');
+          hamburger.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+  }
+
+  function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    
+    applyTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
   }
 
   function applyTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
     
     const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+    
     if (themeToggle) {
       themeToggle.classList.toggle('dark-active', theme === 'dark');
+    }
+    
+    if (themeToggleMobile) {
+      themeToggleMobile.classList.toggle('dark-active', theme === 'dark');
     }
   }
 
@@ -245,6 +283,65 @@
     position: relative;
   }
 
+  /* Mobile Theme Toggle Styles */
+  .mobile-theme-toggle {
+    display: none; /* Hidden by default, shown in mobile menu */
+    border-top: 1px solid #f0f0f0;
+    padding-top: 1rem;
+    margin-top: 1rem;
+  }
+
+  .theme-toggle-mobile {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 1rem;
+    width: 100%;
+    text-align: left;
+    font-size: 16px;
+    color: #333;
+    transition: background-color 0.2s ease;
+  }
+
+  .theme-toggle-mobile:hover {
+    background-color: #f0f0f0;
+  }
+
+  .theme-toggle-mobile .theme-icon {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    display: inline-block;
+  }
+
+  .theme-toggle-mobile .dark-icon {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .theme-toggle-mobile .light-icon {
+    opacity: 0;
+    transform: scale(0.8);
+    position: absolute;
+  }
+
+  .theme-toggle-mobile.dark-active .dark-icon {
+    opacity: 0;
+    transform: scale(0.8);
+    position: absolute;
+  }
+
+  .theme-toggle-mobile.dark-active .light-icon {
+    opacity: 1;
+    transform: scale(1);
+    position: relative;
+  }
+
+  .toggle-text {
+    font-weight: 500;
+  }
+
   /* Mobile Styles */
     .navbar-logo-img {
     height: 30px; /* Adjust as needed */
@@ -285,6 +382,16 @@
     }
     .nav-links li:last-child a {
       border-bottom: none;
+    }
+    
+    /* Show mobile theme toggle in mobile menu */
+    .mobile-theme-toggle {
+      display: block !important;
+    }
+    
+    /* Hide desktop theme toggle on mobile */
+    .theme-toggle {
+      display: none !important;
     }
     .hamburger {
       display: flex; /* Changed from block to flex for centering */
