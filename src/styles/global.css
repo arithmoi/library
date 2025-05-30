@@ -97,14 +97,16 @@ body {
 
 /* Mobile Theme Toggle Dark Mode */
 [data-theme="dark"] .mobile-theme-toggle {
-  border-top-color: var(--border-color) !important;
+  /* Remove border styling since we removed the border */
 }
 
 [data-theme="dark"] .theme-toggle-mobile {
-  color: var(--text-color) !important;
+  background: var(--button-bg) !important;
+  border-color: var(--button-border) !important;
 }
 
 [data-theme="dark"] .theme-toggle-mobile:hover {
+  border-color: var(--link-color) !important;
   background-color: var(--button-hover-bg) !important;
 }
 
