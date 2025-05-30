@@ -1,0 +1,122 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PdfViewer from '../../components/PdfViewer.astro';
+---
+
+<Layout title="PDF Viewer TTS Test | Arithmoi Library">
+  <div class="pdf-test-page">
+    <h2>PDF Viewer TTS Test</h2>
+    <p class="intro-text">
+      This page tests the Text-to-Speech functionality of the PDF viewer component.
+      Upload a PDF file to test the TTS voice loading and speech synthesis features.
+    </p>
+    
+    <div class="test-instructions">
+      <h3>🧪 Testing Instructions:</h3>
+      <ol>
+        <li><strong>Open Developer Console</strong> (F12) to see TTS loading messages</li>
+        <li><strong>Click the hamburger menu</strong> (☰) in the PDF viewer</li>
+        <li><strong>Switch to "Audio" or "Video" mode</strong></li>
+        <li><strong>Click the Play button</strong> (▶️) to test TTS</li>
+        <li><strong>🎛️ Test Speed Control:</strong> Change the speed selector (0.5x, 1.25x, 2x) while audio is playing</li>
+        <li><strong>✅ Expected:</strong> Audio speed should change immediately without restarting</li>
+        <li><strong>🔄 Test Auto-Advance:</strong> Enable "Auto-advance pages" checkbox and let audio finish</li>
+        <li><strong>✅ Expected:</strong> Should automatically go to next page and continue reading</li>
+      </ol>
+      
+      <div class="expected-output">
+        <h4>Expected Console Output (Success):</h4>
+        <pre><code>Initializing TTS...
+Available voices: 0
+No voices available immediately, starting force loading...
+Voice loading attempt 1/10
+✅ Voices loaded successfully: 12
+Voice selector populated with 12 voices
+✅ TTS test successful - speech synthesis is working</code></pre>
+      </div>
+    </div>
+    
+    <div class="pdf-viewer-container">
+      <PdfViewer pdfUrl="/pdfs/foundations/analysis.pdf" />
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .pdf-test-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  .pdf-test-page h2 {
+    margin-bottom: 1.5rem;
+    font-size: 2.4em;
+    text-align: center;
+    color: #222;
+  }
+  
+  .intro-text {
+    margin-bottom: 2rem;
+    font-size: 1.15em;
+    color: #444;
+    max-width: 75ch;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    line-height: 1.7;
+  }
+  
+  .test-instructions {
+    background: #f8f9fa;
+    border: 2px solid #007bff;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .test-instructions h3 {
+    margin-top: 0;
+    color: #007bff;
+  }
+  
+  .test-instructions ol {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+  }
+  
+  .test-instructions li {
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+  }
+  
+  .expected-output {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: #e9ecef;
+    border-radius: 4px;
+  }
+  
+  .expected-output h4 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    color: #28a745;
+  }
+  
+  .expected-output pre {
+    background: #2d3748;
+    color: #e2e8f0;
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: 0.9em;
+    line-height: 1.4;
+  }
+  
+  .pdf-viewer-container {
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    overflow: hidden;
+    min-height: 600px;
+  }
+</style>

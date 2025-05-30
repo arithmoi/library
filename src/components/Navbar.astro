@@ -17,7 +17,20 @@
       <li><a href="/library" class:list={{ active: Astro.url.pathname.startsWith('/library') }}>Library</a></li>
       <li><a href="/about" class:list={{ active: Astro.url.pathname.startsWith('/about') }}>About</a></li>
       <li><a href="/contact" class:list={{ active: Astro.url.pathname.startsWith('/contact') }}>Contact</a></li>
+      <!-- Theme toggle in mobile menu - using same style as desktop -->
+      <li class="mobile-theme-toggle">
+        <button id="theme-toggle-mobile" class="theme-toggle theme-toggle-mobile" aria-label="Toggle dark mode" title="Toggle dark/light mode">
+          <span class="theme-icon light-icon">☀️</span>
+          <span class="theme-icon dark-icon">🌙</span>
+        </button>
+      </li>
     </ul>
+    
+    <!-- Global Dark Mode Toggle - Desktop Only -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark/light mode">
+      <span class="theme-icon light-icon">☀️</span>
+      <span class="theme-icon dark-icon">🌙</span>
+    </button>
   </div>
 </nav>
 
@@ -40,11 +53,75 @@
     }
   }
 
+  function initializeThemeToggle() {
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+
+    // Load saved theme preference or default to light
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    applyTheme(savedTheme);
+
+    // Handle desktop theme toggle
+    if (themeToggle) {
+      themeToggle.replaceWith(themeToggle.cloneNode(true));
+      const newThemeToggle = document.getElementById('theme-toggle');
+      
+      newThemeToggle.addEventListener('click', () => {
+        toggleTheme();
+      });
+    }
+
+    // Handle mobile theme toggle
+    if (themeToggleMobile) {
+      themeToggleMobile.replaceWith(themeToggleMobile.cloneNode(true));
+      const newThemeToggleMobile = document.getElementById('theme-toggle-mobile');
+      
+      newThemeToggleMobile.addEventListener('click', () => {
+        toggleTheme();
+        // Close mobile menu after theme change
+        const navLinks = document.querySelector('.nav-links');
+        const hamburger = document.querySelector('.hamburger');
+        if (navLinks && hamburger) {
+          navLinks.classList.remove('is-active');
+          hamburger.classList.remove('is-active');
+          hamburger.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+  }
+
+  function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    
+    applyTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+  }
+
+  function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+    
+    if (themeToggle) {
+      themeToggle.classList.toggle('dark-active', theme === 'dark');
+    }
+    
+    if (themeToggleMobile) {
+      themeToggleMobile.classList.toggle('dark-active', theme === 'dark');
+    }
+  }
+
   // Initialize on page load
   initializeHamburgerMenu();
+  initializeThemeToggle();
 
   // Reinitialize after view transitions
-  document.addEventListener('astro:page-load', initializeHamburgerMenu);
+  document.addEventListener('astro:page-load', () => {
+    initializeHamburgerMenu();
+    initializeThemeToggle();
+  });
 </script>
 
 <style>
@@ -64,6 +141,7 @@
     display: flex;
     justify-content: center; /* This will center the .nav-links ul */
     align-items: center;
+    position: relative; /* For absolute positioning of theme toggle */
   }
   .logo {
     display: flex; /* To align image and text */
@@ -151,6 +229,87 @@
     opacity: 0;
   }
 
+  /* Theme Toggle Styles */
+  .theme-toggle {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: 2px solid #e0e0e0;
+    border-radius: 50px;
+    padding: 8px 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    min-width: 60px;
+    justify-content: center;
+  }
+
+  .theme-toggle:hover {
+    border-color: #007bff;
+    background-color: rgba(0, 123, 255, 0.05);
+  }
+
+  .theme-icon {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    display: inline-block;
+  }
+
+  .theme-toggle .dark-icon {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .theme-toggle .light-icon {
+    opacity: 0;
+    transform: scale(0.8);
+    position: absolute;
+  }
+
+  .theme-toggle.dark-active .dark-icon {
+    opacity: 0;
+    transform: scale(0.8);
+    position: absolute;
+  }
+
+  .theme-toggle.dark-active .light-icon {
+    opacity: 1;
+    transform: scale(1);
+    position: relative;
+  }
+
+  /* Mobile Theme Toggle Styles */
+  .mobile-theme-toggle {
+    display: none; /* Hidden by default, shown only on mobile */
+  }
+
+  .theme-toggle-mobile {
+    /* Simplified styling for mobile */
+    background: none;
+    border: 2px solid #e0e0e0;
+    border-radius: 50px;
+    padding: 8px 12px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    min-width: 60px;
+    justify-content: center;
+  }
+
+  .theme-toggle-mobile:hover {
+    border-color: #007bff;
+    background-color: rgba(0, 123, 255, 0.05);
+  }
+
+  /* Remove the separate mobile theme icon styles since we're using the same class as desktop */
+
   /* Mobile Styles */
     .navbar-logo-img {
     height: 30px; /* Adjust as needed */
@@ -189,8 +348,33 @@
       padding: 1rem;
       border-bottom: 1px solid #f0f0f0;
     }
-    .nav-links li:last-child a {
+    .nav-links li:last-child:not(.mobile-theme-toggle) a {
       border-bottom: none;
+    }
+    
+    /* Ensure Contact keeps its border when theme toggle is present */
+    .nav-links li:nth-last-child(2) a {
+      border-bottom: 1px solid #f0f0f0;
+    }
+    
+    /* Show mobile theme toggle in mobile menu */
+    .mobile-theme-toggle {
+      display: block !important;
+      width: 100%;
+      text-align: center;
+      padding: 1rem;
+    }
+    
+    /* Ensure the mobile theme toggle button displays as block */
+    .mobile-theme-toggle .theme-toggle-mobile {
+      display: block !important;
+      margin: 0 auto;
+      position: static;
+    }
+    
+    /* Hide desktop theme toggle on mobile */
+    .theme-toggle:not(.theme-toggle-mobile) {
+      display: none !important;
     }
     .hamburger {
       display: flex; /* Changed from block to flex for centering */
@@ -205,8 +389,8 @@
       transform: none; /* Reset transform */
     }
     .nav-container {
-      /* Ensure logo and hamburger can coexist if logo is very wide */
-      justify-content: space-between; /* Distribute space between logo and hamburger */
+      /* Ensure logo, hamburger, and theme toggle can coexist */
+      justify-content: space-between; /* Distribute space between elements */
       width: 100%; /* Ensure full width for space-between to work effectively */
       padding-top: 0.5rem; /* Reduced top padding for a shorter navbar */
       padding-bottom: 0.5rem; /* Reduced bottom padding for a shorter navbar */
@@ -216,6 +400,11 @@
         /* If logo was not absolute, we might need to ensure it doesn't push hamburger off */
         position: static; /* Become a flex item, overriding base style's absolute */
         transform: none; /* Reset transform, vertical centering by flex align-items */
+    }
+    
+    /* Adjust hamburger order */
+    .hamburger {
+      order: 2; /* Place before theme toggle */
     }
   }
   li a {
