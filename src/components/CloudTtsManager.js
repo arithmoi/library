@@ -12,6 +12,7 @@ class CloudTtsManager {
     this.currentAudio = null;
     this.isPlaying = false;
     this.onStatusChange = null;
+    this.onEnd = null;
     this.onError = null;
     this.onSuccess = null;
     this.debugMode = localStorage.getItem('tts_debug') === 'true';
@@ -142,6 +143,7 @@ class CloudTtsManager {
         this.isPlaying = false;
         this.currentAudio = null;
         this.onStatusChange?.({ isPlaying: false, provider: 'Free Cloud TTS' });
+        this.onEnd?.(); // Trigger auto-advance if enabled
         this.log('✅ Audio finished');
       };
 
@@ -200,6 +202,7 @@ class CloudTtsManager {
         this.isPlaying = false;
         this.currentAudio = null;
         this.onStatusChange?.({ isPlaying: false, provider: 'Alternative Cloud TTS' });
+        this.onEnd?.(); // Trigger auto-advance if enabled
       };
 
       audio.onerror = () => {
@@ -256,6 +259,7 @@ class CloudTtsManager {
       utterance.onend = () => {
         this.isPlaying = false;
         this.onStatusChange?.({ isPlaying: false, provider: 'Browser TTS' });
+        this.onEnd?.(); // Trigger auto-advance if enabled
       };
 
       utterance.onerror = (event) => {

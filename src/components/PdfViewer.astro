@@ -1129,6 +1129,24 @@ const pdfjsWorkerSrc = `/pdf.worker.min.mjs`;
             updateTtsControlsInMenu();
           };
 
+          cloudTtsManager.onEnd = () => {
+            console.log('🔚 TTS ended - checking auto-advance...');
+            // Auto-advance to next page if enabled
+            if (autoAdvance && currentPageNum < totalPages) {
+              console.log(`📖 Auto-advancing from page ${currentPageNum} to ${currentPageNum + 1}`);
+              setTimeout(async () => {
+                await renderPage(currentPageNum + 1);
+                currentPageText = ''; // Reset text for new page
+                if (currentReadingMode === 'audio' || currentReadingMode === 'video') {
+                  console.log('🔊 Auto-starting TTS on new page');
+                  startTTS();
+                }
+              }, 1000);
+            } else {
+              console.log('⏹️ Auto-advance disabled or on last page');
+            }
+          };
+
           // Initialize the cloud TTS system
           const success = await cloudTtsManager.initialize();
           
