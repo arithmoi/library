@@ -1401,11 +1401,11 @@ const pdfjsWorkerSrc = `/pdf.worker.min.mjs`;
           stopTTS();
         }
         
-        // Auto-start TTS for audio/video modes
+        // For audio/video modes, just prepare but don't auto-start
         if (mode === 'audio' || mode === 'video') {
-          console.log('Auto-starting TTS for mode:', mode);
-          currentPageText = ''; // Reset to extract fresh text
-          setTimeout(() => startTTS(), 500); // Small delay to ensure page is rendered
+          console.log(`Switched to ${mode} mode - ready for TTS (click Play to start)`);
+          currentPageText = ''; // Reset to extract fresh text when user clicks play
+          // Don't auto-start - wait for user to click play button
         }
         
         savePreferences();
