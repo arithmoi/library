@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal TTS Test</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 20px; 
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .test-section {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+        }
+        .result { 
+            margin: 10px 0; 
+            padding: 10px; 
+            border-radius: 5px; 
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .warning { background: #fff3cd; color: #856404; }
+        .info { background: #d1ecf1; color: #0c5460; }
+        button { 
+            padding: 10px 20px; 
+            margin: 5px; 
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .btn-primary { background: #007bff; color: white; }
+        .btn-success { background: #28a745; color: white; }
+        .btn-warning { background: #ffc107; color: black; }
+        .btn-danger { background: #dc3545; color: white; }
+        .btn-secondary { background: #6c757d; color: white; }
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .status-display {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .provider-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin: 10px 0;
+        }
+        .provider-card {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .provider-card.available {
+            border-color: #28a745;
+            background: #f8fff9;
+        }
+        .provider-card.unavailable {
+            border-color: #dc3545;
+            background: #fff8f8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔊 Universal TTS System Test</h1>
+        <p>This page tests the Universal Text-to-Speech system that works across all platforms without requiring system voice installation.</p>
+        
+        <div class="test-section">
+            <h2>🚀 System Initialization</h2>
+            <button onclick="initializeTTS()" class="btn-primary">Initialize Universal TTS</button>
+            <button onclick="clearResults()" class="btn-secondary">Clear Results</button>
+            <div id="init-results"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>📊 Provider Status</h2>
+            <div id="provider-status" class="provider-info">
+                <div class="provider-card">
+                    <h4>ResponsiveVoice</h4>
+                    <p>Status: <span id="rv-status">Not tested</span></p>
+                </div>
+                <div class="provider-card">
+                    <h4>Web Speech API</h4>
+                    <p>Status: <span id="ws-status">Not tested</span></p>
+                </div>
+                <div class="provider-card">
+                    <h4>Enhanced Speech</h4>
+                    <p>Status: <span id="es-status">Not tested</span></p>
+                </div>
+                <div class="provider-card">
+                    <h4>Cloud TTS</h4>
+                    <p>Status: <span id="ct-status">Always available</span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2>🎤 Voice Testing</h2>
+            <textarea id="test-text" placeholder="Enter text to test TTS...">
+Hello! This is a test of the Universal Text-to-Speech system. It works on all devices without requiring downloads. The system automatically selects the best available provider for your platform.
+            </textarea>
+            
+            <div>
+                <button onclick="testSpeak()" class="btn-success">🔊 Test Speak</button>
+                <button onclick="pauseResume()" class="btn-warning">⏸️ Pause/Resume</button>
+                <button onclick="stopSpeech()" class="btn-danger">⏹️ Stop</button>
+            </div>
+            
+            <div class="status-display">
+                <strong>Current Status:</strong> <span id="speech-status">Ready</span><br>
+                <strong>Selected Provider:</strong> <span id="current-provider">None</span><br>
+                <strong>Selected Voice:</strong> <span id="current-voice">None</span><br>
+                <strong>Platform:</strong> <span id="platform-info">Detecting...</span>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2>🎛️ Voice Options</h2>
+            <div>
+                <label for="voice-select">Voice:</label>
+                <select id="voice-select">
+                    <option>Loading voices...</option>
+                </select>
+            </div>
+            <div style="margin-top: 10px;">
+                <label for="rate-slider">Speed: <span id="rate-value">1.0x</span></label><br>
+                <input type="range" id="rate-slider" min="0.5" max="2" step="0.1" value="1" 
+                       oninput="document.getElementById('rate-value').textContent = this.value + 'x'">
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2>📋 Test Results</h2>
+            <div id="test-results"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>🔧 Troubleshooting</h2>
+            <button onclick="runDiagnostics()" class="btn-warning">Run Full Diagnostics</button>
+            <button onclick="testAllProviders()" class="btn-primary">Test All Providers</button>
+            <button onclick="showSystemInfo()" class="btn-secondary">Show System Info</button>
+        </div>
+    </div>
+
+    <script src="/UniversalTtsManager.js"></script>
+    <script>
+        let universalTTS = null;
+        let isPaused = false;
+
+        function addResult(message, type = 'info') {
+            const div = document.createElement('div');
+            div.className = `result ${type}`;
+            div.innerHTML = `<strong>${new Date().toLocaleTimeString()}:</strong> ${message}`;
+            document.getElementById('test-results').appendChild(div);
+        }
+
+        function clearResults() {
+            document.getElementById('test-results').innerHTML = '';
+            document.getElementById('init-results').innerHTML = '';
+        }
+
+        async function initializeTTS() {
+            const initResults = document.getElementById('init-results');
+            initResults.innerHTML = '<div class="result info">🚀 Initializing Universal TTS...</div>';
+            
+            try {
+                universalTTS = new UniversalTtsManager();
+                
+                // Set up event handlers
+                universalTTS.onSuccess = (message) => {
+                    addResult(`✅ TTS Ready: ${message}`, 'success');
+                    updateStatus();
+                    loadVoices();
+                };
+
+                universalTTS.onError = (guidance) => {
+                    addResult(`❌ TTS Error: ${typeof guidance === 'object' ? guidance.title : guidance}`, 'error');
+                    updateStatus();
+                };
+
+                universalTTS.onStatusChange = (status) => {
+                    updatePlaybackStatus(status);
+                };
+
+                // Initialize
+                const success = await universalTTS.initialize();
+                
+                if (success) {
+                    initResults.innerHTML = '<div class="result success">✅ Universal TTS initialized successfully!</div>';
+                    addResult('Universal TTS system ready', 'success');
+                } else {
+                    initResults.innerHTML = '<div class="result warning">⚠️ Universal TTS initialized with fallback mode</div>';
+                    addResult('TTS initialized with limited functionality', 'warning');
+                }
+                
+                updateStatus();
+                updateProviderStatus();
+                
+            } catch (error) {
+                initResults.innerHTML = `<div class="result error">❌ Initialization failed: ${error.message}</div>`;
+                addResult(`Initialization failed: ${error.message}`, 'error');
+            }
+        }
+
+        function updateStatus() {
+            if (!universalTTS) return;
+            
+            const status = universalTTS.getStatus();
+            document.getElementById('current-provider').textContent = status.selectedProvider || 'None';
+            document.getElementById('current-voice').textContent = status.selectedVoice || 'Default';
+            document.getElementById('platform-info').textContent = status.platform || 'Unknown';
+        }
+
+        function updatePlaybackStatus(status) {
+            const statusEl = document.getElementById('speech-status');
+            if (status.isPlaying) {
+                statusEl.textContent = status.isPaused ? 'Paused' : 'Playing';
+            } else {
+                statusEl.textContent = 'Ready';
+            }
+        }
+
+        function updateProviderStatus() {
+            if (!universalTTS) return;
+            
+            const status = universalTTS.getStatus();
+            
+            // Update provider cards
+            const providers = ['responsiveVoice', 'webSpeech', 'speechSynthesis', 'cloudTts'];
+            const statusMap = {
+                'responsiveVoice': 'rv-status',
+                'webSpeech': 'ws-status', 
+                'speechSynthesis': 'es-status',
+                'cloudTts': 'ct-status'
+            };
+            
+            providers.forEach(provider => {
+                const isAvailable = status.availableProviders.includes(provider);
+                const statusEl = document.getElementById(statusMap[provider]);
+                const card = statusEl.closest('.provider-card');
+                
+                if (statusEl) {
+                    statusEl.textContent = isAvailable ? 'Available' : 'Not available';
+                }
+                
+                if (card) {
+                    card.className = `provider-card ${isAvailable ? 'available' : 'unavailable'}`;
+                }
+            });
+        }
+
+        function loadVoices() {
+            if (!universalTTS) return;
+            
+            const voices = universalTTS.getVoices();
+            const voiceSelect = document.getElementById('voice-select');
+            
+            voiceSelect.innerHTML = '<option value="">Default Voice</option>';
+            voices.forEach(voice => {
+                const option = document.createElement('option');
+                option.value = voice.name;
+                option.textContent = `${voice.name} (${voice.lang || 'unknown'})`;
+                voiceSelect.appendChild(option);
+            });
+            
+            addResult(`Loaded ${voices.length} voices`, 'info');
+        }
+
+        async function testSpeak() {
+            if (!universalTTS) {
+                addResult('TTS not initialized. Please initialize first.', 'error');
+                return;
+            }
+            
+            const text = document.getElementById('test-text').value.trim();
+            if (!text) {
+                addResult('Please enter text to speak', 'warning');
+                return;
+            }
+            
+            try {
+                const voice = document.getElementById('voice-select').value;
+                const rate = parseFloat(document.getElementById('rate-slider').value);
+                
+                addResult(`🔊 Starting speech: "${text.substring(0, 50)}..."`, 'info');
+                
+                await universalTTS.speak(text, {
+                    voice: voice || null,
+                    rate: rate
+                });
+                
+                addResult('Speech started successfully', 'success');
+                
+            } catch (error) {
+                addResult(`Speech failed: ${error.message}`, 'error');
+            }
+        }
+
+        function pauseResume() {
+            if (!universalTTS) return;
+            
+            if (isPaused) {
+                universalTTS.resume();
+                isPaused = false;
+                addResult('Speech resumed', 'info');
+            } else {
+                universalTTS.pause();
+                isPaused = true;
+                addResult('Speech paused', 'info');
+            }
+        }
+
+        function stopSpeech() {
+            if (!universalTTS) return;
+            
+            universalTTS.stop();
+            isPaused = false;
+            addResult('Speech stopped', 'info');
+        }
+
+        async function runDiagnostics() {
+            addResult('🔍 Running full diagnostics...', 'info');
+            
+            // Check browser support
+            addResult(`Browser: ${navigator.userAgent}`, 'info');
+            addResult(`Platform: ${navigator.platform}`, 'info');
+            addResult(`Language: ${navigator.language}`, 'info');
+            
+            // Check Web Speech API
+            if (window.speechSynthesis) {
+                addResult('✅ Web Speech API available', 'success');
+                const voices = speechSynthesis.getVoices();
+                addResult(`Web Speech voices: ${voices.length}`, voices.length > 0 ? 'success' : 'warning');
+            } else {
+                addResult('❌ Web Speech API not available', 'error');
+            }
+            
+            // Check ResponsiveVoice
+            if (window.responsiveVoice) {
+                addResult('✅ ResponsiveVoice available', 'success');
+            } else {
+                addResult('⚠️ ResponsiveVoice not loaded', 'warning');
+            }
+            
+            // Check internet connection
+            if (navigator.onLine) {
+                addResult('✅ Internet connection available', 'success');
+            } else {
+                addResult('❌ No internet connection', 'error');
+            }
+        }
+
+        async function testAllProviders() {
+            addResult('🧪 Testing all providers...', 'info');
+            
+            if (!universalTTS) {
+                addResult('Please initialize TTS first', 'error');
+                return;
+            }
+            
+            const testText = "Testing provider";
+            const status = universalTTS.getStatus();
+            
+            addResult(`Available providers: ${status.availableProviders.join(', ')}`, 'info');
+            addResult(`Selected provider: ${status.selectedProvider}`, 'info');
+            
+            // Test current provider
+            try {
+                await universalTTS.speak(testText, { rate: 1.5 });
+                addResult(`✅ Current provider (${status.selectedProvider}) works`, 'success');
+            } catch (error) {
+                addResult(`❌ Current provider failed: ${error.message}`, 'error');
+            }
+        }
+
+        function showSystemInfo() {
+            addResult('📱 System Information:', 'info');
+            addResult(`User Agent: ${navigator.userAgent}`, 'info');
+            addResult(`Platform: ${navigator.platform}`, 'info');
+            addResult(`Language: ${navigator.language}`, 'info');
+            addResult(`Online: ${navigator.onLine}`, 'info');
+            addResult(`Cookies Enabled: ${navigator.cookieEnabled}`, 'info');
+            addResult(`Screen: ${screen.width}x${screen.height}`, 'info');
+            addResult(`Viewport: ${window.innerWidth}x${window.innerHeight}`, 'info');
+            
+            if (universalTTS) {
+                const status = universalTTS.getStatus();
+                addResult(`TTS Status: ${JSON.stringify(status, null, 2)}`, 'info');
+            }
+        }
+
+        // Auto-initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            addResult('Page loaded, ready for testing', 'info');
+            
+            // Show platform info immediately
+            document.getElementById('platform-info').textContent = 
+                /android/i.test(navigator.userAgent) ? 'Android' :
+                /iphone|ipad|ipod/i.test(navigator.userAgent) ? 'iOS' :
+                /win/i.test(navigator.platform) ? 'Windows' :
+                /mac/i.test(navigator.platform) ? 'macOS' :
+                /linux/i.test(navigator.platform) ? 'Linux' : 'Unknown';
+        });
+    </script>
+</body>
+</html>

@@ -238,8 +238,17 @@ const {
 </style>
 
 <script>
-  // Import the CloudTtsManager
-  import '/src/components/CloudTtsManager.js';
+  // Load CloudTtsManager dynamically to avoid import issues
+  async function loadCloudTtsManager() {
+    return new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = '/CloudTtsManager.js';
+      script.type = 'text/javascript';
+      script.onload = () => resolve();
+      script.onerror = () => reject(new Error('Failed to load CloudTtsManager.js'));
+      document.head.appendChild(script);
+    });
+  }
 
   class CloudTtsController {
     constructor() {
@@ -250,6 +259,22 @@ const {
 
     async init() {
       try {
+        // Load CloudTtsManager script first
+        if (!window.CloudTtsManager) {
+          await loadCloudTtsManager();
+          
+          // Wait for CloudTtsManager to be available
+          let attempts = 0;
+          while (!window.CloudTtsManager && attempts < 50) {
+            await new Promise(resolve => setTimeout(resolve, 100));
+            attempts++;
+          }
+          
+          if (!window.CloudTtsManager) {
+            throw new Error('CloudTtsManager not loaded after script loading');
+          }
+        }
+        
         // Initialize Cloud TTS Manager
         this.ttsManager = new window.CloudTtsManager();
         
