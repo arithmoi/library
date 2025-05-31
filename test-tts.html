@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced TTS Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .controls {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        select {
+            padding: 8px;
+            margin: 5px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        .status {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        .error {
+            background: #ffebee;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        .success {
+            background: #e8f5e8;
+            color: #2e7d32;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔊 Enhanced TTS Test</h1>
+    <p>This page tests the enhanced Text-to-Speech functionality that will be used in the PDF viewer when deployed to GitHub Pages.</p>
+
+    <div class="controls">
+        <h3>TTS Controls</h3>
+        <div>
+            <label for="voice-select">Voice:</label>
+            <select id="voice-select">
+                <option value="">Loading voices...</option>
+            </select>
+        </div>
+        <div>
+            <label for="speed-select">Speed:</label>
+            <select id="speed-select">
+                <option value="0.5">0.5x</option>
+                <option value="0.75">0.75x</option>
+                <option value="1.0" selected>1.0x</option>
+                <option value="1.25">1.25x</option>
+                <option value="1.5">1.5x</option>
+                <option value="2.0">2.0x</option>
+            </select>
+        </div>
+        <div>
+            <button id="speak-btn">🔊 Speak Test Text</button>
+            <button id="pause-btn" disabled>⏸️ Pause</button>
+            <button id="resume-btn" disabled>▶️ Resume</button>
+            <button id="stop-btn" disabled>⏹️ Stop</button>
+        </div>
+        <div>
+            <button id="test-voice-btn">🎤 Test Selected Voice</button>
+            <button id="debug-btn">🔍 Enable Debug Mode</button>
+        </div>
+    </div>
+
+    <div id="status" class="status">
+        <strong>Status:</strong> Initializing TTS...
+    </div>
+
+    <div id="messages"></div>
+
+    <div>
+        <h3>Test Text</h3>
+        <textarea id="test-text" rows="4" style="width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #ddd;">
+Welcome to the enhanced Text-to-Speech system! This system is designed to work reliably on GitHub Pages and other static hosting platforms. It uses the browser's built-in speech synthesis API with enhanced error handling, user interaction management, and voice loading capabilities. The system will automatically detect available voices on your system and provide clear guidance if no voices are found.
+        </textarea>
+    </div>
+
+    <script src="/TtsManager.js"></script>
+    <script>
+        let ttsManager = null;
+        const statusDiv = document.getElementById('status');
+        const messagesDiv = document.getElementById('messages');
+        const voiceSelect = document.getElementById('voice-select');
+        const speedSelect = document.getElementById('speed-select');
+        const testTextArea = document.getElementById('test-text');
+
+        const speakBtn = document.getElementById('speak-btn');
+        const pauseBtn = document.getElementById('pause-btn');
+        const resumeBtn = document.getElementById('resume-btn');
+        const stopBtn = document.getElementById('stop-btn');
+        const testVoiceBtn = document.getElementById('test-voice-btn');
+        const debugBtn = document.getElementById('debug-btn');
+
+        function addMessage(message, type = 'info') {
+            const div = document.createElement('div');
+            div.className = type;
+            div.innerHTML = `<strong>${new Date().toLocaleTimeString()}:</strong> ${message}`;
+            messagesDiv.appendChild(div);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function updateStatus(message) {
+            statusDiv.innerHTML = `<strong>Status:</strong> ${message}`;
+        }
+
+        function updateControls() {
+            if (!ttsManager) return;
+            
+            const status = ttsManager.getStatus();
+            const isPlaying = status.isPlaying && !status.isPaused;
+            const isPaused = status.isPlaying && status.isPaused;
+            
+            speakBtn.disabled = isPlaying;
+            pauseBtn.disabled = !isPlaying;
+            resumeBtn.disabled = !isPaused;
+            stopBtn.disabled = !status.isPlaying;
+            
+            updateStatus(`${status.isInitialized ? 'Ready' : 'Not initialized'} | Voices: ${status.voiceCount} | Playing: ${isPlaying} | Paused: ${isPaused}`);
+        }
+
+        async function initializeTTS() {
+            try {
+                updateStatus('Waiting for TtsManager to load...');
+                
+                // Wait for TtsManager to be available
+                let attempts = 0;
+                while (!window.TtsManager && attempts < 50) {
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                    attempts++;
+                }
+                
+                if (!window.TtsManager) {
+                    throw new Error('TtsManager not loaded');
+                }
+                
+                updateStatus('Creating TTS Manager instance...');
+                ttsManager = new window.TtsManager();
+                
+                // Set up event handlers
+                ttsManager.onSuccess = (message) => {
+                    addMessage(message, 'success');
+                    loadVoices();
+                    updateControls();
+                };
+
+                ttsManager.onError = (guidance) => {
+                    if (typeof guidance === 'object' && guidance.title) {
+                        addMessage(`${guidance.title}: ${guidance.message.replace(/<[^>]*>/g, '')}`, 'error');
+                    } else {
+                        addMessage(guidance, 'error');
+                    }
+                    updateControls();
+                };
+
+                ttsManager.onStatusChange = (status) => {
+                    addMessage(`Status changed: Playing=${status.isPlaying}, Paused=${status.isPaused}, Provider=${status.provider}`, 'info');
+                    updateControls();
+                };
+
+                updateStatus('Initializing TTS system...');
+                const success = await ttsManager.initialize();
+                
+                if (success) {
+                    addMessage('TTS initialization successful!', 'success');
+                } else {
+                    addMessage('TTS initialization completed with warnings', 'error');
+                }
+                
+                updateControls();
+                
+            } catch (error) {
+                addMessage(`TTS initialization failed: ${error.message}`, 'error');
+                updateStatus('Initialization failed');
+            }
+        }
+
+        function loadVoices() {
+            if (!ttsManager) return;
+            
+            const voices = ttsManager.getVoices();
+            voiceSelect.innerHTML = '<option value="">Default Voice</option>';
+            
+            voices.forEach((voice) => {
+                const option = document.createElement('option');
+                option.value = voice.name;
+                option.textContent = `${voice.name} (${voice.lang}) ${voice.quality === 'high' ? '⭐' : ''}`;
+                if (voice.default) {
+                    option.selected = true;
+                }
+                voiceSelect.appendChild(option);
+            });
+            
+            addMessage(`Loaded ${voices.length} voices`, 'success');
+        }
+
+        // Event listeners
+        speakBtn.addEventListener('click', async () => {
+            if (!ttsManager) return;
+            
+            try {
+                const text = testTextArea.value.trim();
+                if (!text) {
+                    addMessage('Please enter some text to speak', 'error');
+                    return;
+                }
+                
+                const selectedVoice = voiceSelect.value;
+                const selectedSpeed = parseFloat(speedSelect.value);
+                
+                addMessage(`Starting speech: voice="${selectedVoice}", speed=${selectedSpeed}`, 'info');
+                
+                await ttsManager.speak(text, {
+                    voice: selectedVoice || null,
+                    rate: selectedSpeed,
+                    pitch: 1.0,
+                    volume: 1.0
+                });
+                
+            } catch (error) {
+                addMessage(`Speech failed: ${error.message}`, 'error');
+            }
+        });
+
+        pauseBtn.addEventListener('click', () => {
+            if (ttsManager) {
+                ttsManager.pause();
+                addMessage('Speech paused', 'info');
+            }
+        });
+
+        resumeBtn.addEventListener('click', () => {
+            if (ttsManager) {
+                ttsManager.resume();
+                addMessage('Speech resumed', 'info');
+            }
+        });
+
+        stopBtn.addEventListener('click', () => {
+            if (ttsManager) {
+                ttsManager.stop();
+                addMessage('Speech stopped', 'info');
+            }
+        });
+
+        testVoiceBtn.addEventListener('click', async () => {
+            if (!ttsManager) return;
+            
+            const selectedVoice = voiceSelect.value;
+            addMessage(`Testing voice: ${selectedVoice || 'default'}`, 'info');
+            
+            const success = await ttsManager.testVoice(selectedVoice);
+            addMessage(`Voice test ${success ? 'passed' : 'failed'}`, success ? 'success' : 'error');
+        });
+
+        debugBtn.addEventListener('click', () => {
+            const isDebug = localStorage.getItem('tts_debug') === 'true';
+            localStorage.setItem('tts_debug', isDebug ? 'false' : 'true');
+            debugBtn.textContent = isDebug ? '🔍 Enable Debug Mode' : '🔍 Disable Debug Mode';
+            addMessage(`Debug mode ${isDebug ? 'disabled' : 'enabled'}`, 'info');
+        });
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            addMessage('Page loaded, initializing TTS...', 'info');
+            initializeTTS();
+        });
+
+        // Update controls periodically
+        setInterval(updateControls, 1000);
+    </script>
+</body>
+</html>
