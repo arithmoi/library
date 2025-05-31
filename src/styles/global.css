@@ -27,11 +27,11 @@
   --shadow-color: rgba(0, 0, 0, 0.4);
   --navbar-bg: #2d3748;
   --navbar-border: #4a5568;
-  --link-color: #68d391;
-  --link-hover: #9ae6b4;
+  --link-color: #60a5fa;
+  --link-hover: #93c5fd;
   --button-bg: #4a5568;
   --button-border: #718096;
-  --button-hover-bg: rgba(104, 211, 145, 0.15);
+  --button-hover-bg: rgba(96, 165, 250, 0.15);
 }
 
 body {
@@ -229,7 +229,7 @@ body {
 }
 
 [data-theme="dark"] .menu-option:hover {
-  background: rgba(104, 211, 145, 0.15) !important;
+  background: rgba(96, 165, 250, 0.15) !important;
   border-radius: 4px !important;
 }
 
@@ -320,7 +320,7 @@ body {
 [data-theme="dark"] .color-picker:focus {
   border-color: var(--link-color) !important;
   outline: none !important;
-  box-shadow: 0 0 0 2px rgba(104, 211, 145, 0.2) !important;
+  box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.2) !important;
 }
 
 
@@ -335,7 +335,7 @@ body {
 [data-theme="dark"] .menu-select:focus {
   border-color: var(--link-color) !important;
   outline: none !important;
-  box-shadow: 0 0 0 2px rgba(104, 211, 145, 0.2) !important;
+  box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.2) !important;
 }
 
 [data-theme="dark"] .menu-select option {
