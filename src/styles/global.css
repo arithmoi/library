@@ -186,12 +186,13 @@ body {
 }
 
 [data-theme="dark"] .menu-header {
-  background: var(--button-bg) !important;
+  background: var(--bg-secondary) !important;
   border-bottom: 1px solid var(--border-color) !important;
 }
 
 [data-theme="dark"] .menu-title {
   color: var(--text-color) !important;
+  background: var(--bg-secondary) !important;
 }
 
 [data-theme="dark"] .menu-close-btn {
@@ -354,7 +355,8 @@ body {
 }
 
 [data-theme="dark"] #voice-selector,
-[data-theme="dark"] #speed-selector {
+[data-theme="dark"] #speed-selector,
+[data-theme="dark"] #pitch-selector {
   background: #374151 !important;
   border: 1px solid #6b7280 !important;
   color: var(--text-color) !important;
@@ -362,7 +364,8 @@ body {
 }
 
 [data-theme="dark"] #voice-selector option,
-[data-theme="dark"] #speed-selector option {
+[data-theme="dark"] #speed-selector option,
+[data-theme="dark"] #pitch-selector option {
   background: #374151 !important;
   color: var(--text-color) !important;
 }
@@ -598,4 +601,53 @@ body {
 
 [data-theme="dark"] em {
   color: var(--text-secondary) !important;
+}
+
+/* TTS Status Message Dark Mode Styles */
+[data-theme="dark"] .tts-status {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-color) !important;
+}
+
+[data-theme="dark"] .status-message {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-color) !important;
+}
+
+[data-theme="dark"] .status-message.info {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--link-color) !important;
+  color: var(--text-color) !important;
+}
+
+[data-theme="dark"] .status-message.warning {
+  background: #2d1b0e !important;
+  border: 1px solid #d97706 !important;
+  color: #fbbf24 !important;
+}
+
+[data-theme="dark"] .status-message.error {
+  background: #2d1b1b !important;
+  border: 1px solid #dc2626 !important;
+  color: #fca5a5 !important;
+}
+
+[data-theme="dark"] .status-message code {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: var(--text-color) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+[data-theme="dark"] .status-message strong {
+  color: var(--text-color) !important;
+}
+
+[data-theme="dark"] .status-message a {
+  color: var(--link-color) !important;
+}
+
+[data-theme="dark"] .status-message a:hover {
+  color: var(--link-hover) !important;
 }
