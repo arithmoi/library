@@ -97,11 +97,23 @@ const pdfjsWorkerSrc = `/pdf.worker.min.mjs`;
             <div class="control-row">
               <label class="control-label">⚡ Speed:</label>
               <select id="speed-selector" class="menu-select">
-                <option value="0.75">0.75x</option>
-                <option value="1.0" selected>1.0x</option>
-                <option value="1.25">1.25x</option>
-                <option value="1.5">1.5x</option>
-                <option value="2.0">2.0x</option>
+                <option value="0.6">0.6x (Very Slow)</option>
+                <option value="0.75">0.75x (Slow)</option>
+                <option value="0.9" selected>0.9x (Natural)</option>
+                <option value="1.0">1.0x (Normal)</option>
+                <option value="1.1">1.1x (Slightly Fast)</option>
+                <option value="1.25">1.25x (Fast)</option>
+                <option value="1.5">1.5x (Very Fast)</option>
+              </select>
+            </div>
+            <div class="control-row">
+              <label class="control-label">🎵 Pitch:</label>
+              <select id="pitch-selector" class="menu-select">
+                <option value="0.8">0.8 (Lower)</option>
+                <option value="0.9">0.9 (Slightly Lower)</option>
+                <option value="1.0" selected>1.0 (Normal)</option>
+                <option value="1.1">1.1 (Slightly Higher)</option>
+                <option value="1.2">1.2 (Higher)</option>
               </select>
             </div>
             <div class="control-row">
@@ -302,14 +314,20 @@ const pdfjsWorkerSrc = `/pdf.worker.min.mjs`;
       // Check if SimpleTtsManager is already loaded
       if (typeof window.SimpleTtsManager !== 'undefined') {
         console.log('SimpleTtsManager already loaded, using existing instance');
-        ttsManager = new SimpleTtsManager();
-        const success = await ttsManager.initialize();
-        
-        if (success) {
-          setupTTSControls();
-          showTTSControls();
-        } else {
-          showTTSUnavailable();
+        try {
+          ttsManager = new SimpleTtsManager();
+          const success = await ttsManager.initialize();
+          
+          if (success || ttsManager.isInitialized) {
+            setupTTSControls();
+            showTTSControls();
+          } else {
+            console.warn('TTS initialization returned false, showing unavailable');
+            showTTSUnavailable('unavailable');
+          }
+        } catch (error) {
+          console.error('Error creating TTS manager:', error);
+          showTTSUnavailable('unavailable');
         }
         return;
       }
@@ -320,14 +338,20 @@ const pdfjsWorkerSrc = `/pdf.worker.min.mjs`;
         console.log('SimpleTtsManager script already exists, waiting for load...');
         // Wait for existing script to load
         if (typeof window.SimpleTtsManager !== 'undefined') {
-          ttsManager = new SimpleTtsManager();
-          const success = await ttsManager.initialize();
-          
-          if (success) {
-            setupTTSControls();
-            showTTSControls();
-          } else {
-            showTTSUnavailable();
+          try {
+            ttsManager = new SimpleTtsManager();
+            const success = await ttsManager.initialize();
+            
+            if (success || ttsManager.isInitialized) {
+              setupTTSControls();
+              showTTSControls();
+            } else {
+              console.warn('TTS initialization returned false, showing unavailable');
+              showTTSUnavailable('unavailable');
+            }
+          } catch (error) {
+            console.error('Error with existing TTS script:', error);
+            showTTSUnavailable('unavailable');
           }
         }
         return;
@@ -338,40 +362,83 @@ const pdfjsWorkerSrc = `/pdf.worker.min.mjs`;
       script.src = '/SimpleTtsManager.js';
       script.onload = async () => {
         console.log('SimpleTtsManager script loaded successfully');
-        ttsManager = new SimpleTtsManager();
-        const success = await ttsManager.initialize();
-        
-        if (success) {
-          setupTTSControls();
-          showTTSControls();
-        } else {
-          showTTSUnavailable();
+        try {
+          ttsManager = new SimpleTtsManager();
+          const success = await ttsManager.initialize();
+          
+          if (success || ttsManager.isInitialized) {
+            setupTTSControls();
+            showTTSControls();
+          } else {
+            console.warn('TTS initialization returned false, showing unavailable');
+            showTTSUnavailable('unavailable');
+          }
+        } catch (error) {
+          console.error('Error initializing TTS after script load:', error);
+          showTTSUnavailable('unavailable');
         }
       };
       script.onerror = () => {
         console.error('Failed to load SimpleTtsManager script');
-        showTTSUnavailable();
+        showTTSUnavailable('unavailable');
       };
       document.head.appendChild(script);
       
     } catch (error) {
       console.error('TTS initialization failed:', error);
-      showTTSUnavailable();
+      showTTSUnavailable('unavailable');
     }
   }
 
   function setupTTSControls() {
-    // Populate voice selector
+    // Check if TTS manager is properly initialized
+    if (!ttsManager || !ttsManager.isInitialized) {
+      console.error('TTS manager not properly initialized');
+      showTTSUnavailable('unavailable');
+      return;
+    }
+
+    // Populate voice selector with quality-ranked voices
     const voiceSelector = document.getElementById('voice-selector');
-    const voices = ttsManager.getVoices();
+    const allVoices = ttsManager.getVoices();
     
-    voiceSelector.innerHTML = '<option value="">Default Voice</option>';
-    voices.forEach((voice, index) => {
-      const option = document.createElement('option');
-      option.value = index;
-      option.textContent = `${voice.name} (${voice.lang})`;
-      voiceSelector.appendChild(option);
-    });
+    voiceSelector.innerHTML = '<option value="">Best Available Voice</option>';
+    
+    // Check if getBestVoices method exists (for backward compatibility)
+    let bestVoices = [];
+    if (typeof ttsManager.getBestVoices === 'function') {
+      bestVoices = ttsManager.getBestVoices();
+    }
+    
+    // Add best voices first if available
+    if (bestVoices.length > 0) {
+      const optgroup = document.createElement('optgroup');
+      optgroup.label = 'Recommended Voices';
+      bestVoices.slice(0, 5).forEach((voice, index) => {
+        const option = document.createElement('option');
+        option.value = allVoices.indexOf(voice);
+        option.textContent = `${voice.name} (${voice.lang})`;
+        optgroup.appendChild(option);
+      });
+      voiceSelector.appendChild(optgroup);
+    }
+    
+    // Add all voices (or remaining voices if we have best voices)
+    const remainingVoices = bestVoices.length > 0
+      ? allVoices.filter(voice => !bestVoices.slice(0, 5).includes(voice))
+      : allVoices;
+      
+    if (remainingVoices.length > 0) {
+      const optgroup = document.createElement('optgroup');
+      optgroup.label = bestVoices.length > 0 ? 'Other Voices' : 'Available Voices';
+      remainingVoices.forEach((voice, index) => {
+        const option = document.createElement('option');
+        option.value = allVoices.indexOf(voice);
+        option.textContent = `${voice.name} (${voice.lang})`;
+        optgroup.appendChild(option);
+      });
+      voiceSelector.appendChild(optgroup);
+    }
 
     // Setup event listeners
     document.getElementById('tts-play-pause').addEventListener('click', toggleTTS);
@@ -383,6 +450,8 @@ const pdfjsWorkerSrc = `/pdf.worker.min.mjs`;
     // TTS status updates
     ttsManager.onStatusChange = updateTTSStatus;
     ttsManager.onEnd = handleTTSEnd;
+    
+    console.log('TTS controls setup complete with', allVoices.length, 'voices available');
   }
 
   async function toggleTTS() {
@@ -412,41 +481,53 @@ const pdfjsWorkerSrc = `/pdf.worker.min.mjs`;
     try {
       const voiceSelector = document.getElementById('voice-selector');
       const speedSelector = document.getElementById('speed-selector');
+      const pitchSelector = document.getElementById('pitch-selector');
       
       const selectedVoiceIndex = voiceSelector.value;
       const selectedVoice = selectedVoiceIndex ? ttsManager.getVoices()[selectedVoiceIndex] : null;
-      const rate = parseFloat(speedSelector.value) || 1.0;
+      const rate = parseFloat(speedSelector.value) || 0.9;
+      const pitch = parseFloat(pitchSelector.value) || 1.0;
 
       // Use chunked speech for better flow
       await speakInChunks(currentPageText, {
         voice: selectedVoice,
-        rate: rate
+        rate: rate,
+        pitch: pitch
       });
 
     } catch (error) {
       console.error('TTS failed:', error);
-      showTTSStatus(`Speech failed: ${error.message}`, 'error');
+      
+      // Check if this is a synthesis-failed error and show appropriate message
+      if (error.message.includes('synthesis-failed')) {
+        showTTSUnavailable('synthesis-failed');
+      } else {
+        showTTSStatus(`Speech failed: ${error.message}`, 'error');
+      }
     }
   }
 
   // Text Chunking for Better Speech
-  function chunkTextForTTS(text, maxLength = 200) {
+  function chunkTextForTTS(text, maxLength = 150) {
     // Split by sentences for natural pauses
     const sentences = text.match(/[^\.!?]+[\.!?]+/g) || [text];
     const chunks = [];
     let currentChunk = '';
     
     for (const sentence of sentences) {
-      if (currentChunk.length + sentence.length <= maxLength) {
-        currentChunk += sentence;
+      const trimmedSentence = sentence.trim();
+      if (currentChunk.length + trimmedSentence.length <= maxLength) {
+        currentChunk += (currentChunk ? ' ' : '') + trimmedSentence;
       } else {
         if (currentChunk) chunks.push(currentChunk.trim());
-        currentChunk = sentence;
+        currentChunk = trimmedSentence;
       }
     }
     
     if (currentChunk) chunks.push(currentChunk.trim());
-    return chunks;
+    
+    // Filter out empty chunks
+    return chunks.filter(chunk => chunk.length > 0);
   }
 
   async function speakInChunks(text, options = {}) {
@@ -460,9 +541,9 @@ const pdfjsWorkerSrc = `/pdf.worker.min.mjs`;
       
       await ttsManager.speak(chunks[i], options);
       
-      // Small pause between chunks
+      // Reduced pause between chunks for smoother flow
       if (i < chunks.length - 1) {
-        await new Promise(resolve => setTimeout(resolve, 500));
+        await new Promise(resolve => setTimeout(resolve, 100));
       }
     }
   }
@@ -523,19 +604,57 @@ const pdfjsWorkerSrc = `/pdf.worker.min.mjs`;
     }
   }
 
-  function showTTSUnavailable() {
+  function showTTSUnavailable(errorType = 'unavailable') {
     const statusDiv = document.getElementById('tts-status');
     if (statusDiv) {
       const userAgent = navigator.userAgent.toLowerCase();
+      const platform = navigator.platform.toLowerCase();
       let message = '📖 Text-to-speech not available.';
       
       if (userAgent.includes('linux')) {
+        if (errorType === 'synthesis-failed') {
+          message = `
+            🔊 Text-to-speech failed on this Linux system.<br>
+            <strong>Try these solutions:</strong><br>
+            • <strong>Use Firefox instead of Chrome/Brave</strong> (works much better on Linux)<br>
+            • Install speech-dispatcher: <code>sudo apt install speech-dispatcher</code><br>
+            • Restart your browser after installing speech-dispatcher<br>
+            • Use <a href="https://ttsreader.com" target="_blank">TTSReader.com</a> as alternative<br>
+            <em>Note: Firefox typically has better TTS support on Linux than Chrome/Brave.</em>
+          `;
+        } else {
+          message = `
+            📖 Text-to-speech may not be available on this Linux system.<br>
+            <strong>Try these solutions:</strong><br>
+            • <strong>Use Firefox instead of Chrome/Brave</strong> (works much better on Linux)<br>
+            • Install speech-dispatcher: <code>sudo apt install speech-dispatcher</code><br>
+            • Use <a href="https://ttsreader.com" target="_blank">TTSReader.com</a> as alternative<br>
+            <em>Note: Voice quality will be much better on Mac, Windows, or Android devices.</em>
+          `;
+        }
+      } else if (userAgent.includes('mac') || platform.includes('mac')) {
         message = `
-          📖 Text-to-speech may not be available on this Linux system.<br>
-          <strong>Try these solutions:</strong><br>
-          • Install speech-dispatcher: <code>sudo apt install speech-dispatcher</code><br>
-          • Try Firefox or Chrome with different settings
+          📖 Text-to-speech not available.<br>
+          <strong>Mac usually has excellent voice quality!</strong><br>
+          • Check Safari or Chrome browser settings<br>
+          • Try <a href="https://ttsreader.com" target="_blank">TTSReader.com</a> as alternative
         `;
+      } else if (userAgent.includes('win') || platform.includes('win')) {
+        message = `
+          📖 Text-to-speech not available.<br>
+          <strong>Windows has good voice quality!</strong><br>
+          • Check browser permissions for microphone/speech<br>
+          • Try <a href="https://ttsreader.com" target="_blank">TTSReader.com</a> as alternative
+        `;
+      } else if (userAgent.includes('android')) {
+        message = `
+          📖 Text-to-speech not available.<br>
+          <strong>Android usually has good Google voices!</strong><br>
+          • Check Chrome browser settings<br>
+          • Try <a href="https://ttsreader.com" target="_blank">TTSReader.com</a> as alternative
+        `;
+      } else {
+        message += ` <a href="https://ttsreader.com" target="_blank">Try TTSReader.com</a>`;
       }
       
       statusDiv.innerHTML = `<div class="status-message warning">${message}</div>`;
