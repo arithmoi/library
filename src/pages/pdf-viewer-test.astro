@@ -1,0 +1,65 @@
+---
+import PdfViewer from '../components/PdfViewer.astro';
+---
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PDF Viewer Test - Fixed Version</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    .test-info {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: rgba(0,0,0,0.8);
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      z-index: 1001;
+    }
+  </style>
+</head>
+<body>
+  <div class="test-info">
+    <div>🔧 Fixed Version</div>
+    <div>Page: <span id="debug-page">-</span></div>
+    <div>Total: <span id="debug-total">-</span></div>
+  </div>
+  
+  <PdfViewer pdfUrl="/pdfs/foundations/analysis.pdf" />
+
+  <script>
+    // Debug info updater
+    function updateDebugInfo() {
+      const pageDisplay = document.getElementById('page-num-display');
+      const totalDisplay = document.getElementById('page-count-display');
+      const debugPage = document.getElementById('debug-page');
+      const debugTotal = document.getElementById('debug-total');
+      
+      if (pageDisplay && debugPage) {
+        debugPage.textContent = pageDisplay.textContent || '-';
+      }
+      if (totalDisplay && debugTotal) {
+        debugTotal.textContent = totalDisplay.textContent || '-';
+      }
+    }
+    
+    // Update debug info every second
+    setInterval(updateDebugInfo, 1000);
+    
+    // Force refresh if needed
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'F5' || (e.ctrlKey && e.key === 'r')) {
+        console.log('Force refresh triggered');
+        location.reload(true);
+      }
+    });
+  </script>
+</body>
+</html>
