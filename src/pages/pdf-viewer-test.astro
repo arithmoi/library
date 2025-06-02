@@ -1,5 +1,5 @@
 ---
-import PdfViewer from '../components/PdfViewer.astro';
+import UniversalPdfViewer from '../components/UniversalPdfViewer.astro';
 ---
 
 <html lang="en">
@@ -32,7 +32,7 @@ import PdfViewer from '../components/PdfViewer.astro';
     <div>Total: <span id="debug-total">-</span></div>
   </div>
   
-  <PdfViewer pdfUrl="/pdfs/foundations/analysis.pdf" />
+  <UniversalPdfViewer pdfUrl="/pdfs/foundations/analysis.pdf" mode="read" title="Analysis PDF" />
 
   <script>
     // Debug info updater

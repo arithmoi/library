@@ -1,0 +1,140 @@
+---
+import UniversalPdfViewer from '../components/UniversalPdfViewer.astro';
+---
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Debug PDF Viewer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    .debug-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .debug-info {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .viewer-container {
+      height: 600px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+      background: white;
+    }
+    .debug-buttons {
+      margin: 20px 0;
+      display: flex;
+      gap: 10px;
+    }
+    .debug-btn {
+      padding: 10px 20px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .debug-btn:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="debug-container">
+    <h1>🐛 PDF Viewer Debug Page</h1>
+    
+    <div class="debug-info">
+      <h2>Debug Information</h2>
+      <p>This page is for debugging the PDF viewer functionality.</p>
+      <p><strong>Expected behavior:</strong></p>
+      <ul>
+        <li>PDF should load in the viewer below</li>
+        <li>Read/Audio/Video buttons should be visible at the bottom</li>
+        <li>Clicking Audio or Video should show additional controls</li>
+        <li>Play button should work and speak sample text</li>
+      </ul>
+      
+      <div class="debug-buttons">
+        <button class="debug-btn" onclick="checkConsole()">Check Console</button>
+        <button class="debug-btn" onclick="testTTS()">Test TTS Directly</button>
+        <button class="debug-btn" onclick="inspectViewer()">Inspect Viewer</button>
+      </div>
+    </div>
+
+    <div class="viewer-container">
+      <UniversalPdfViewer 
+        pdfUrl="/pdfs/foundations/analysis.pdf" 
+        mode="read" 
+        title="Analysis PDF Debug" 
+      />
+    </div>
+  </div>
+
+  <script>
+    function checkConsole() {
+      console.log('🔍 Debug: Checking PDF viewer state...');
+      const viewer = document.querySelector('.universal-pdf-viewer');
+      console.log('Viewer element:', viewer);
+      
+      if (viewer) {
+        console.log('Viewer dataset:', viewer.dataset);
+        const buttons = viewer.querySelectorAll('.mode-btn');
+        console.log('Mode buttons found:', buttons.length);
+        buttons.forEach((btn, i) => {
+          console.log(`Button ${i}:`, btn.dataset.mode, btn.textContent.trim());
+        });
+      } else {
+        console.error('❌ No PDF viewer found!');
+      }
+    }
+
+    function testTTS() {
+      console.log('🗣️ Testing TTS directly...');
+      if ('speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance('Testing text to speech functionality');
+        utterance.rate = 0.9;
+        utterance.pitch = 1.0;
+        utterance.volume = 0.8;
+        
+        utterance.onstart = () => console.log('✅ TTS started');
+        utterance.onend = () => console.log('✅ TTS ended');
+        utterance.onerror = (e) => console.error('❌ TTS error:', e);
+        
+        speechSynthesis.speak(utterance);
+      } else {
+        console.error('❌ Speech synthesis not supported');
+      }
+    }
+
+    function inspectViewer() {
+      console.log('🔍 Inspecting viewer components...');
+      const viewer = document.querySelector('.universal-pdf-viewer');
+      if (viewer) {
+        console.log('PDF container:', viewer.querySelector('.pdf-container'));
+        console.log('Mode controls:', viewer.querySelector('.mode-controls'));
+        console.log('Audio controls:', viewer.querySelector('.audio-controls'));
+        console.log('Video controls:', viewer.querySelector('.video-controls'));
+      }
+    }
+
+    // Auto-check on page load
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        console.log('🚀 Page loaded, running auto-check...');
+        checkConsole();
+      }, 1000);
+    });
+  </script>
+</body>
+</html>

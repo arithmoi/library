@@ -1,15 +1,45 @@
 {
-  "name": "library",
+  "name": "universal-pdf-library",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "description": "Universal PDF Viewer with Audiobook and Videobook modes - Browser-native PDF viewing with client-side TTS and word highlighting",
   "scripts": {
     "dev": "astro dev",
+    "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "sync": "astro sync",
+    "clean": "rm -rf dist .astro",
+    "deploy": "npm run build && npm run preview"
   },
   "dependencies": {
     "astro": "^5.8.0",
     "pdfjs-dist": "^5.2.133"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "keywords": [
+    "pdf",
+    "viewer",
+    "audiobook",
+    "videobook",
+    "text-to-speech",
+    "tts",
+    "highlighting",
+    "astro",
+    "github-pages",
+    "accessibility"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/library.git"
+  },
+  "homepage": "https://yourusername.github.io/library",
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

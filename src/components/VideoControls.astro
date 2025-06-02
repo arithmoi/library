@@ -1,0 +1,598 @@
+---
+// src/components/VideoControls.astro
+export interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<div class={`video-controls ${className}`}>
+  <div class="playback-controls">
+    <button id="video-play-pause" class="control-btn primary" title="Play/Pause (Space)">
+      <span class="icon">▶️</span>
+      <span class="text">Play</span>
+    </button>
+    <button id="video-stop" class="control-btn" title="Stop (Escape)">
+      <span class="icon">⏹️</span>
+      <span class="text">Stop</span>
+    </button>
+    <button id="video-prev-page" class="control-btn" title="Previous Page (←)">
+      <span class="icon">⏮️</span>
+      <span class="text">Previous</span>
+    </button>
+    <button id="video-next-page" class="control-btn" title="Next Page (→)">
+      <span class="icon">⏭️</span>
+      <span class="text">Next</span>
+    </button>
+  </div>
+  
+  <div class="video-settings">
+    <div class="setting-group">
+      <label for="video-voice-select">🎤 Voice:</label>
+      <select id="video-voice-select" class="setting-select">
+        <option value="">Loading voices...</option>
+      </select>
+    </div>
+    
+    <div class="setting-group">
+      <label for="video-speed-select">⚡ Speed:</label>
+      <select id="video-speed-select" class="setting-select">
+        <option value="0.5">0.5x (Very Slow)</option>
+        <option value="0.6">0.6x (Slow)</option>
+        <option value="0.75">0.75x (Slower)</option>
+        <option value="0.9" selected>0.9x (Natural)</option>
+        <option value="1.0">1.0x (Normal)</option>
+        <option value="1.1">1.1x (Slightly Fast)</option>
+        <option value="1.25">1.25x (Fast)</option>
+        <option value="1.5">1.5x (Very Fast)</option>
+      </select>
+    </div>
+    
+    <div class="setting-group highlight-setting">
+      <label for="video-highlight-mode">✨ Highlight:</label>
+      <select id="video-highlight-mode" class="setting-select">
+        <option value="word" selected>Word by Word</option>
+        <option value="sentence">Sentence by Sentence</option>
+        <option value="paragraph">Paragraph by Paragraph</option>
+        <option value="off">No Highlighting</option>
+      </select>
+    </div>
+    
+    <div class="setting-group">
+      <label for="video-highlight-color">🎨 Color:</label>
+      <select id="video-highlight-color" class="setting-select">
+        <option value="yellow" selected>Yellow (Classic)</option>
+        <option value="blue">Blue (Cool)</option>
+        <option value="green">Green (Natural)</option>
+        <option value="orange">Orange (Warm)</option>
+        <option value="purple">Purple (Creative)</option>
+        <option value="red">Red (Bold)</option>
+      </select>
+    </div>
+    
+    <div class="setting-group checkbox-group">
+      <label class="checkbox-label">
+        <input type="checkbox" id="video-auto-advance" checked>
+        <span class="checkmark"></span>
+        <span class="text">🔄 Auto-advance pages</span>
+      </label>
+    </div>
+    
+    <div class="setting-group checkbox-group">
+      <label class="checkbox-label">
+        <input type="checkbox" id="video-word-click" checked>
+        <span class="checkmark"></span>
+        <span class="text">👆 Click words to hear</span>
+      </label>
+    </div>
+    
+    <div class="setting-group checkbox-group">
+      <label class="checkbox-label">
+        <input type="checkbox" id="video-save-progress" checked>
+        <span class="checkmark"></span>
+        <span class="text">💾 Save reading progress</span>
+      </label>
+    </div>
+  </div>
+
+  <!-- Video Status Display -->
+  <div class="video-status" style="display: none;">
+    <div class="status-content">
+      <div class="status-icon">🎬</div>
+      <div class="status-text">
+        <div class="status-title">Video Mode Active</div>
+        <div class="status-details">
+          <span class="current-page">Page 1</span> of <span class="total-pages">1</span>
+          • <span class="highlight-mode">Word highlighting</span>
+          • <span class="reading-speed">0.9x speed</span>
+        </div>
+      </div>
+      <div class="status-controls">
+        <button class="status-btn" id="video-status-close" title="Hide status">
+          <span class="icon">✕</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Highlighting Preview -->
+  <div class="highlight-preview" style="display: none;">
+    <div class="preview-content">
+      <div class="preview-title">Highlighting Preview</div>
+      <div class="preview-samples">
+        <div class="preview-sample word-sample">
+          <span class="sample-text highlight-word">Word</span>
+          <span class="sample-label">Word Mode</span>
+        </div>
+        <div class="preview-sample sentence-sample">
+          <span class="sample-text highlight-sentence">This is a sentence example.</span>
+          <span class="sample-label">Sentence Mode</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reading Statistics -->
+  <div class="reading-stats" style="display: none;">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-value" id="words-read">0</div>
+        <div class="stat-label">Words Read</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" id="reading-time">0:00</div>
+        <div class="stat-label">Reading Time</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" id="reading-wpm">0</div>
+        <div class="stat-label">Words/Min</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" id="pages-completed">0</div>
+        <div class="stat-label">Pages Done</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .video-controls {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-top: 1px solid #e9ecef;
+    padding: 1.5rem;
+    animation: slideInFromBottom 0.3s ease-out;
+  }
+
+  .playback-controls {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .control-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 1rem;
+    font-weight: 500;
+    color: #495057;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .control-btn:hover {
+    background: #f8f9fa;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .control-btn.primary {
+    background: linear-gradient(135deg, #dc3545 0%, #e83e8c 100%);
+    color: white;
+    border-color: #dc3545;
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+  }
+
+  .control-btn.primary:hover {
+    background: linear-gradient(135deg, #c82333 0%, #d91a72 100%);
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+  }
+
+  .control-btn.primary.playing {
+    background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
+    border-color: #ffc107;
+  }
+
+  .control-btn .icon {
+    font-size: 1.25rem;
+    transition: transform 0.3s ease;
+  }
+
+  .control-btn:hover .icon {
+    transform: scale(1.1);
+  }
+
+  .video-settings {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .setting-group {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+  }
+
+  .setting-group:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+  }
+
+  .highlight-setting {
+    background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+    border: 1px solid #ffeaa7;
+  }
+
+  .setting-group label {
+    font-weight: 600;
+    min-width: 80px;
+    font-size: 0.95rem;
+    color: #495057;
+  }
+
+  .setting-select {
+    flex: 1;
+    padding: 0.75rem;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    background: white;
+    font-size: 0.95rem;
+    color: #495057;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .setting-select:focus {
+    outline: none;
+    border-color: #dc3545;
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+  }
+
+  .checkbox-group {
+    background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+  }
+
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #495057;
+  }
+
+  .checkbox-label input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    cursor: pointer;
+    accent-color: #dc3545;
+  }
+
+  .video-status {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+    border: 1px solid #f5c6cb;
+    border-radius: 10px;
+    animation: fadeInUp 0.3s ease-out;
+  }
+
+  .status-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .status-icon {
+    font-size: 1.5rem;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+
+  .status-text {
+    flex: 1;
+  }
+
+  .status-title {
+    font-weight: 600;
+    color: #721c24;
+    margin-bottom: 0.25rem;
+  }
+
+  .status-details {
+    font-size: 0.9rem;
+    color: #721c24;
+    opacity: 0.8;
+  }
+
+  .status-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+  }
+
+  .status-btn:hover {
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  .highlight-preview {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, #e2e3e5 0%, #d6d8db 100%);
+    border: 1px solid #d6d8db;
+    border-radius: 10px;
+    animation: fadeInUp 0.3s ease-out;
+  }
+
+  .preview-title {
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .preview-samples {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .preview-sample {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .sample-text {
+    padding: 0.5rem;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+
+  .highlight-word {
+    background: rgba(255, 255, 0, 0.4);
+    animation: highlightPulse 1s infinite;
+  }
+
+  .highlight-sentence {
+    background: rgba(0, 123, 255, 0.3);
+    animation: sentenceHighlight 1s infinite;
+  }
+
+  .sample-label {
+    font-size: 0.8rem;
+    color: #6c757d;
+    font-weight: 500;
+  }
+
+  .reading-stats {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
+    border: 1px solid #bee5eb;
+    border-radius: 10px;
+    animation: fadeInUp 0.3s ease-out;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+  }
+
+  .stat-item {
+    text-align: center;
+    padding: 0.75rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #0c5460;
+    margin-bottom: 0.25rem;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: #0c5460;
+    opacity: 0.8;
+    font-weight: 500;
+  }
+
+  /* Highlight Color Variations */
+  .highlight-yellow { background: rgba(255, 255, 0, 0.4); }
+  .highlight-blue { background: rgba(0, 123, 255, 0.3); }
+  .highlight-green { background: rgba(40, 167, 69, 0.3); }
+  .highlight-orange { background: rgba(253, 126, 20, 0.3); }
+  .highlight-purple { background: rgba(111, 66, 193, 0.3); }
+  .highlight-red { background: rgba(220, 53, 69, 0.3); }
+
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .video-controls {
+      padding: 1rem;
+    }
+    
+    .playback-controls {
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .control-btn {
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+      min-height: 48px;
+      min-width: 48px;
+    }
+    
+    .control-btn .text {
+      display: none;
+    }
+    
+    .video-settings {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    
+    .setting-group {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.5rem;
+      padding: 0.75rem;
+    }
+    
+    .setting-group label {
+      min-width: auto;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+    
+    .preview-samples {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .status-content {
+      flex-direction: column;
+      text-align: center;
+      gap: 0.75rem;
+    }
+  }
+
+  /* Dark Mode */
+  @media (prefers-color-scheme: dark) {
+    .video-controls {
+      background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+      border-color: #404040;
+    }
+    
+    .control-btn,
+    .setting-group,
+    .preview-sample,
+    .stat-item {
+      background: #2d2d2d;
+      color: #ffffff;
+      border-color: #404040;
+    }
+    
+    .control-btn:hover,
+    .setting-group:hover {
+      background: #404040;
+    }
+    
+    .setting-select {
+      background: #2d2d2d;
+      color: #ffffff;
+      border-color: #404040;
+    }
+    
+    .video-status {
+      background: linear-gradient(135deg, #4a1e1e 0%, #721c24 100%);
+      border-color: #721c24;
+    }
+    
+    .status-title,
+    .status-details {
+      color: #f8d7da;
+    }
+    
+    .highlight-preview {
+      background: linear-gradient(135deg, #404040 0%, #2d2d2d 100%);
+      border-color: #404040;
+    }
+    
+    .preview-title {
+      color: #ffffff;
+    }
+    
+    .reading-stats {
+      background: linear-gradient(135deg, #1e3a3a 0%, #0c5460 100%);
+      border-color: #0c5460;
+    }
+    
+    .stat-value,
+    .stat-label {
+      color: #d1ecf1;
+    }
+  }
+
+  @keyframes slideInFromBottom {
+    from {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes highlightPulse {
+    0%, 100% { background: rgba(255, 255, 0, 0.4); }
+    50% { background: rgba(255, 255, 0, 0.8); }
+  }
+
+  @keyframes sentenceHighlight {
+    0%, 100% { background: rgba(0, 123, 255, 0.3); }
+    50% { background: rgba(0, 123, 255, 0.6); }
+  }
+</style>

@@ -1,6 +1,6 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import PdfViewer from '../../../components/PdfViewer.astro';
+import UniversalPdfViewer from '../../../components/UniversalPdfViewer.astro';
 import libraryContent from '../../../data/library_content.json';
 
 export async function getStaticPaths() {
@@ -15,52 +15,269 @@ const { item } = Astro.props;
 ---
 <Layout title={item.title + " | Arithmoi Library"} currentPage={`/library/insights/${item.slug}`} isBookDetailPage={true}>
   <article class="book-detail">
-    <h1>{item.title}</h1>
-    {item.author && <p class="author">By: {item.author}</p>}
-    {item.summary && <p class="summary">{item.summary}</p>}
+    <header class="book-header">
+      <h1>{item.title}</h1>
+      {item.author && <p class="author">By: {item.author}</p>}
+      {item.summary && <p class="summary">{item.summary}</p>}
+      
+      <!-- Feature Badges -->
+      <div class="feature-badges">
+        <span class="badge">📖 Read</span>
+        <span class="badge">🔊 Audio</span>
+        <span class="badge">🎬 Video</span>
+        <span class="badge">📱 Mobile</span>
+      </div>
+    </header>
 
     {item.pdfUrl && (
       <div class="pdf-embed-container">
-        <PdfViewer pdfUrl={item.pdfUrl} />
+        <!-- NEW: Universal PDF Viewer with all modes -->
+        <UniversalPdfViewer
+          pdfUrl={item.pdfUrl}
+          mode="read"
+          title={item.title}
+        />
       </div>
     )}
     
-    {!item.pdfUrl && <p><em>Content for this item is not available in PDF format.</em></p>}
+    {!item.pdfUrl && (
+      <div class="no-pdf-message">
+        <p><em>Content for this item is not available in PDF format.</em></p>
+      </div>
+    )}
+
+    <!-- Reading Instructions -->
+    <div class="reading-instructions">
+      <h2>📚 How to Use This Document</h2>
+      <div class="instruction-grid">
+        <div class="instruction">
+          <span class="icon">📖</span>
+          <div class="content">
+            <h3>Read Mode</h3>
+            <p>Traditional PDF reading with browser-native zoom, scroll, and search.</p>
+          </div>
+        </div>
+        <div class="instruction">
+          <span class="icon">🔊</span>
+          <div class="content">
+            <h3>Audio Mode</h3>
+            <p>Listen to the document with high-quality text-to-speech. Perfect for multitasking or accessibility.</p>
+          </div>
+        </div>
+        <div class="instruction">
+          <span class="icon">🎬</span>
+          <div class="content">
+            <h3>Video Mode</h3>
+            <p>Follow along with synchronized word highlighting as the document is read aloud.</p>
+          </div>
+        </div>
+        <div class="instruction">
+          <span class="icon">📱</span>
+          <div class="content">
+            <h3>Mobile</h3>
+            <p>Double-tap to play/pause, swipe for navigation. Optimized for touch devices.</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </article>
 </Layout>
 
 <style>
-  /* Styles are identical to explorations/[slug].astro */
   .book-detail {
-    padding: 20px;
+    padding: 0;
     background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    overflow: hidden;
   }
+
+  .book-header {
+    padding: 2rem;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+  }
+
   .book-detail h1 {
-    margin-top: 0;
-    margin-bottom: 0.5rem;
-    font-size: 2rem;
-    color: #333;
+    margin: 0 0 1rem 0;
+    font-size: 2.5rem;
+    color: white;
+    font-weight: 700;
+    line-height: 1.2;
   }
+
   .author {
     font-style: italic;
-    color: #555;
+    color: rgba(255, 255, 255, 0.9);
     margin-bottom: 1rem;
+    font-size: 1.1rem;
   }
+
   .summary {
-    margin-bottom: 1.5rem;
+    color: rgba(255, 255, 255, 0.95);
     line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
   }
-  .pdf-embed-container {
-    margin-top: 20px;
-    border: 1px solid #ddd;
-    height: 75vh;
+
+  .feature-badges {
     display: flex;
-    flex-direction: column;
+    gap: 0.75rem;
+    flex-wrap: wrap;
   }
-  .pdf-embed-container > :global(.pdf-viewer-container) {
-    flex-grow: 1;
-    min-height: 0;
+
+  .badge {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .pdf-embed-container {
+    height: 80vh;
+    min-height: 600px;
+    position: relative;
+  }
+
+  .no-pdf-message {
+    padding: 2rem;
+    text-align: center;
+    color: #6c757d;
+    background: #f8f9fa;
+    margin: 2rem;
+    border-radius: 8px;
+  }
+
+  .reading-instructions {
+    padding: 2rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  }
+
+  .reading-instructions h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+  }
+
+  .instruction-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .instruction {
+    display: flex;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .instruction:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  }
+
+  .instruction .icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+  }
+
+  .instruction .content h3 {
+    margin: 0 0 0.5rem 0;
+    color: #2c3e50;
+    font-size: 1.2rem;
+  }
+
+  .instruction .content p {
+    margin: 0;
+    color: #6c757d;
+    line-height: 1.5;
+    font-size: 0.95rem;
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .book-header {
+      padding: 1.5rem;
+    }
+
+    .book-detail h1 {
+      font-size: 2rem;
+    }
+
+    .feature-badges {
+      gap: 0.5rem;
+    }
+
+    .badge {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.8rem;
+    }
+
+    .pdf-embed-container {
+      height: 70vh;
+      min-height: 500px;
+    }
+
+    .reading-instructions {
+      padding: 1.5rem;
+    }
+
+    .instruction-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .instruction {
+      padding: 1rem;
+    }
+
+    .instruction .icon {
+      font-size: 1.5rem;
+    }
+
+    .instruction .content h3 {
+      font-size: 1.1rem;
+    }
+  }
+
+  /* Dark Mode */
+  @media (prefers-color-scheme: dark) {
+    .book-detail {
+      background-color: #1a1a1a;
+    }
+
+    .reading-instructions {
+      background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+    }
+
+    .reading-instructions h2 {
+      color: #ffffff;
+    }
+
+    .instruction {
+      background: #2d2d2d;
+      color: #ffffff;
+    }
+
+    .instruction .content h3 {
+      color: #ffffff;
+    }
+
+    .instruction .content p {
+      color: #adb5bd;
+    }
+
+    .no-pdf-message {
+      background: #2d2d2d;
+      color: #adb5bd;
+    }
   }
 </style>

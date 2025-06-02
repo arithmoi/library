@@ -6,8 +6,8 @@ export interface Props {
 
 const { pdfUrl } = Astro.props;
 
-// Construct the worker URL for PDF.js
-const pdfjsWorkerSrc = `/pdf.worker.min.mjs`;
+// Worker will be set dynamically in the script
+// const pdfjsWorkerSrc = `/pdf.worker.min.mjs`;
 ---
 
 <div id="pdf-viewer-container" class="pdf-viewer-container">
@@ -245,11 +245,14 @@ const pdfjsWorkerSrc = `/pdf.worker.min.mjs`;
     console.log('Loading PDF:', pdfUrl);
     
     try {
-      // Dynamically import pdfjs-dist
-      const pdfjsLib = await import('/pdf.min.mjs');
+      // Dynamically import pdfjs-dist from npm package
+      const pdfjsLib = await import('pdfjs-dist');
       
-      // Set worker source
-      pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorkerSrc;
+      // Set worker source to use the npm package worker
+      pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
+        'pdfjs-dist/build/pdf.worker.min.mjs',
+        import.meta.url
+      ).toString();
       console.log('PDF.js worker source set to:', pdfjsWorkerSrc);
 
       const loadingTask = pdfjsLib.getDocument(pdfUrl);

@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import PdfViewer from '../../components/PdfViewer.astro';
+import UniversalPdfViewer from '../../components/UniversalPdfViewer.astro';
 ---
 
 <Layout title="PDF Viewer TTS Test | Arithmoi Library">
@@ -37,7 +37,7 @@ Voice selector populated with 12 voices
     </div>
     
     <div class="pdf-viewer-container">
-      <PdfViewer pdfUrl="/pdfs/foundations/analysis.pdf" />
+      <UniversalPdfViewer pdfUrl="/pdfs/foundations/analysis.pdf" mode="read" title="Analysis PDF" />
     </div>
   </div>
 </Layout>

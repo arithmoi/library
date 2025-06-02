@@ -1,0 +1,444 @@
+---
+// src/components/AudioControls.astro
+export interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<div class={`audio-controls ${className}`}>
+  <div class="playback-controls">
+    <button id="audio-play-pause" class="control-btn primary" title="Play/Pause (Space)">
+      <span class="icon">▶️</span>
+      <span class="text">Play</span>
+    </button>
+    <button id="audio-stop" class="control-btn" title="Stop (Escape)">
+      <span class="icon">⏹️</span>
+      <span class="text">Stop</span>
+    </button>
+    <button id="audio-prev-page" class="control-btn" title="Previous Page (←)">
+      <span class="icon">⏮️</span>
+      <span class="text">Previous</span>
+    </button>
+    <button id="audio-next-page" class="control-btn" title="Next Page (→)">
+      <span class="icon">⏭️</span>
+      <span class="text">Next</span>
+    </button>
+  </div>
+  
+  <div class="audio-settings">
+    <div class="setting-group">
+      <label for="audio-voice-select">🎤 Voice:</label>
+      <select id="audio-voice-select" class="setting-select">
+        <option value="">Loading voices...</option>
+      </select>
+    </div>
+    
+    <div class="setting-group">
+      <label for="audio-speed-select">⚡ Speed:</label>
+      <select id="audio-speed-select" class="setting-select">
+        <option value="0.5">0.5x (Very Slow)</option>
+        <option value="0.6">0.6x (Slow)</option>
+        <option value="0.75">0.75x (Slower)</option>
+        <option value="0.9" selected>0.9x (Natural)</option>
+        <option value="1.0">1.0x (Normal)</option>
+        <option value="1.1">1.1x (Slightly Fast)</option>
+        <option value="1.25">1.25x (Fast)</option>
+        <option value="1.5">1.5x (Very Fast)</option>
+        <option value="2.0">2.0x (Maximum)</option>
+      </select>
+    </div>
+    
+    <div class="setting-group">
+      <label for="audio-pitch-select">🎵 Pitch:</label>
+      <select id="audio-pitch-select" class="setting-select">
+        <option value="0.7">0.7 (Much Lower)</option>
+        <option value="0.8">0.8 (Lower)</option>
+        <option value="0.9">0.9 (Slightly Lower)</option>
+        <option value="1.0" selected>1.0 (Normal)</option>
+        <option value="1.1">1.1 (Slightly Higher)</option>
+        <option value="1.2">1.2 (Higher)</option>
+        <option value="1.3">1.3 (Much Higher)</option>
+      </select>
+    </div>
+    
+    <div class="setting-group">
+      <label for="audio-volume-select">🔊 Volume:</label>
+      <select id="audio-volume-select" class="setting-select">
+        <option value="0.3">30% (Quiet)</option>
+        <option value="0.5">50% (Low)</option>
+        <option value="0.7">70% (Medium)</option>
+        <option value="0.85" selected>85% (High)</option>
+        <option value="1.0">100% (Maximum)</option>
+      </select>
+    </div>
+    
+    <div class="setting-group checkbox-group">
+      <label class="checkbox-label">
+        <input type="checkbox" id="audio-auto-advance" checked>
+        <span class="checkmark"></span>
+        <span class="text">🔄 Auto-advance pages</span>
+      </label>
+    </div>
+    
+    <div class="setting-group checkbox-group">
+      <label class="checkbox-label">
+        <input type="checkbox" id="audio-save-progress" checked>
+        <span class="checkmark"></span>
+        <span class="text">💾 Save reading progress</span>
+      </label>
+    </div>
+  </div>
+
+  <!-- Audio Status Display -->
+  <div class="audio-status" style="display: none;">
+    <div class="status-content">
+      <div class="status-icon">🔊</div>
+      <div class="status-text">
+        <div class="status-title">Audio Mode Active</div>
+        <div class="status-details">
+          <span class="current-page">Page 1</span> of <span class="total-pages">1</span>
+          • <span class="reading-speed">0.9x speed</span>
+        </div>
+      </div>
+      <div class="status-controls">
+        <button class="status-btn" id="audio-status-close" title="Hide status">
+          <span class="icon">✕</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Voice Quality Indicator -->
+  <div class="voice-quality-indicator" style="display: none;">
+    <div class="quality-badge">
+      <span class="quality-icon">🎤</span>
+      <span class="quality-text">High Quality Voice</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .audio-controls {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-top: 1px solid #e9ecef;
+    padding: 1.5rem;
+    animation: slideInFromBottom 0.3s ease-out;
+  }
+
+  .playback-controls {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .control-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 1rem;
+    font-weight: 500;
+    color: #495057;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .control-btn:hover {
+    background: #f8f9fa;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .control-btn.primary {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    border-color: #28a745;
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+  }
+
+  .control-btn.primary:hover {
+    background: linear-gradient(135deg, #218838 0%, #1e7e34 100%);
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
+  }
+
+  .control-btn.primary.playing {
+    background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
+    border-color: #ffc107;
+  }
+
+  .control-btn .icon {
+    font-size: 1.25rem;
+    transition: transform 0.3s ease;
+  }
+
+  .control-btn:hover .icon {
+    transform: scale(1.1);
+  }
+
+  .audio-settings {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .setting-group {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+  }
+
+  .setting-group:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+  }
+
+  .setting-group label {
+    font-weight: 600;
+    min-width: 80px;
+    font-size: 0.95rem;
+    color: #495057;
+  }
+
+  .setting-select {
+    flex: 1;
+    padding: 0.75rem;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    background: white;
+    font-size: 0.95rem;
+    color: #495057;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .setting-select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+  }
+
+  .checkbox-group {
+    background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+  }
+
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #495057;
+  }
+
+  .checkbox-label input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    cursor: pointer;
+    accent-color: #007bff;
+  }
+
+  .audio-status {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+    border: 1px solid #c3e6cb;
+    border-radius: 10px;
+    animation: fadeInUp 0.3s ease-out;
+  }
+
+  .status-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .status-icon {
+    font-size: 1.5rem;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+
+  .status-text {
+    flex: 1;
+  }
+
+  .status-title {
+    font-weight: 600;
+    color: #155724;
+    margin-bottom: 0.25rem;
+  }
+
+  .status-details {
+    font-size: 0.9rem;
+    color: #155724;
+    opacity: 0.8;
+  }
+
+  .status-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+  }
+
+  .status-btn:hover {
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  .voice-quality-indicator {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .quality-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+    border: 1px solid #ffeaa7;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: #856404;
+    animation: fadeInUp 0.3s ease-out;
+  }
+
+  .quality-icon {
+    font-size: 1rem;
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .audio-controls {
+      padding: 1rem;
+    }
+    
+    .playback-controls {
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .control-btn {
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+      min-height: 48px;
+      min-width: 48px;
+    }
+    
+    .control-btn .text {
+      display: none;
+    }
+    
+    .audio-settings {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    
+    .setting-group {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.5rem;
+      padding: 0.75rem;
+    }
+    
+    .setting-group label {
+      min-width: auto;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+    
+    .status-content {
+      flex-direction: column;
+      text-align: center;
+      gap: 0.75rem;
+    }
+  }
+
+  /* Dark Mode */
+  @media (prefers-color-scheme: dark) {
+    .audio-controls {
+      background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+      border-color: #404040;
+    }
+    
+    .control-btn,
+    .setting-group {
+      background: #2d2d2d;
+      color: #ffffff;
+      border-color: #404040;
+    }
+    
+    .control-btn:hover,
+    .setting-group:hover {
+      background: #404040;
+    }
+    
+    .setting-select {
+      background: #2d2d2d;
+      color: #ffffff;
+      border-color: #404040;
+    }
+    
+    .audio-status {
+      background: linear-gradient(135deg, #1e4620 0%, #155724 100%);
+      border-color: #155724;
+    }
+    
+    .status-title,
+    .status-details {
+      color: #d4edda;
+    }
+    
+    .quality-badge {
+      background: linear-gradient(135deg, #664d03 0%, #856404 100%);
+      border-color: #856404;
+      color: #fff3cd;
+    }
+  }
+
+  @keyframes slideInFromBottom {
+    from {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

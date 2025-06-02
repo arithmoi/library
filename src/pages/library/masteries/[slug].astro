@@ -1,6 +1,6 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import PdfViewer from '../../../components/PdfViewer.astro';
+import UniversalPdfViewer from '../../../components/UniversalPdfViewer.astro';
 import libraryContent from '../../../data/library_content.json';
 
 export async function getStaticPaths() {
@@ -21,7 +21,11 @@ const { item } = Astro.props;
 
     {item.pdfUrl && (
       <div class="pdf-embed-container">
-        <PdfViewer pdfUrl={item.pdfUrl} />
+        <UniversalPdfViewer 
+          pdfUrl={item.pdfUrl} 
+          mode="read"
+          title={item.title}
+        />
       </div>
     )}
     

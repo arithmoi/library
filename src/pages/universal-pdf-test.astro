@@ -1,0 +1,298 @@
+---
+// Test page for the new Universal PDF Viewer
+import Layout from '../layouts/Layout.astro';
+import UniversalPdfViewer from '../components/UniversalPdfViewer.astro';
+---
+
+<Layout title="Universal PDF Viewer Test">
+  <main>
+    <div class="test-container">
+      <h1>🚀 Universal PDF Viewer Test</h1>
+      <p class="description">
+        Testing the new browser-native PDF viewer with audiobook and videobook modes.
+        This implementation follows the refactor plan for zero-cost GitHub Pages deployment.
+      </p>
+      
+      <div class="feature-highlights">
+        <div class="feature">
+          <span class="icon">📖</span>
+          <span class="text">Browser-native PDF rendering</span>
+        </div>
+        <div class="feature">
+          <span class="icon">🔊</span>
+          <span class="text">High-quality TTS audiobook mode</span>
+        </div>
+        <div class="feature">
+          <span class="icon">🎬</span>
+          <span class="text">Real-time word highlighting</span>
+        </div>
+        <div class="feature">
+          <span class="icon">📱</span>
+          <span class="text">Mobile-optimized touch controls</span>
+        </div>
+      </div>
+
+      <!-- Universal PDF Viewer Component -->
+      <UniversalPdfViewer
+        pdfUrl="/pdfs/explorations/glowney_jason_A_Novel_U_3_Group_and_Applications_to_Qu.pdf"
+        mode="read"
+        title="A Novel U(3) Group and Applications to Quantum Computing"
+      />
+      
+      <div class="instructions">
+        <h2>📋 How to Test</h2>
+        <div class="instruction-grid">
+          <div class="instruction">
+            <h3>📖 Read Mode</h3>
+            <p>Native browser PDF viewing with zoom, scroll, and search built-in.</p>
+          </div>
+          <div class="instruction">
+            <h3>🔊 Audio Mode</h3>
+            <p>Click Audio button, then Play to hear text-to-speech with quality voice selection.</p>
+          </div>
+          <div class="instruction">
+            <h3>🎬 Video Mode</h3>
+            <p>Click Video button, then Play to see synchronized word highlighting with audio.</p>
+          </div>
+          <div class="instruction">
+            <h3>📱 Mobile</h3>
+            <p>Double-tap to play/pause, swipe left/right for pages, pinch to zoom.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="technical-info">
+        <h2>🔧 Technical Implementation</h2>
+        <div class="tech-grid">
+          <div class="tech-item">
+            <h4>Browser-Native PDF</h4>
+            <p>Uses HTML &lt;embed&gt; for zero-JavaScript PDF rendering</p>
+          </div>
+          <div class="tech-item">
+            <h4>Client-Side TTS</h4>
+            <p>Web Speech API with platform-optimized voice quality ranking</p>
+          </div>
+          <div class="tech-item">
+            <h4>Word Highlighting</h4>
+            <p>PDF.js text extraction + CSS overlay for synchronized highlighting</p>
+          </div>
+          <div class="tech-item">
+            <h4>Touch Optimization</h4>
+            <p>Gesture recognition and mobile-first responsive design</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .test-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+  }
+
+  .description {
+    text-align: center;
+    color: #6c757d;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+
+  .feature-highlights {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .feature {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+
+  .feature:hover {
+    transform: translateY(-2px);
+  }
+
+  .feature .icon {
+    font-size: 1.5rem;
+  }
+
+  .feature .text {
+    font-weight: 500;
+    color: #495057;
+  }
+
+  .instructions {
+    margin: 3rem 0;
+    padding: 2rem;
+    background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+    border-radius: 15px;
+  }
+
+  .instructions h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+  }
+
+  .instruction-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .instruction {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .instruction h3 {
+    color: #007bff;
+    margin-bottom: 0.75rem;
+    font-size: 1.2rem;
+  }
+
+  .instruction p {
+    color: #6c757d;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .technical-info {
+    margin: 3rem 0;
+    padding: 2rem;
+    background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+    border-radius: 15px;
+  }
+
+  .technical-info h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+  }
+
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .tech-item {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .tech-item h4 {
+    color: #dc3545;
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+  }
+
+  .tech-item p {
+    color: #6c757d;
+    line-height: 1.5;
+    margin: 0;
+    font-size: 0.95rem;
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .test-container {
+      padding: 1rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    .feature-highlights,
+    .instruction-grid,
+    .tech-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .instructions,
+    .technical-info {
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .instruction,
+    .tech-item {
+      padding: 1rem;
+    }
+  }
+
+  /* Dark Mode */
+  @media (prefers-color-scheme: dark) {
+    .test-container {
+      color: #ffffff;
+    }
+
+    h1,
+    .instructions h2,
+    .technical-info h2 {
+      color: #ffffff;
+    }
+
+    .description {
+      color: #adb5bd;
+    }
+
+    .feature {
+      background: linear-gradient(135deg, #2d2d2d 0%, #404040 100%);
+    }
+
+    .feature .text {
+      color: #ffffff;
+    }
+
+    .instructions {
+      background: linear-gradient(135deg, #1e3a3a 0%, #2d1b69 100%);
+    }
+
+    .technical-info {
+      background: linear-gradient(135deg, #664d03 0%, #856404 100%);
+    }
+
+    .instruction,
+    .tech-item {
+      background: #2d2d2d;
+      color: #ffffff;
+    }
+
+    .instruction h3 {
+      color: #66b3ff;
+    }
+
+    .tech-item h4 {
+      color: #ff6b6b;
+    }
+
+    .instruction p,
+    .tech-item p {
+      color: #adb5bd;
+    }
+  }
+</style>

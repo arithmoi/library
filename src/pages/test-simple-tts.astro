@@ -1,6 +1,6 @@
 c.---
 // Test page for the new Simple TTS implementation
-import PdfViewer from '../components/PdfViewer.astro';
+import UniversalPdfViewer from '../components/UniversalPdfViewer.astro';
 ---
 
 <html lang="en">
@@ -17,7 +17,7 @@ import PdfViewer from '../components/PdfViewer.astro';
     <p>This test page demonstrates the new simplified TTS implementation using native Web Speech API.</p>
     
     <div style="border: 2px solid #ddd; border-radius: 8px; overflow: hidden; height: 600px;">
-      <PdfViewer pdfUrl="/pdfs/foundations/analysis.pdf" />
+      <UniversalPdfViewer pdfUrl="/pdfs/foundations/analysis.pdf" mode="read" title="Analysis PDF" />
     </div>
     
     <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px;">
