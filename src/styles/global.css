@@ -260,10 +260,6 @@ body {
   color: var(--link-color) !important;
 }
 
-[data-theme="dark"] .tts-menu-section {
-  background: transparent !important;
-  border-top: 1px solid var(--border-color) !important;
-}
 
 [data-theme="dark"] .menu-section:not(:last-child) {
   border-bottom: 1px solid var(--border-color) !important;
@@ -397,6 +393,8 @@ body {
 
 [data-theme="dark"] .page-indicator {
   color: var(--text-color) !important;
+  background: #374151 !important;
+  border: 1px solid #6b7280 !important;
 }
 
 [data-theme="dark"] .zoom-level-display {
@@ -444,6 +442,25 @@ body {
 [data-theme="dark"] .page-input-container button:hover {
   background: #4b5563 !important;
   border-color: var(--link-color) !important;
+}
+
+/* Menu Info Dark Mode Styles */
+[data-theme="dark"] .menu-info {
+  background: #2d3748 !important;
+  border: 1px solid #4a5568 !important;
+  color: var(--text-color) !important;
+}
+
+[data-theme="dark"] .menu-info p {
+  color: var(--text-color) !important;
+}
+
+[data-theme="dark"] .menu-info ul {
+  color: var(--text-secondary) !important;
+}
+
+[data-theme="dark"] .menu-info li {
+  color: var(--text-secondary) !important;
 }
 
 /* Footer Dark Mode Styles */
@@ -603,24 +620,6 @@ body {
   color: var(--text-secondary) !important;
 }
 
-/* TTS Status Message Dark Mode Styles */
-[data-theme="dark"] .tts-status {
-  background: var(--bg-secondary) !important;
-  border: 1px solid var(--border-color) !important;
-  color: var(--text-color) !important;
-}
-
-[data-theme="dark"] .status-message {
-  background: var(--bg-secondary) !important;
-  border: 1px solid var(--border-color) !important;
-  color: var(--text-color) !important;
-}
-
-[data-theme="dark"] .status-message.info {
-  background: var(--bg-secondary) !important;
-  border: 1px solid var(--link-color) !important;
-  color: var(--text-color) !important;
-}
 
 [data-theme="dark"] .status-message.warning {
   background: #2d1b0e !important;
