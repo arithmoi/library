@@ -1,5 +1,5 @@
-<!DOCTYPE html><html lang="en" class="library-layout-active"> <head><meta charset="UTF-8"><meta name="description" content="A knowledge library for the school"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/png" href="/images/library_logo.png"><meta name="generator" content="Astro v5.8.0"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CtSceO8m.js"></script><title>The Strange Attractor of the Lorenz System | Arithmoi Library</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/_astro/_slug_.B3Yyye1y.css">
-<link rel="stylesheet" href="/_astro/about.NTbQV5HS.css">
+<!DOCTYPE html><html lang="en" class="library-layout-active"> <head><meta charset="UTF-8"><meta name="description" content="A knowledge library for the school"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/png" href="/images/library_logo.png"><meta name="generator" content="Astro v5.8.0"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CtSceO8m.js"></script><title>The Strange Attractor of the Lorenz System | Arithmoi Library</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/_astro/_slug_.3CYiisX3.css">
+<link rel="stylesheet" href="/_astro/about.DYtJ1lyU.css">
 <style>.book-detail[data-astro-cid-y47snweo]{padding:20px;background-color:#fff;border-radius:8px;box-shadow:0 2px 10px #0000001a}.book-detail[data-astro-cid-y47snweo] h1[data-astro-cid-y47snweo]{margin-top:0;margin-bottom:.5rem;font-size:2rem;color:#333}.author[data-astro-cid-y47snweo]{font-style:italic;color:#555;margin-bottom:1rem}.summary[data-astro-cid-y47snweo]{margin-bottom:1.5rem;line-height:1.6}.pdf-embed-container[data-astro-cid-y47snweo]{margin-top:20px;border:1px solid #ddd;height:75vh;display:flex;flex-direction:column}.pdf-embed-container[data-astro-cid-y47snweo]>.pdf-viewer-container{flex-grow:1;min-height:0}
 </style></head> <body> <nav data-astro-cid-5blmo7yk> <div class="nav-container" data-astro-cid-5blmo7yk> <div class="logo" data-astro-cid-5blmo7yk> <img src="/images/library_logo.png" alt="Arithmoi Library Logo" class="navbar-logo-img" data-astro-cid-5blmo7yk> <a href="/" data-astro-cid-5blmo7yk>Arithmoi Library</a> </div> <button class="hamburger" aria-label="Toggle menu" aria-expanded="false" data-astro-cid-5blmo7yk> <span class="hamburger-box" data-astro-cid-5blmo7yk> <span class="hamburger-inner" data-astro-cid-5blmo7yk></span> </span> </button> <ul class="nav-links" data-astro-cid-5blmo7yk> <li data-astro-cid-5blmo7yk><a href="/" data-astro-cid-5blmo7yk>Home</a></li> <li data-astro-cid-5blmo7yk><a href="/library" class="active" data-astro-cid-5blmo7yk>Library</a></li> <li data-astro-cid-5blmo7yk><a href="/about" data-astro-cid-5blmo7yk>About</a></li> <li data-astro-cid-5blmo7yk><a href="/contact" data-astro-cid-5blmo7yk>Contact</a></li> <!-- Theme toggle in mobile menu - using same style as desktop --> <li class="mobile-theme-toggle" data-astro-cid-5blmo7yk> <button id="theme-toggle-mobile" class="theme-toggle theme-toggle-mobile" aria-label="Toggle dark mode" title="Toggle dark/light mode" data-astro-cid-5blmo7yk> <span class="theme-icon light-icon" data-astro-cid-5blmo7yk>☀️</span> <span class="theme-icon dark-icon" data-astro-cid-5blmo7yk>🌙</span> </button> </li> </ul> <!-- Global Dark Mode Toggle - Desktop Only --> <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark/light mode" data-astro-cid-5blmo7yk> <span class="theme-icon light-icon" data-astro-cid-5blmo7yk>☀️</span> <span class="theme-icon dark-icon" data-astro-cid-5blmo7yk>🌙</span> </button> </div> </nav> <script type="module">function g(){const e=document.querySelector(".hamburger"),t=document.querySelector(".nav-links");if(e&&t){e.replaceWith(e.cloneNode(!0));const n=document.querySelector(".hamburger");n.addEventListener("click",()=>{const o=n.getAttribute("aria-expanded")==="true"||!1;n.setAttribute("aria-expanded",!o),t.classList.toggle("is-active"),n.classList.toggle("is-active")})}}function a(){const e=document.getElementById("theme-toggle"),t=document.getElementById("theme-toggle-mobile"),n=localStorage.getItem("theme")||"light";m(n),e&&(e.replaceWith(e.cloneNode(!0)),document.getElementById("theme-toggle").addEventListener("click",()=>{i()})),t&&(t.replaceWith(t.cloneNode(!0)),document.getElementById("theme-toggle-mobile").addEventListener("click",()=>{i();const c=document.querySelector(".nav-links"),l=document.querySelector(".hamburger");c&&l&&(c.classList.remove("is-active"),l.classList.remove("is-active"),l.setAttribute("aria-expanded","false"))}))}function i(){const t=(document.documentElement.getAttribute("data-theme")||"light")==="light"?"dark":"light";m(t),localStorage.setItem("theme",t)}function m(e){document.documentElement.setAttribute("data-theme",e);const t=document.getElementById("theme-toggle"),n=document.getElementById("theme-toggle-mobile");t&&t.classList.toggle("dark-active",e==="dark"),n&&n.classList.toggle("dark-active",e==="dark")}g();a();document.addEventListener("astro:page-load",()=>{g(),a()});</script>  <button class="sidebar-toggle" aria-label="Toggle sidebar" aria-expanded="false"> <span class="hamburger-box"> <span class="hamburger-inner"></span> </span> </button> <div class="main-container"> <aside id="sidebar" data-astro-cid-ssfzsv2f> <h4 data-astro-cid-ssfzsv2f>Library Navigation</h4> <ul data-astro-cid-ssfzsv2f> <li data-astro-cid-ssfzsv2f><a href="/library/" class="sidebar-nav-item" data-astro-cid-ssfzsv2f>Welcome</a></li> <li class="collapsible-category" data-category-path="/library/insights/" data-astro-cid-ssfzsv2f> <div class="category-header" data-astro-cid-ssfzsv2f> <span class="dropdown-indicator" data-astro-cid-ssfzsv2f> <svg class="chevron-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" data-astro-cid-ssfzsv2f> <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" data-astro-cid-ssfzsv2f></path> </svg> </span> <a href="/library/insights/" class="category-title-link" data-astro-cid-ssfzsv2f> Insights </a> </div> <ul class="submenu" data-astro-cid-ssfzsv2f> <li data-astro-cid-ssfzsv2f> <a href="/library/insights/power-of-mathematics-and-numbers" data-astro-cid-ssfzsv2f> The Power of Mathematics and Numbers </a> </li><li data-astro-cid-ssfzsv2f> <a href="/library/insights/alchemy-of-symmetry-and-anti-symmetry" data-astro-cid-ssfzsv2f> The Alchemy of Symmetry and Anti-Symmetry </a> </li><li data-astro-cid-ssfzsv2f> <a href="/library/insights/bridge-of-thought" data-astro-cid-ssfzsv2f> The Bridge of Thought </a> </li><li data-astro-cid-ssfzsv2f> <a href="/library/insights/foundations-for-mathematical-reality" data-astro-cid-ssfzsv2f> Foundations for Mathematical Reality </a> </li><li data-astro-cid-ssfzsv2f> <a href="/library/insights/pondering-on-the-god-equation" data-astro-cid-ssfzsv2f> Pondering on the God Equation </a> </li><li data-astro-cid-ssfzsv2f> <a href="/library/insights/mystical-dance-of-symmetry-and-anti-symmetry" data-astro-cid-ssfzsv2f> The Mystical Dance of Symmetry and Anti-Symmetry </a> </li><li data-astro-cid-ssfzsv2f> <a href="/library/insights/mathematical-and-medical-alliance" data-astro-cid-ssfzsv2f> The Mathematical and Medical Alliance </a> </li><li data-astro-cid-ssfzsv2f> <a href="/library/insights/ontological-mathematics-and-eastern-philosophy" data-astro-cid-ssfzsv2f> Ontological Mathematics and Eastern Philosophy </a> </li> </ul> </li><li class="collapsible-category" data-category-path="/library/foundations/" data-astro-cid-ssfzsv2f> <div class="category-header" data-astro-cid-ssfzsv2f> <span class="dropdown-indicator" data-astro-cid-ssfzsv2f> <svg class="chevron-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" data-astro-cid-ssfzsv2f> <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" data-astro-cid-ssfzsv2f></path> </svg> </span> <a href="/library/foundations/" class="category-title-link" data-astro-cid-ssfzsv2f> Foundations </a> </div> <ul class="submenu" data-astro-cid-ssfzsv2f> <li data-astro-cid-ssfzsv2f> <a href="/library/foundations/essential-calculus-theorems" data-astro-cid-ssfzsv2f> Essential Calculus Theorems </a> </li><li data-astro-cid-ssfzsv2f> <a href="/library/foundations/real-and-complex-mathematical-analysis" data-astro-cid-ssfzsv2f> Real and Complex Mathematical Analysis </a> </li> </ul> </li><li class="collapsible-category is-expanded" data-category-path="/library/explorations/" data-astro-cid-ssfzsv2f> <div class="category-header" data-astro-cid-ssfzsv2f> <span class="dropdown-indicator" data-astro-cid-ssfzsv2f> <svg class="chevron-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" data-astro-cid-ssfzsv2f> <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" data-astro-cid-ssfzsv2f></path> </svg> </span> <a href="/library/explorations/" class="category-title-link" data-astro-cid-ssfzsv2f> Explorations </a> </div> <ul class="submenu" data-astro-cid-ssfzsv2f> <li data-astro-cid-ssfzsv2f> <a href="/library/explorations/novel-u3-group-applications" data-astro-cid-ssfzsv2f> A Novel U(3) Group and Applications </a> </li><li data-astro-cid-ssfzsv2f> <a href="/library/explorations/lie-groups-algebras" data-astro-cid-ssfzsv2f> Lie Groups and Lie Algebras </a> </li><li data-astro-cid-ssfzsv2f> <a href="/library/explorations/imaginary-derivation-e" data-astro-cid-ssfzsv2f> An Imaginary Derivation of e </a> </li><li data-astro-cid-ssfzsv2f> <a href="/library/explorations/asymptotic-light-geometry" data-astro-cid-ssfzsv2f> Asymptotic Light Geometry </a> </li><li data-astro-cid-ssfzsv2f> <a href="/library/explorations/derivation-complex-unit-sphere" data-astro-cid-ssfzsv2f> Derivation of the Complex Unit Sphere </a> </li><li data-astro-cid-ssfzsv2f> <a href="/library/explorations/geometric-thoughts-guest-algebra" data-astro-cid-ssfzsv2f> Geometric Thoughts with Guest Algebra </a> </li><li data-astro-cid-ssfzsv2f> <a href="/library/explorations/gravitational-wave-signal-processing" data-astro-cid-ssfzsv2f> Gravitational Wave Signal Processing </a> </li><li data-astro-cid-ssfzsv2f> <a href="/library/explorations/imaginary-angles-connection-between" data-astro-cid-ssfzsv2f> Imaginary Angles and the Connection Between </a> </li><li data-astro-cid-ssfzsv2f> <a href="/library/explorations/pascals-tetrahedron-combinatorics-theory" data-astro-cid-ssfzsv2f> Pascal&#39;s Tetrahedron, Combinatorics, and Theory </a> </li><li data-astro-cid-ssfzsv2f> <a href="/library/explorations/strange-attractor-lorenz-system" data-astro-cid-ssfzsv2f> The Strange Attractor of the Lorenz System </a> </li> </ul> </li><li data-astro-cid-ssfzsv2f> <a href="/library/masteries/" class="sidebar-nav-item category-title-like" data-astro-cid-ssfzsv2f> Masteries </a> </li> </ul> </aside>  <script>(function(){const currentPage = "/library/explorations/strange-attractor-lorenz-system/";
 
@@ -36,7 +36,7 @@
       }
     });
   });
-})();</script> <main class="content-area"> <div class="content-wrapper library-content-wrapper book-detail-active">  <article class="book-detail" data-astro-cid-y47snweo> <h1 data-astro-cid-y47snweo>The Strange Attractor of the Lorenz System</h1> <p class="author" data-astro-cid-y47snweo>By: Jason Glowney</p> <p class="summary" data-astro-cid-y47snweo>An article on the strange attractor of the Lorenz system.</p> <div class="pdf-embed-container" data-astro-cid-y47snweo> <div id="pdf-viewer-container" class="pdf-viewer-container" data-astro-cid-v6ggcyrl> <div class="canvas-wrapper" data-astro-cid-v6ggcyrl> <canvas id="pdf-canvas" data-astro-cid-v6ggcyrl></canvas> </div> <div class="pdf-controls" data-astro-cid-v6ggcyrl> <button id="prev-page" data-astro-cid-v6ggcyrl> <span class="icon" data-astro-cid-v6ggcyrl><</span> <span class="text" data-astro-cid-v6ggcyrl>Previous</span> </button> <div id="page-indicator" class="page-indicator" data-astro-cid-v6ggcyrl> <span id="page-num-display" data-astro-cid-v6ggcyrl></span>&nbsp;/&nbsp;<span id="page-count-display" data-astro-cid-v6ggcyrl></span> </div> <div id="page-navigation-group" style="display: none;" data-astro-cid-v6ggcyrl> <div id="page-input-container" class="page-input-container" data-astro-cid-v6ggcyrl> <input type="number" id="page-input" min="1" data-astro-cid-v6ggcyrl> <button id="goto-page-btn" data-astro-cid-v6ggcyrl>Go</button> <span id="page-input-error-icon" class="page-input-error-icon" style="display: none;" data-astro-cid-v6ggcyrl>&#9432;</span> </div> </div> <button id="next-page" data-astro-cid-v6ggcyrl> <span class="icon" data-astro-cid-v6ggcyrl>></span> <span class="text" data-astro-cid-v6ggcyrl>Next</span> </button> <span class="spacer" data-astro-cid-v6ggcyrl></span> <button id="zoom-out" class="zoom-button" data-astro-cid-v6ggcyrl>-</button> <span id="zoom-level" class="zoom-level-display" data-astro-cid-v6ggcyrl>100%</span> <button id="zoom-in" class="zoom-button" data-astro-cid-v6ggcyrl>+</button> <span class="spacer" data-astro-cid-v6ggcyrl></span> <button id="fullscreen-btn" data-astro-cid-v6ggcyrl> <span class="icon" data-astro-cid-v6ggcyrl>&#x2922;</span> <span class="text" style="display: none;" data-astro-cid-v6ggcyrl>Full Screen</span> </button> <!-- Hamburger Menu Button --> <button id="menu-btn" class="menu-button" title="More Options" data-astro-cid-v6ggcyrl> <span class="icon" data-astro-cid-v6ggcyrl>☰</span> </button> </div> <!-- Modal Overlay Menu --> <div id="pdf-menu-overlay" class="pdf-menu-overlay" style="display: none;" data-astro-cid-v6ggcyrl> <div class="pdf-menu-modal" data-astro-cid-v6ggcyrl> <div class="menu-header" data-astro-cid-v6ggcyrl> <h3 class="menu-title" data-astro-cid-v6ggcyrl>📖 PDF Viewer Options</h3> <button id="menu-close-btn" class="menu-close-btn" data-astro-cid-v6ggcyrl>&times;</button> </div> <div class="menu-content" data-astro-cid-v6ggcyrl> <div class="menu-section" data-astro-cid-v6ggcyrl> <h4 class="menu-section-title" data-astro-cid-v6ggcyrl>📖 Reading Mode</h4> <div class="menu-options" data-astro-cid-v6ggcyrl> <label class="menu-option" data-astro-cid-v6ggcyrl> <input type="radio" name="reading-mode" value="read" checked data-astro-cid-v6ggcyrl> <span class="option-icon" data-astro-cid-v6ggcyrl>📖</span> <span class="option-text" data-astro-cid-v6ggcyrl>Read Only</span> </label> <label class="menu-option" data-astro-cid-v6ggcyrl> <input type="radio" name="reading-mode" value="audio" data-astro-cid-v6ggcyrl> <span class="option-icon" data-astro-cid-v6ggcyrl>🔊</span> <span class="option-text" data-astro-cid-v6ggcyrl>Audio Mode</span> </label> </div> </div> <!-- TTS Controls Section --> <div id="tts-menu-section" class="menu-section" style="display: none;" data-astro-cid-v6ggcyrl> <h4 class="menu-section-title" data-astro-cid-v6ggcyrl>🎵 Audio Controls</h4> <div class="menu-controls" data-astro-cid-v6ggcyrl> <div class="control-row" data-astro-cid-v6ggcyrl> <button id="tts-play-pause" class="menu-control-btn" data-astro-cid-v6ggcyrl> <span class="icon" data-astro-cid-v6ggcyrl>▶️</span> <span class="text" data-astro-cid-v6ggcyrl>Play</span> </button> <button id="tts-stop" class="menu-control-btn" data-astro-cid-v6ggcyrl> <span class="icon" data-astro-cid-v6ggcyrl>⏹️</span> <span class="text" data-astro-cid-v6ggcyrl>Stop</span> </button> </div> <div class="control-row" data-astro-cid-v6ggcyrl> <label class="control-label" data-astro-cid-v6ggcyrl>🎤 Voice:</label> <select id="voice-selector" class="menu-select" data-astro-cid-v6ggcyrl> <option value="" data-astro-cid-v6ggcyrl>Default Voice</option> </select> </div> <div class="control-row" data-astro-cid-v6ggcyrl> <label class="control-label" data-astro-cid-v6ggcyrl>⚡ Speed:</label> <select id="speed-selector" class="menu-select" data-astro-cid-v6ggcyrl> <option value="0.6" data-astro-cid-v6ggcyrl>0.6x (Very Slow)</option> <option value="0.75" data-astro-cid-v6ggcyrl>0.75x (Slow)</option> <option value="0.9" selected data-astro-cid-v6ggcyrl>0.9x (Natural)</option> <option value="1.0" data-astro-cid-v6ggcyrl>1.0x (Normal)</option> <option value="1.1" data-astro-cid-v6ggcyrl>1.1x (Slightly Fast)</option> <option value="1.25" data-astro-cid-v6ggcyrl>1.25x (Fast)</option> <option value="1.5" data-astro-cid-v6ggcyrl>1.5x (Very Fast)</option> </select> </div> <div class="control-row" data-astro-cid-v6ggcyrl> <label class="control-label" data-astro-cid-v6ggcyrl>🎵 Pitch:</label> <select id="pitch-selector" class="menu-select" data-astro-cid-v6ggcyrl> <option value="0.8" data-astro-cid-v6ggcyrl>0.8 (Lower)</option> <option value="0.9" data-astro-cid-v6ggcyrl>0.9 (Slightly Lower)</option> <option value="1.0" selected data-astro-cid-v6ggcyrl>1.0 (Normal)</option> <option value="1.1" data-astro-cid-v6ggcyrl>1.1 (Slightly Higher)</option> <option value="1.2" data-astro-cid-v6ggcyrl>1.2 (Higher)</option> </select> </div> <div class="control-row" data-astro-cid-v6ggcyrl> <label class="menu-option" data-astro-cid-v6ggcyrl> <input type="checkbox" id="auto-advance" data-astro-cid-v6ggcyrl> <span class="option-text" data-astro-cid-v6ggcyrl>🔄 Auto-advance pages</span> </label> </div> </div> </div> </div> </div> </div> <!-- TTS Status Display --> <div id="tts-status" class="tts-status" style="display: none;" data-astro-cid-v6ggcyrl> <div class="status-message" data-astro-cid-v6ggcyrl></div> </div> </div> <script>(function(){const pdfUrl = "/pdfs/explorations/glowney_jason_The_Strange_Attractor_of_the_Lorenz_Syst.pdf";
+})();</script> <main class="content-area"> <div class="content-wrapper library-content-wrapper book-detail-active">  <article class="book-detail" data-astro-cid-y47snweo> <h1 data-astro-cid-y47snweo>The Strange Attractor of the Lorenz System</h1> <p class="author" data-astro-cid-y47snweo>By: Jason Glowney</p> <p class="summary" data-astro-cid-y47snweo>An article on the strange attractor of the Lorenz system.</p> <div class="pdf-embed-container" data-astro-cid-y47snweo> <div id="pdf-viewer-container" class="pdf-viewer-container" data-astro-cid-v6ggcyrl> <div class="canvas-wrapper" data-astro-cid-v6ggcyrl> <canvas id="pdf-canvas" data-astro-cid-v6ggcyrl></canvas> </div> <div class="pdf-controls" data-astro-cid-v6ggcyrl> <button id="prev-page" data-astro-cid-v6ggcyrl> <span class="icon" data-astro-cid-v6ggcyrl><</span> <span class="text" data-astro-cid-v6ggcyrl>Previous</span> </button> <div id="page-indicator" class="page-indicator" data-astro-cid-v6ggcyrl> <span id="page-num-display" data-astro-cid-v6ggcyrl></span>&nbsp;/&nbsp;<span id="page-count-display" data-astro-cid-v6ggcyrl></span> </div> <div id="page-navigation-group" style="display: none;" data-astro-cid-v6ggcyrl> <div id="page-input-container" class="page-input-container" data-astro-cid-v6ggcyrl> <input type="number" id="page-input" min="1" data-astro-cid-v6ggcyrl> <button id="goto-page-btn" data-astro-cid-v6ggcyrl>Go</button> <span id="page-input-error-icon" class="page-input-error-icon" style="display: none;" data-astro-cid-v6ggcyrl>&#9432;</span> </div> </div> <button id="next-page" data-astro-cid-v6ggcyrl> <span class="icon" data-astro-cid-v6ggcyrl>></span> <span class="text" data-astro-cid-v6ggcyrl>Next</span> </button> <span class="spacer" data-astro-cid-v6ggcyrl></span> <button id="zoom-out" class="zoom-button" data-astro-cid-v6ggcyrl>-</button> <span id="zoom-level" class="zoom-level-display" data-astro-cid-v6ggcyrl>100%</span> <button id="zoom-in" class="zoom-button" data-astro-cid-v6ggcyrl>+</button> <span class="spacer" data-astro-cid-v6ggcyrl></span> <button id="fullscreen-btn" data-astro-cid-v6ggcyrl> <span class="icon" data-astro-cid-v6ggcyrl>&#x2922;</span> <span class="text" style="display: none;" data-astro-cid-v6ggcyrl>Full Screen</span> </button> <!-- Hamburger Menu Button --> <button id="menu-btn" class="menu-button" title="More Options" data-astro-cid-v6ggcyrl> <span class="icon" data-astro-cid-v6ggcyrl>☰</span> </button> </div> <!-- Modal Overlay Menu --> <div id="pdf-menu-overlay" class="pdf-menu-overlay" style="display: none;" data-astro-cid-v6ggcyrl> <div class="pdf-menu-modal" data-astro-cid-v6ggcyrl> <div class="menu-header" data-astro-cid-v6ggcyrl> <h3 class="menu-title" data-astro-cid-v6ggcyrl>📖 PDF Viewer Options</h3> <button id="menu-close-btn" class="menu-close-btn" data-astro-cid-v6ggcyrl>&times;</button> </div> <div class="menu-content" data-astro-cid-v6ggcyrl> <div class="menu-section" data-astro-cid-v6ggcyrl> <h4 class="menu-section-title" data-astro-cid-v6ggcyrl>📚 How to Use</h4> <div class="menu-info" data-astro-cid-v6ggcyrl> <p data-astro-cid-v6ggcyrl>Use the controls below to navigate through the PDF document.</p> <ul data-astro-cid-v6ggcyrl> <li data-astro-cid-v6ggcyrl>🖱️ Use Previous/Next buttons to navigate pages</li> <li data-astro-cid-v6ggcyrl>🔍 Use +/- buttons to zoom in and out</li> <li data-astro-cid-v6ggcyrl>📱 Click page number to jump to specific page</li> <li data-astro-cid-v6ggcyrl>⛶ Use fullscreen button for immersive reading</li> </ul> </div> </div> </div> </div> </div> </div> <script>(function(){const pdfUrl = "/pdfs/explorations/glowney_jason_The_Strange_Attractor_of_the_Lorenz_Syst.pdf";
 const pdfjsWorkerSrc = "/pdf.worker.min.mjs";
 
   // Global variables
@@ -44,9 +44,6 @@ const pdfjsWorkerSrc = "/pdf.worker.min.mjs";
   let currentPageNum = 1;
   let currentScale = 1.5;
   let totalPages = 0;
-  let ttsManager = null;
-  let currentPageText = '';
-  let autoAdvance = false;
   let isInitialized = false;
 
   // Cleanup function to prevent multiple initializations
@@ -57,11 +54,10 @@ const pdfjsWorkerSrc = "/pdf.worker.min.mjs";
     }
     currentPageNum = 1;
     totalPages = 0;
-    currentPageText = '';
     isInitialized = false;
   }
 
-  // Initialize PDF and TTS
+  // Initialize PDF viewer
   async function initializePdfViewer() {
     if (isInitialized) {
       console.log('PDF viewer already initialized, skipping...');
@@ -79,9 +75,6 @@ const pdfjsWorkerSrc = "/pdf.worker.min.mjs";
       
       // Initialize PDF
       await loadPdf();
-      
-      // Initialize TTS
-      await initializeTTS();
       
       // Setup event listeners
       setupEventListeners();
@@ -213,372 +206,6 @@ const pdfjsWorkerSrc = "/pdf.worker.min.mjs";
     }
   }
 
-  async function initializeTTS() {
-    try {
-      // Check if SimpleTtsManager is already loaded
-      if (typeof window.SimpleTtsManager !== 'undefined') {
-        console.log('SimpleTtsManager already loaded, using existing instance');
-        try {
-          ttsManager = new SimpleTtsManager();
-          const success = await ttsManager.initialize();
-          
-          if (success || ttsManager.isInitialized) {
-            setupTTSControls();
-            showTTSControls();
-          } else {
-            console.warn('TTS initialization returned false, showing unavailable');
-            showTTSUnavailable('unavailable');
-          }
-        } catch (error) {
-          console.error('Error creating TTS manager:', error);
-          showTTSUnavailable('unavailable');
-        }
-        return;
-      }
-
-      // Load SimpleTtsManager script only if not already loaded
-      const existingScript = document.querySelector('script[src="/SimpleTtsManager.js"]');
-      if (existingScript) {
-        console.log('SimpleTtsManager script already exists, waiting for load...');
-        // Wait for existing script to load
-        if (typeof window.SimpleTtsManager !== 'undefined') {
-          try {
-            ttsManager = new SimpleTtsManager();
-            const success = await ttsManager.initialize();
-            
-            if (success || ttsManager.isInitialized) {
-              setupTTSControls();
-              showTTSControls();
-            } else {
-              console.warn('TTS initialization returned false, showing unavailable');
-              showTTSUnavailable('unavailable');
-            }
-          } catch (error) {
-            console.error('Error with existing TTS script:', error);
-            showTTSUnavailable('unavailable');
-          }
-        }
-        return;
-      }
-
-      console.log('Loading SimpleTtsManager script...');
-      const script = document.createElement('script');
-      script.src = '/SimpleTtsManager.js';
-      script.onload = async () => {
-        console.log('SimpleTtsManager script loaded successfully');
-        try {
-          ttsManager = new SimpleTtsManager();
-          const success = await ttsManager.initialize();
-          
-          if (success || ttsManager.isInitialized) {
-            setupTTSControls();
-            showTTSControls();
-          } else {
-            console.warn('TTS initialization returned false, showing unavailable');
-            showTTSUnavailable('unavailable');
-          }
-        } catch (error) {
-          console.error('Error initializing TTS after script load:', error);
-          showTTSUnavailable('unavailable');
-        }
-      };
-      script.onerror = () => {
-        console.error('Failed to load SimpleTtsManager script');
-        showTTSUnavailable('unavailable');
-      };
-      document.head.appendChild(script);
-      
-    } catch (error) {
-      console.error('TTS initialization failed:', error);
-      showTTSUnavailable('unavailable');
-    }
-  }
-
-  function setupTTSControls() {
-    // Check if TTS manager is properly initialized
-    if (!ttsManager || !ttsManager.isInitialized) {
-      console.error('TTS manager not properly initialized');
-      showTTSUnavailable('unavailable');
-      return;
-    }
-
-    // Populate voice selector with quality-ranked voices
-    const voiceSelector = document.getElementById('voice-selector');
-    const allVoices = ttsManager.getVoices();
-    
-    voiceSelector.innerHTML = '<option value="">Best Available Voice</option>';
-    
-    // Check if getBestVoices method exists (for backward compatibility)
-    let bestVoices = [];
-    if (typeof ttsManager.getBestVoices === 'function') {
-      bestVoices = ttsManager.getBestVoices();
-    }
-    
-    // Add best voices first if available
-    if (bestVoices.length > 0) {
-      const optgroup = document.createElement('optgroup');
-      optgroup.label = 'Recommended Voices';
-      bestVoices.slice(0, 5).forEach((voice, index) => {
-        const option = document.createElement('option');
-        option.value = allVoices.indexOf(voice);
-        option.textContent = `${voice.name} (${voice.lang})`;
-        optgroup.appendChild(option);
-      });
-      voiceSelector.appendChild(optgroup);
-    }
-    
-    // Add all voices (or remaining voices if we have best voices)
-    const remainingVoices = bestVoices.length > 0
-      ? allVoices.filter(voice => !bestVoices.slice(0, 5).includes(voice))
-      : allVoices;
-      
-    if (remainingVoices.length > 0) {
-      const optgroup = document.createElement('optgroup');
-      optgroup.label = bestVoices.length > 0 ? 'Other Voices' : 'Available Voices';
-      remainingVoices.forEach((voice, index) => {
-        const option = document.createElement('option');
-        option.value = allVoices.indexOf(voice);
-        option.textContent = `${voice.name} (${voice.lang})`;
-        optgroup.appendChild(option);
-      });
-      voiceSelector.appendChild(optgroup);
-    }
-
-    // Setup event listeners
-    document.getElementById('tts-play-pause').addEventListener('click', toggleTTS);
-    document.getElementById('tts-stop').addEventListener('click', stopTTS);
-    document.getElementById('auto-advance').addEventListener('change', (e) => {
-      autoAdvance = e.target.checked;
-    });
-
-    // TTS status updates
-    ttsManager.onStatusChange = updateTTSStatus;
-    ttsManager.onEnd = handleTTSEnd;
-    
-    console.log('TTS controls setup complete with', allVoices.length, 'voices available');
-  }
-
-  async function toggleTTS() {
-    if (!ttsManager) return;
-
-    const status = ttsManager.getStatus();
-    
-    if (status.isPlaying && !status.isPaused) {
-      ttsManager.pause();
-    } else if (status.isPaused) {
-      ttsManager.resume();
-    } else {
-      await startTTS();
-    }
-  }
-
-  async function startTTS() {
-    if (!currentPageText) {
-      currentPageText = await extractPageText(currentPageNum);
-    }
-
-    if (!currentPageText) {
-      showTTSStatus('No text found on this page', 'warning');
-      return;
-    }
-
-    try {
-      const voiceSelector = document.getElementById('voice-selector');
-      const speedSelector = document.getElementById('speed-selector');
-      const pitchSelector = document.getElementById('pitch-selector');
-      
-      const selectedVoiceIndex = voiceSelector.value;
-      const selectedVoice = selectedVoiceIndex ? ttsManager.getVoices()[selectedVoiceIndex] : null;
-      const rate = parseFloat(speedSelector.value) || 0.9;
-      const pitch = parseFloat(pitchSelector.value) || 1.0;
-
-      // Use chunked speech for better flow
-      await speakInChunks(currentPageText, {
-        voice: selectedVoice,
-        rate: rate,
-        pitch: pitch
-      });
-
-    } catch (error) {
-      console.error('TTS failed:', error);
-      
-      // Check if this is a synthesis-failed error and show appropriate message
-      if (error.message.includes('synthesis-failed')) {
-        showTTSUnavailable('synthesis-failed');
-      } else {
-        showTTSStatus(`Speech failed: ${error.message}`, 'error');
-      }
-    }
-  }
-
-  // Text Chunking for Better Speech
-  function chunkTextForTTS(text, maxLength = 150) {
-    // Split by sentences for natural pauses
-    const sentences = text.match(/[^\.!?]+[\.!?]+/g) || [text];
-    const chunks = [];
-    let currentChunk = '';
-    
-    for (const sentence of sentences) {
-      const trimmedSentence = sentence.trim();
-      if (currentChunk.length + trimmedSentence.length <= maxLength) {
-        currentChunk += (currentChunk ? ' ' : '') + trimmedSentence;
-      } else {
-        if (currentChunk) chunks.push(currentChunk.trim());
-        currentChunk = trimmedSentence;
-      }
-    }
-    
-    if (currentChunk) chunks.push(currentChunk.trim());
-    
-    // Filter out empty chunks
-    return chunks.filter(chunk => chunk.length > 0);
-  }
-
-  async function speakInChunks(text, options = {}) {
-    const chunks = chunkTextForTTS(text);
-    
-    for (let i = 0; i < chunks.length; i++) {
-      // Check if TTS was stopped
-      if (!ttsManager.getStatus().isPlaying && i > 0) {
-        break;
-      }
-      
-      await ttsManager.speak(chunks[i], options);
-      
-      // Reduced pause between chunks for smoother flow
-      if (i < chunks.length - 1) {
-        await new Promise(resolve => setTimeout(resolve, 100));
-      }
-    }
-  }
-
-  function stopTTS() {
-    if (ttsManager) {
-      ttsManager.stop();
-    }
-  }
-
-  async function extractPageText(pageNum) {
-    if (!currentPdfDoc) return '';
-    
-    try {
-      const page = await currentPdfDoc.getPage(pageNum);
-      const textContent = await page.getTextContent();
-      
-      return textContent.items
-        .filter(item => item.str.trim())
-        .map(item => item.str)
-        .join(' ')
-        .replace(/\s+/g, ' ')
-        .trim();
-        
-    } catch (error) {
-      console.error('Text extraction failed:', error);
-      return '';
-    }
-  }
-
-  function updateTTSStatus(status) {
-    const playPauseBtn = document.getElementById('tts-play-pause');
-    if (!playPauseBtn) return;
-
-    if (status.isPlaying && !status.isPaused) {
-      playPauseBtn.innerHTML = '<span class="icon">⏸️</span><span class="text">Pause</span>';
-    } else if (status.isPaused) {
-      playPauseBtn.innerHTML = '<span class="icon">▶️</span><span class="text">Resume</span>';
-    } else {
-      playPauseBtn.innerHTML = '<span class="icon">▶️</span><span class="text">Play</span>';
-    }
-  }
-
-  function handleTTSEnd() {
-    if (autoAdvance && currentPageNum < totalPages) {
-      setTimeout(async () => {
-        await renderPage(currentPageNum + 1);
-        currentPageText = ''; // Reset for new page
-        await startTTS(); // Auto-start on new page
-      }, 1000);
-    }
-  }
-
-  function showTTSControls() {
-    const ttsSection = document.getElementById('tts-menu-section');
-    if (ttsSection) {
-      ttsSection.style.display = 'block';
-    }
-  }
-
-  function showTTSUnavailable(errorType = 'unavailable') {
-    const statusDiv = document.getElementById('tts-status');
-    if (statusDiv) {
-      const userAgent = navigator.userAgent.toLowerCase();
-      const platform = navigator.platform.toLowerCase();
-      let message = '📖 Text-to-speech not available.';
-      
-      if (userAgent.includes('linux')) {
-        if (errorType === 'synthesis-failed') {
-          message = `
-            🔊 Text-to-speech failed on this Linux system.<br>
-            <strong>Try these solutions:</strong><br>
-            • <strong>Use Firefox instead of Chrome/Brave</strong> (works much better on Linux)<br>
-            • Install speech-dispatcher: <code>sudo apt install speech-dispatcher</code><br>
-            • Restart your browser after installing speech-dispatcher<br>
-            • Use <a href="https://ttsreader.com" target="_blank">TTSReader.com</a> as alternative<br>
-            <em>Note: Firefox typically has better TTS support on Linux than Chrome/Brave.</em>
-          `;
-        } else {
-          message = `
-            📖 Text-to-speech may not be available on this Linux system.<br>
-            <strong>Try these solutions:</strong><br>
-            • <strong>Use Firefox instead of Chrome/Brave</strong> (works much better on Linux)<br>
-            • Install speech-dispatcher: <code>sudo apt install speech-dispatcher</code><br>
-            • Use <a href="https://ttsreader.com" target="_blank">TTSReader.com</a> as alternative<br>
-            <em>Note: Voice quality will be much better on Mac, Windows, or Android devices.</em>
-          `;
-        }
-      } else if (userAgent.includes('mac') || platform.includes('mac')) {
-        message = `
-          📖 Text-to-speech not available.<br>
-          <strong>Mac usually has excellent voice quality!</strong><br>
-          • Check Safari or Chrome browser settings<br>
-          • Try <a href="https://ttsreader.com" target="_blank">TTSReader.com</a> as alternative
-        `;
-      } else if (userAgent.includes('win') || platform.includes('win')) {
-        message = `
-          📖 Text-to-speech not available.<br>
-          <strong>Windows has good voice quality!</strong><br>
-          • Check browser permissions for microphone/speech<br>
-          • Try <a href="https://ttsreader.com" target="_blank">TTSReader.com</a> as alternative
-        `;
-      } else if (userAgent.includes('android')) {
-        message = `
-          📖 Text-to-speech not available.<br>
-          <strong>Android usually has good Google voices!</strong><br>
-          • Check Chrome browser settings<br>
-          • Try <a href="https://ttsreader.com" target="_blank">TTSReader.com</a> as alternative
-        `;
-      } else {
-        message += ` <a href="https://ttsreader.com" target="_blank">Try TTSReader.com</a>`;
-      }
-      
-      statusDiv.innerHTML = `<div class="status-message warning">${message}</div>`;
-      statusDiv.style.display = 'block';
-    }
-  }
-
-  function showTTSStatus(message, type = 'info') {
-    const statusDiv = document.getElementById('tts-status');
-    if (statusDiv) {
-      statusDiv.innerHTML = `<div class="status-message ${type}">${message}</div>`;
-      statusDiv.style.display = 'block';
-      
-      if (type !== 'error') {
-        setTimeout(() => {
-          statusDiv.style.display = 'none';
-        }, 3000);
-      }
-    }
-  }
 
   // PDF Rendering Functions
   async function renderPage(num, scale = null) {
@@ -641,7 +268,6 @@ const pdfjsWorkerSrc = "/pdf.worker.min.mjs";
       // Update state
       currentPageNum = num;
       currentScale = useScale;
-      currentPageText = ''; // Reset text for new page
       
       // Update UI
       const pageNumElement = document.getElementById('page-num-display');
@@ -797,9 +423,6 @@ const pdfjsWorkerSrc = "/pdf.worker.min.mjs";
     // Menu functionality
     setupMenuControls();
     
-    // Reading mode controls
-    setupReadingModeControls();
-    
     // Keyboard shortcuts
     setupKeyboardShortcuts();
   }
@@ -889,28 +512,6 @@ const pdfjsWorkerSrc = "/pdf.worker.min.mjs";
     }
   }
 
-  function setupReadingModeControls() {
-    const readingModeInputs = document.querySelectorAll('input[name="reading-mode"]');
-    const ttsMenuSection = document.getElementById('tts-menu-section');
-
-    readingModeInputs.forEach(input => {
-      input.addEventListener('change', (e) => {
-        const mode = e.target.value;
-        
-        if (mode === 'audio') {
-          if (ttsMenuSection) {
-            ttsMenuSection.style.display = 'block';
-          }
-        } else {
-          if (ttsMenuSection) {
-            ttsMenuSection.style.display = 'none';
-          }
-          // Stop TTS if switching away from audio mode
-          stopTTS();
-        }
-      });
-    });
-  }
 
   function setupKeyboardShortcuts() {
     document.addEventListener('keydown', (event) => {
@@ -921,10 +522,6 @@ const pdfjsWorkerSrc = "/pdf.worker.min.mjs";
 
       if (event.ctrlKey || event.metaKey) {
         switch (event.key) {
-          case ' ': // Ctrl/Cmd + Space - Toggle TTS
-            event.preventDefault();
-            toggleTTS();
-            break;
           case 'ArrowRight': // Ctrl/Cmd + Right - Next page
             event.preventDefault();
             if (currentPageNum < totalPages) {
