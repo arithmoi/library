@@ -81,6 +81,14 @@
       "author": "Arithmoi Foundation",
       "summary": "Analysis is the foundation of modern mathematics.",
       "pdfUrl": "/pdfs/foundations/analysis.pdf"
+    },
+    {
+      "type": "article",
+      "title": "Bell's Theorem and the Mathematical Universe",
+      "slug": "bells-theorem-and-the-mathematical-universe",
+      "author": "Arithmoi Foundation",
+      "summary": "An introduction to Bell's theorem in the context of a mathematical universe",
+      "pdfUrl": "/pdfs/foundations/bells_theorem.pdf"
     }
   ],
   "explorations": [
