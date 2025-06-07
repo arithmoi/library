@@ -58,7 +58,7 @@ const masteries = Array.isArray(libraryContent.masteries) ? libraryContent.maste
   .page-container {
     max-width: 900px;
     margin: 0 auto 2rem auto; /* Top margin set to 0 */
-    padding: 0 1rem 1rem 1rem; /* Top padding set to 0 */ 
+    padding: 0 1rem 1rem 1rem; /* Top padding set to 0 */
   }
 
   .page-header {
@@ -68,19 +68,17 @@ const masteries = Array.isArray(libraryContent.masteries) ? libraryContent.maste
 
   .page-header h1 {
     font-size: 2.4em; /* Consistent with other category pages */
-    color: #222; /* Consistent with other category pages */
+    color: var(--text-color);
     margin-bottom: 1.5rem; /* Consistent with other category pages */
     font-weight: 600; /* Retained from original masteries style as it's more specific */
-    /* text-align: center; is inherited from .page-header */
   }
 
   .page-intro {
     font-size: 1.15em; /* Consistent with other category pages */
-    color: #444; /* Consistent with other category pages */
+    color: var(--text-secondary);
     line-height: 1.7; /* Consistent with other category pages */
     max-width: 75ch; /* Consistent with other category pages for optimal readability */
     margin: 0 auto 1.5rem auto; /* Default margin for intro paragraphs */
-    /* text-align: center; is inherited from .page-header */
   }
 
   .page-header > p.page-intro:nth-of-type(2) { /* Target the second intro paragraph specifically */
@@ -89,16 +87,16 @@ const masteries = Array.isArray(libraryContent.masteries) ? libraryContent.maste
 
   .book-feature-container {
     padding: 2rem;
-    background-color: #fdfdfd;
+    background-color: var(--bg-color);
     border-radius: 8px;
-    box-shadow: 0 6px 12px rgba(0,0,0,0.08);
-    border: 1px solid #eee;
+    box-shadow: 0 6px 12px var(--shadow-color);
+    border: 1px solid var(--border-color);
     margin-bottom: 2rem; /* Added margin for separation if other masteries are listed */
   }
 
   .book-feature-container h2 {
     font-size: 2em; 
-    color: #333;
+    color: var(--text-color);
     margin-bottom: 0.2em;
     text-align: center;
     font-weight: 500;
@@ -106,7 +104,7 @@ const masteries = Array.isArray(libraryContent.masteries) ? libraryContent.maste
 
   .book-subtitle {
     font-size: 1.1em;
-    color: #666;
+    color: var(--text-secondary);
     text-align: center;
     margin-bottom: 2em;
     font-style: italic;
@@ -114,10 +112,10 @@ const masteries = Array.isArray(libraryContent.masteries) ? libraryContent.maste
 
   .book-description h3, .book-cta h3 {
     font-size: 1.4em;
-    color: #333;
+    color: var(--text-color);
     margin-top: 1.5em;
     margin-bottom: 0.7em;
-    border-bottom: 1px solid #eaeaea;
+    border-bottom: 1px solid var(--border-color);
     padding-bottom: 0.4em;
     font-weight: 500;
   }
@@ -125,7 +123,7 @@ const masteries = Array.isArray(libraryContent.masteries) ? libraryContent.maste
   .book-description p {
     font-size: 1.05em;
     line-height: 1.75;
-    color: #444;
+    color: var(--text-secondary);
     text-align: justify;
     margin-bottom: 1em;
   }
@@ -133,42 +131,42 @@ const masteries = Array.isArray(libraryContent.masteries) ? libraryContent.maste
   .book-cta {
     margin-top: 2em;
     padding-top: 1.5em;
-    border-top: 1px solid #eee;
+    border-top: 1px solid var(--border-color);
     text-align: center;
   }
   
   .book-cta p {
     font-size: 1.1em;
-    color: #555;
+    color: var(--text-secondary);
     margin-bottom: 1.2em;
   }
 
   .cta-button {
     display: inline-block;
     padding: 12px 25px; 
-    background-color: #007bff; 
-    color: white;
+    background-color: var(--link-color);
+    color: white; /* Retained: global.css handles dark theme text color for .cta-button */
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
     font-size: 1.1em; 
     transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
     border: none;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px var(--shadow-color);
   }
 
   .cta-button:hover,
   .cta-button:focus {
-    background-color: #0056b3; 
+    background-color: var(--link-hover);
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 8px var(--shadow-color);
     outline: none;
   }
 
   /* Styles for listing additional masteries (from generic category page) */
   .additional-masteries h2 {
     font-size: 2em;
-    color: #333;
+    color: var(--text-color);
     margin-top: 2rem;
     margin-bottom: 1.5rem;
     text-align: center;
@@ -182,39 +180,39 @@ const masteries = Array.isArray(libraryContent.masteries) ? libraryContent.maste
   }
   .item-card {
     display: block;
-    background-color: #fff;
-    border: 1px solid #e0e0e0;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
     border-radius: 8px;
     padding: 1.5rem;
     text-decoration: none;
-    color: inherit;
+    color: inherit; /* Inherits text color from parent (should be var(--text-color)) */
     transition: box-shadow 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 5px var(--shadow-color);
   }
   .item-card:hover {
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px var(--shadow-color);
     transform: translateY(-5px);
   }
   .item-card h4 {
     margin-top: 0;
     margin-bottom: 0.5rem;
     font-size: 1.3em;
-    color: #007bff;
+    color: var(--link-color);
   }
   .item-card .author {
     font-size: 0.9em;
-    color: #6c757d;
+    color: var(--text-secondary);
     margin-bottom: 0.75rem;
   }
   .item-card .summary {
     font-size: 0.95em;
     line-height: 1.5;
     margin-bottom: 1rem;
-    color: #495057;
+    color: var(--text-secondary);
   }
   .read-more {
     font-weight: 600;
-    color: #007bff;
+    color: var(--link-color);
     font-size: 0.9em;
   }
 </style>
