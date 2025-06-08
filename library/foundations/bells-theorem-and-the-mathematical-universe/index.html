@@ -278,6 +278,13 @@ const pdfjsWorkerSrc = "/pdf.worker.min.mjs";
         console.warn('Page number element not found during render');
       }
 
+      // Scroll canvas-wrapper to top of the page
+      if (canvasWrapper) {
+        canvasWrapper.scrollTop = 0;
+      } else {
+        console.warn('canvasWrapper not found, unable to scroll to top');
+      }
+
       const prevButton = document.getElementById('prev-page');
       const nextButton = document.getElementById('next-page');
       if (prevButton) prevButton.disabled = num <= 1;
