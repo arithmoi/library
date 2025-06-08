@@ -26,22 +26,6 @@
     },
     {
       "type": "article",
-      "title": "Foundations for Mathematical Reality",
-      "slug": "foundations-for-mathematical-reality",
-      "author": "Arithmoi Foundation",
-      "summary": "Mathematics is the foundation of reality.",
-      "pdfUrl": "/pdfs/insights/foundation.pdf"
-    },
-    {
-      "type": "article",
-      "title": "Pondering on the God Equation",
-      "slug": "pondering-on-the-god-equation",
-      "author": "Arithmoi Foundation",
-      "summary": "There is an equation so sublime and elegant, it is said to be the God Equation.",
-      "pdfUrl": "/pdfs/insights/god_equation.pdf"
-    },
-    {
-      "type": "article",
       "title": "The Mystical Dance of Symmetry and Anti-Symmetry",
       "slug": "mystical-dance-of-symmetry-and-anti-symmetry",
       "author": "Arithmoi Foundation",
@@ -58,22 +42,70 @@
     },
     {
       "type": "article",
+      "title": "The Power of Mathematics and Numbers",
+      "slug": "the-power-of-mathematics-and-numbers",
+      "author": "Arithmoi Foundation",
+      "summary": "The power of numbers can be unlocked with the right mindset and approach.",
+      "pdfUrl": "/pdfs/insights/3_6_9_guide.pdf"
+    },
+    {
+      "type": "article",
+      "title": "The Alchemy of Symmetry and Anti-Symmetry",
+      "slug": "the-alchemy-of-symmetry-and-antisymmetry",
+      "author": "Arithmoi Foundation",
+      "summary": "An exploration of the fundamental duality between symmetry and anti-symmetry in mathematics, from basic number theory to quantum mechanics and the divine structure of reality.",
+      "pdfUrl": "/pdfs/insights/alchemy.pdf"
+    },
+    {
+      "type": "article",
+      "title": "The Bridge of Thought",
+      "slug": "the-bridge-of-thought",
+      "author": "Arithmoi Foundation",
+      "summary": "There is a way to understand the universe thanks to mathematics.",
+      "pdfUrl": "/pdfs/insights/bridge.pdf"
+    },
+    {
+      "type": "article",
+      "title": "Foundations for Mathematical Reality",
+      "slug": "foundations-for-mathematical-reality",
+      "author": "Arithmoi Foundation",
+      "summary": "An exploration of mathematics as the fundamental structure of reality, introducing group theory and the elegant foundations that underlie number theory, symmetry, and the mathematical nature of existence.",
+      "pdfUrl": "/pdfs/insights/foundation.pdf"
+    },
+    {
+      "type": "article",
+      "title": "Pondering on the God Equation",
+      "slug": "pondering-on-the-god-equation",
+      "author": "Arithmoi Foundation",
+      "summary": "An exploration of Euler's formula as the fundamental equation of existence, examining how this elegant mathematical relationship encodes the logic of reality itself through ontological mathematics.",
+      "pdfUrl": "/pdfs/insights/god_equation.pdf"
+    },
+    {
+      "type": "article",
+      "title": "The Mystical Dance of Symmetry and Anti-Symmetry",
+      "slug": "the-mystical-dance-of-symmetry-and-antisymmetry",
+      "author": "Arithmoi Foundation",
+      "summary": "An exploration of the fundamental duality between symmetry and anti-symmetry through Lie algebras, revealing how these mathematical structures govern continuous transformations and the deep patterns of reality.",
+      "pdfUrl": "/pdfs/insights/lie_algebra.pdf"
+    },
+    {
+      "type": "article",
       "title": "Ontological Mathematics and Eastern Philosophy",
       "slug": "ontological-mathematics-and-eastern-philosophy",
       "author": "Arithmoi Foundation",
       "summary": "The seers and philosophers of old have long known the power of numbers.",
       "pdfUrl": "/pdfs/insights/math_east_vision.pdf"
+    },
+    {
+      "type": "article",
+      "title": "The Mathematical and Medical Alliance",
+      "slug": "the-mathematical-and-medical-alliance",
+      "author": "Arithmoi Foundation",
+      "summary": "A proposal for alliance between mathematics and medicine, exploring how advanced mathematical tools can enhance medical treatments and broaden understanding of the human experience through unified knowledge.",
+      "pdfUrl": "/pdfs/insights/math-medi-alliance.pdf"
     }
   ],
   "foundations": [
-    {
-      "type": "article",
-      "title": "Essential Calculus Theorems",
-      "slug": "essential-calculus-theorems",
-      "author": "Arithmoi Foundation",
-      "summary": "Calculus theorems are essential to a strong mathematical education.",
-      "pdfUrl": "/pdfs/foundations/calculus_theorems.pdf"
-    },
     {
       "type": "article",
       "title": "Real and Complex Mathematical Analysis",
@@ -87,8 +119,24 @@
       "title": "Bell's Theorem and the Mathematical Universe",
       "slug": "bells-theorem-and-the-mathematical-universe",
       "author": "Arithmoi Foundation",
-      "summary": "An introduction to Bell's theorem in the context of a mathematical universe",
+      "summary": "A comprehensive exploration of Bell's Theorem, demonstrating the conflict between local realism and quantum mechanics, with mathematical foundations and philosophical implications for the nature of reality.",
       "pdfUrl": "/pdfs/foundations/bells_theorem.pdf"
+    },
+    {
+      "type": "article",
+      "title": "Essential Calculus Theorems",
+      "slug": "essential-calculus-theorems",
+      "author": "Arithmoi Foundation",
+      "summary": "Calculus theorems are essential to a strong mathematical education.",
+      "pdfUrl": "/pdfs/foundations/calculus_theorems.pdf"
+    },
+    {
+      "type": "article",
+      "title": "Prime Numbers as a Way to Sublime Mathematics",
+      "slug": "prime-numbers-as-a-way-to-sublime-mathematics",
+      "author": "Arithmoi Foundation",
+      "summary": "An introduction to prime numbers allowing readers to develop a strong intuition of the mathematical objects.",
+      "pdfUrl": "/pdfs/foundations/prime_numbers.pdf"
     }
   ],
   "explorations": [
