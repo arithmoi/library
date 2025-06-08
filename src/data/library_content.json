@@ -2,51 +2,27 @@
   "insights": [
     {
       "type": "article",
-      "title": "The Power of Mathematics and Numbers",
-      "slug": "power-of-mathematics-and-numbers",
+      "title": "Foundations for Mathematical Reality",
+      "slug": "foundations-for-mathematical-reality",
       "author": "Arithmoi Foundation",
-      "summary": "The power of numbers can be unlocked with the right mindset and approach.",
-      "pdfUrl": "/pdfs/insights/3_6_9_guide.pdf"
+      "summary": "An exploration of mathematics as the fundamental structure of reality, introducing group theory and the elegant foundations that underlie number theory, symmetry, and the mathematical nature of existence.",
+      "pdfUrl": "/pdfs/insights/foundation.pdf"
     },
     {
       "type": "article",
-      "title": "The Alchemy of Symmetry and Anti-Symmetry",
-      "slug": "alchemy-of-symmetry-and-anti-symmetry",
+      "title": "Ontological Mathematics and Eastern Philosophy",
+      "slug": "ontological-mathematics-and-eastern-philosophy",
       "author": "Arithmoi Foundation",
-      "summary": "The doors of knowledge can lead you to a place of infinite power.",
-      "pdfUrl": "/pdfs/insights/alchemy.pdf"
+      "summary": "The seers and philosophers of old have long known the power of numbers.",
+      "pdfUrl": "/pdfs/insights/math_east_vision.pdf"
     },
     {
       "type": "article",
-      "title": "The Bridge of Thought",
-      "slug": "bridge-of-thought",
+      "title": "Pondering on the God Equation",
+      "slug": "pondering-on-the-god-equation",
       "author": "Arithmoi Foundation",
-      "summary": "There is a way to understand the universe thanks to mathematics.",
-      "pdfUrl": "/pdfs/insights/bridge.pdf"
-    },
-    {
-      "type": "article",
-      "title": "The Mystical Dance of Symmetry and Anti-Symmetry",
-      "slug": "mystical-dance-of-symmetry-and-anti-symmetry",
-      "author": "Arithmoi Foundation",
-      "summary": "Dancing numbers in the realm of symmetry and anti-symmetry.",
-      "pdfUrl": "/pdfs/insights/lie_algebra.pdf"
-    },
-    {
-      "type": "article",
-      "title": "The Mathematical and Medical Alliance",
-      "slug": "mathematical-and-medical-alliance",
-      "author": "Arithmoi Foundation",
-      "summary": "The medical and mathematical fields can grow together.",
-      "pdfUrl": "/pdfs/insights/math-medi-alliance.pdf"
-    },
-    {
-      "type": "article",
-      "title": "The Power of Mathematics and Numbers",
-      "slug": "the-power-of-mathematics-and-numbers",
-      "author": "Arithmoi Foundation",
-      "summary": "The power of numbers can be unlocked with the right mindset and approach.",
-      "pdfUrl": "/pdfs/insights/3_6_9_guide.pdf"
+      "summary": "An exploration of Euler's formula as the fundamental equation of existence, examining how this elegant mathematical relationship encodes the logic of reality itself through ontological mathematics.",
+      "pdfUrl": "/pdfs/insights/god_equation.pdf"
     },
     {
       "type": "article",
@@ -66,19 +42,11 @@
     },
     {
       "type": "article",
-      "title": "Foundations for Mathematical Reality",
-      "slug": "foundations-for-mathematical-reality",
+      "title": "The Mathematical and Medical Alliance",
+      "slug": "mathematical-and-medical-alliance",
       "author": "Arithmoi Foundation",
-      "summary": "An exploration of mathematics as the fundamental structure of reality, introducing group theory and the elegant foundations that underlie number theory, symmetry, and the mathematical nature of existence.",
-      "pdfUrl": "/pdfs/insights/foundation.pdf"
-    },
-    {
-      "type": "article",
-      "title": "Pondering on the God Equation",
-      "slug": "pondering-on-the-god-equation",
-      "author": "Arithmoi Foundation",
-      "summary": "An exploration of Euler's formula as the fundamental equation of existence, examining how this elegant mathematical relationship encodes the logic of reality itself through ontological mathematics.",
-      "pdfUrl": "/pdfs/insights/god_equation.pdf"
+      "summary": "The medical and mathematical fields can grow together.",
+      "pdfUrl": "/pdfs/insights/math-medi-alliance.pdf"
     },
     {
       "type": "article",
@@ -90,30 +58,14 @@
     },
     {
       "type": "article",
-      "title": "Ontological Mathematics and Eastern Philosophy",
-      "slug": "ontological-mathematics-and-eastern-philosophy",
+      "title": "The Power of Mathematics and Numbers",
+      "slug": "power-of-mathematics-and-numbers",
       "author": "Arithmoi Foundation",
-      "summary": "The seers and philosophers of old have long known the power of numbers.",
-      "pdfUrl": "/pdfs/insights/math_east_vision.pdf"
-    },
-    {
-      "type": "article",
-      "title": "The Mathematical and Medical Alliance",
-      "slug": "the-mathematical-and-medical-alliance",
-      "author": "Arithmoi Foundation",
-      "summary": "A proposal for alliance between mathematics and medicine, exploring how advanced mathematical tools can enhance medical treatments and broaden understanding of the human experience through unified knowledge.",
-      "pdfUrl": "/pdfs/insights/math-medi-alliance.pdf"
+      "summary": "The power of numbers can be unlocked with the right mindset and approach.",
+      "pdfUrl": "/pdfs/insights/3_6_9_guide.pdf"
     }
   ],
   "foundations": [
-    {
-      "type": "article",
-      "title": "Real and Complex Mathematical Analysis",
-      "slug": "real-and-complex-mathematical-analysis",
-      "author": "Arithmoi Foundation",
-      "summary": "Analysis is the foundation of modern mathematics.",
-      "pdfUrl": "/pdfs/foundations/analysis.pdf"
-    },
     {
       "type": "article",
       "title": "Bell's Theorem and the Mathematical Universe",
@@ -132,6 +84,14 @@
     },
     {
       "type": "article",
+      "title": "Real and Complex Mathematical Analysis",
+      "slug": "real-and-complex-mathematical-analysis",
+      "author": "Arithmoi Foundation",
+      "summary": "A comprehensive guide to real and complex mathematical analysis, covering foundations, sequences, series, continuity, differentiation, integration, and complex function theory.",
+      "pdfUrl": "/pdfs/foundations/analysis.pdf"
+    },
+    {
+      "type": "article",
       "title": "Prime Numbers as a Way to Sublime Mathematics",
       "slug": "prime-numbers-as-a-way-to-sublime-mathematics",
       "author": "Arithmoi Foundation",
@@ -147,14 +107,6 @@
       "author": "Jason Glowney",
       "summary": "An article discussing a novel U(3) group and its applications to quantum computing and other fields.",
       "pdfUrl": "/pdfs/explorations/glowney_jason_A_Novel_U_3_Group_and_Applications_to_Qu.pdf"
-    },
-    {
-      "type": "article",
-      "title": "Lie Groups and Lie Algebras",
-      "slug": "lie-groups-algebras",
-      "author": "Jason Glowney",
-      "summary": "An article on Lie groups and Lie algebras.",
-      "pdfUrl": "/pdfs/explorations/glowney_jason_lie_representation_complex_unit_sphere.pdf"
     },
     {
       "type": "article",
@@ -203,6 +155,14 @@
       "author": "Jason Glowney",
       "summary": "An article on imaginary angles and the connection between related concepts.",
       "pdfUrl": "/pdfs/explorations/glowney_jason_Imaginary_Angles_and_the_Connection_betw.pdf"
+    },
+    {
+      "type": "article",
+      "title": "Lie Groups and Lie Algebras",
+      "slug": "lie-groups-algebras",
+      "author": "Jason Glowney",
+      "summary": "An article on Lie groups and Lie algebras.",
+      "pdfUrl": "/pdfs/explorations/glowney_jason_lie_representation_complex_unit_sphere.pdf"
     },
     {
       "type": "article",
