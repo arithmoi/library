@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en" class="library-layout-active"> <head><meta charset="UTF-8"><meta name="description" content="A knowledge library for the school"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/png" href="/images/library_logo.png"><meta name="generator" content="Astro v5.8.0"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CtSceO8m.js"></script><title>The Strange Attractor of the Lorenz System | Arithmoi Library</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/_astro/_slug_.CV6cwl7k.css">
+<!DOCTYPE html><html lang="en" class="library-layout-active"> <head><meta charset="UTF-8"><meta name="description" content="A knowledge library for the school"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/png" href="/images/library_logo.png"><meta name="generator" content="Astro v5.8.0"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CtSceO8m.js"></script><title>The Strange Attractor of the Lorenz System | Arithmoi Library</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/_astro/_slug_.BZQEDgqw.css">
 <link rel="stylesheet" href="/_astro/about.DYtJ1lyU.css">
 <style>.book-detail[data-astro-cid-y47snweo]{padding:20px;background-color:#fff;border-radius:8px;box-shadow:0 2px 10px #0000001a}.book-detail[data-astro-cid-y47snweo] h1[data-astro-cid-y47snweo]{margin-top:0;margin-bottom:.5rem;font-size:2rem;color:#333}.author[data-astro-cid-y47snweo]{font-style:italic;color:#555;margin-bottom:1rem}.summary[data-astro-cid-y47snweo]{margin-bottom:1.5rem;line-height:1.6}.pdf-embed-container[data-astro-cid-y47snweo]{margin-top:20px;border:1px solid #ddd;height:75vh;display:flex;flex-direction:column}.pdf-embed-container[data-astro-cid-y47snweo]>.pdf-viewer-container{flex-grow:1;min-height:0}
 </style></head> <body> <nav data-astro-cid-5blmo7yk> <div class="nav-container" data-astro-cid-5blmo7yk> <div class="logo" data-astro-cid-5blmo7yk> <img src="/images/library_logo.png" alt="Arithmoi Library Logo" class="navbar-logo-img" data-astro-cid-5blmo7yk> <a href="/" data-astro-cid-5blmo7yk>Arithmoi Library</a> </div> <button class="hamburger" aria-label="Toggle menu" aria-expanded="false" data-astro-cid-5blmo7yk> <span class="hamburger-box" data-astro-cid-5blmo7yk> <span class="hamburger-inner" data-astro-cid-5blmo7yk></span> </span> </button> <ul class="nav-links" data-astro-cid-5blmo7yk> <li data-astro-cid-5blmo7yk><a href="/" data-astro-cid-5blmo7yk>Home</a></li> <li data-astro-cid-5blmo7yk><a href="/library" class="active" data-astro-cid-5blmo7yk>Library</a></li> <li data-astro-cid-5blmo7yk><a href="/about" data-astro-cid-5blmo7yk>About</a></li> <li data-astro-cid-5blmo7yk><a href="/contact" data-astro-cid-5blmo7yk>Contact</a></li> <!-- Theme toggle in mobile menu - using same style as desktop --> <li class="mobile-theme-toggle" data-astro-cid-5blmo7yk> <button id="theme-toggle-mobile" class="theme-toggle theme-toggle-mobile" aria-label="Toggle dark mode" title="Toggle dark/light mode" data-astro-cid-5blmo7yk> <span class="theme-icon light-icon" data-astro-cid-5blmo7yk>☀️</span> <span class="theme-icon dark-icon" data-astro-cid-5blmo7yk>🌙</span> </button> </li> </ul> <!-- Global Dark Mode Toggle - Desktop Only --> <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark/light mode" data-astro-cid-5blmo7yk> <span class="theme-icon light-icon" data-astro-cid-5blmo7yk>☀️</span> <span class="theme-icon dark-icon" data-astro-cid-5blmo7yk>🌙</span> </button> </div> </nav> <script type="module">function g(){const e=document.querySelector(".hamburger"),t=document.querySelector(".nav-links");if(e&&t){e.replaceWith(e.cloneNode(!0));const n=document.querySelector(".hamburger");n.addEventListener("click",()=>{const o=n.getAttribute("aria-expanded")==="true"||!1;n.setAttribute("aria-expanded",!o),t.classList.toggle("is-active"),n.classList.toggle("is-active")})}}function a(){const e=document.getElementById("theme-toggle"),t=document.getElementById("theme-toggle-mobile"),n=localStorage.getItem("theme")||"light";m(n),e&&(e.replaceWith(e.cloneNode(!0)),document.getElementById("theme-toggle").addEventListener("click",()=>{i()})),t&&(t.replaceWith(t.cloneNode(!0)),document.getElementById("theme-toggle-mobile").addEventListener("click",()=>{i();const c=document.querySelector(".nav-links"),l=document.querySelector(".hamburger");c&&l&&(c.classList.remove("is-active"),l.classList.remove("is-active"),l.setAttribute("aria-expanded","false"))}))}function i(){const t=(document.documentElement.getAttribute("data-theme")||"light")==="light"?"dark":"light";m(t),localStorage.setItem("theme",t)}function m(e){document.documentElement.setAttribute("data-theme",e);const t=document.getElementById("theme-toggle"),n=document.getElementById("theme-toggle-mobile");t&&t.classList.toggle("dark-active",e==="dark"),n&&n.classList.toggle("dark-active",e==="dark")}g();a();document.addEventListener("astro:page-load",()=>{g(),a()});</script>  <button class="sidebar-toggle" aria-label="Toggle sidebar" aria-expanded="false"> <span class="hamburger-box"> <span class="hamburger-inner"></span> </span> </button> <div class="main-container"> <aside id="sidebar" data-astro-cid-ssfzsv2f> <h4 data-astro-cid-ssfzsv2f>Library Navigation</h4> <ul data-astro-cid-ssfzsv2f> <li data-astro-cid-ssfzsv2f><a href="/library/" class="sidebar-nav-item" data-astro-cid-ssfzsv2f>Welcome</a></li> <li class="collapsible-category" data-category-path="/library/insights/" data-astro-cid-ssfzsv2f> <div class="category-header" data-astro-cid-ssfzsv2f> <span class="dropdown-indicator" data-astro-cid-ssfzsv2f> <svg class="chevron-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" data-astro-cid-ssfzsv2f> <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" data-astro-cid-ssfzsv2f></path> </svg> </span> <a href="/library/insights/" class="category-title-link" data-astro-cid-ssfzsv2f> Insights </a> </div> <ul class="submenu" data-astro-cid-ssfzsv2f> <li data-astro-cid-ssfzsv2f> <a href="/library/insights/foundations-for-mathematical-reality" data-astro-cid-ssfzsv2f> Foundations for Mathematical Reality </a> </li><li data-astro-cid-ssfzsv2f> <a href="/library/insights/ontological-mathematics-and-eastern-philosophy" data-astro-cid-ssfzsv2f> Ontological Mathematics and Eastern Philosophy </a> </li><li data-astro-cid-ssfzsv2f> <a href="/library/insights/pondering-on-the-god-equation" data-astro-cid-ssfzsv2f> Pondering on the God Equation </a> </li><li data-astro-cid-ssfzsv2f> <a href="/library/insights/the-alchemy-of-symmetry-and-antisymmetry" data-astro-cid-ssfzsv2f> The Alchemy of Symmetry and Anti-Symmetry </a> </li><li data-astro-cid-ssfzsv2f> <a href="/library/insights/the-bridge-of-thought" data-astro-cid-ssfzsv2f> The Bridge of Thought </a> </li><li data-astro-cid-ssfzsv2f> <a href="/library/insights/mathematical-and-medical-alliance" data-astro-cid-ssfzsv2f> The Mathematical and Medical Alliance </a> </li><li data-astro-cid-ssfzsv2f> <a href="/library/insights/power-of-mathematics-and-numbers" data-astro-cid-ssfzsv2f> The Power of Mathematics and Numbers </a> </li> </ul> </li><li class="collapsible-category" data-category-path="/library/foundations/" data-astro-cid-ssfzsv2f> <div class="category-header" data-astro-cid-ssfzsv2f> <span class="dropdown-indicator" data-astro-cid-ssfzsv2f> <svg class="chevron-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" data-astro-cid-ssfzsv2f> <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" data-astro-cid-ssfzsv2f></path> </svg> </span> <a href="/library/foundations/" class="category-title-link" data-astro-cid-ssfzsv2f> Foundations </a> </div> <ul class="submenu" data-astro-cid-ssfzsv2f> <li data-astro-cid-ssfzsv2f> <a href="/library/foundations/bells-theorem-and-the-mathematical-universe" data-astro-cid-ssfzsv2f> Bell&#39;s Theorem and the Mathematical Universe </a> </li><li data-astro-cid-ssfzsv2f> <a href="/library/foundations/essential-calculus-theorems" data-astro-cid-ssfzsv2f> Essential Calculus Theorems </a> </li><li data-astro-cid-ssfzsv2f> <a href="/library/foundations/real-and-complex-mathematical-analysis" data-astro-cid-ssfzsv2f> Real and Complex Mathematical Analysis </a> </li><li data-astro-cid-ssfzsv2f> <a href="/library/foundations/prime-numbers-as-a-way-to-sublime-mathematics" data-astro-cid-ssfzsv2f> Prime Numbers as a Way to Sublime Mathematics </a> </li> </ul> </li><li class="collapsible-category is-expanded" data-category-path="/library/explorations/" data-astro-cid-ssfzsv2f> <div class="category-header" data-astro-cid-ssfzsv2f> <span class="dropdown-indicator" data-astro-cid-ssfzsv2f> <svg class="chevron-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" data-astro-cid-ssfzsv2f> <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" data-astro-cid-ssfzsv2f></path> </svg> </span> <a href="/library/explorations/" class="category-title-link" data-astro-cid-ssfzsv2f> Explorations </a> </div> <ul class="submenu" data-astro-cid-ssfzsv2f> <li data-astro-cid-ssfzsv2f> <a href="/library/explorations/novel-u3-group-applications" data-astro-cid-ssfzsv2f> A Novel U(3) Group and Applications </a> </li><li data-astro-cid-ssfzsv2f> <a href="/library/explorations/imaginary-derivation-e" data-astro-cid-ssfzsv2f> An Imaginary Derivation of e </a> </li><li data-astro-cid-ssfzsv2f> <a href="/library/explorations/asymptotic-light-geometry" data-astro-cid-ssfzsv2f> Asymptotic Light Geometry </a> </li><li data-astro-cid-ssfzsv2f> <a href="/library/explorations/derivation-complex-unit-sphere" data-astro-cid-ssfzsv2f> Derivation of the Complex Unit Sphere </a> </li><li data-astro-cid-ssfzsv2f> <a href="/library/explorations/geometric-thoughts-guest-algebra" data-astro-cid-ssfzsv2f> Geometric Thoughts with Guest Algebra </a> </li><li data-astro-cid-ssfzsv2f> <a href="/library/explorations/gravitational-wave-signal-processing" data-astro-cid-ssfzsv2f> Gravitational Wave Signal Processing </a> </li><li data-astro-cid-ssfzsv2f> <a href="/library/explorations/imaginary-angles-connection-between" data-astro-cid-ssfzsv2f> Imaginary Angles and the Connection Between </a> </li><li data-astro-cid-ssfzsv2f> <a href="/library/explorations/lie-groups-algebras" data-astro-cid-ssfzsv2f> Lie Groups and Lie Algebras </a> </li><li data-astro-cid-ssfzsv2f> <a href="/library/explorations/pascals-tetrahedron-combinatorics-theory" data-astro-cid-ssfzsv2f> Pascal&#39;s Tetrahedron, Combinatorics, and Theory </a> </li><li data-astro-cid-ssfzsv2f> <a href="/library/explorations/strange-attractor-lorenz-system" data-astro-cid-ssfzsv2f> The Strange Attractor of the Lorenz System </a> </li> </ul> </li><li data-astro-cid-ssfzsv2f> <a href="/library/masteries/" class="sidebar-nav-item category-title-like" data-astro-cid-ssfzsv2f> Masteries </a> </li> </ul> </aside>  <script>(function(){const currentPage = "/library/explorations/strange-attractor-lorenz-system/";
@@ -36,52 +36,29 @@
       }
     });
   });
-})();</script> <main class="content-area"> <div class="content-wrapper library-content-wrapper book-detail-active">  <article class="book-detail" data-astro-cid-y47snweo> <h1 data-astro-cid-y47snweo>The Strange Attractor of the Lorenz System</h1> <p class="author" data-astro-cid-y47snweo>By: Jason Glowney</p> <p class="summary" data-astro-cid-y47snweo>An article on the strange attractor of the Lorenz system.</p> <div class="pdf-embed-container" data-astro-cid-y47snweo> <div id="pdf-viewer-container" class="pdf-viewer-container" data-astro-cid-v6ggcyrl> <div class="canvas-wrapper" data-astro-cid-v6ggcyrl> <canvas id="pdf-canvas" data-astro-cid-v6ggcyrl></canvas> </div> <div class="pdf-controls" data-astro-cid-v6ggcyrl> <button id="prev-page" title="Previous Page" data-astro-cid-v6ggcyrl> <span class="icon" data-astro-cid-v6ggcyrl><</span> <span class="text" data-astro-cid-v6ggcyrl>Previous</span> </button> <div id="page-indicator" class="page-indicator" title="Go to Page" data-astro-cid-v6ggcyrl> <span id="page-num-display" data-astro-cid-v6ggcyrl></span>&nbsp;/&nbsp;<span id="page-count-display" data-astro-cid-v6ggcyrl></span> </div> <div id="page-navigation-group" style="display: none;" data-astro-cid-v6ggcyrl> <div id="page-input-container" class="page-input-container" data-astro-cid-v6ggcyrl> <input type="number" id="page-input" min="1" data-astro-cid-v6ggcyrl> <button id="goto-page-btn" data-astro-cid-v6ggcyrl>Go</button> <span id="page-input-error-icon" class="page-input-error-icon" style="display: none;" data-astro-cid-v6ggcyrl>&#9432;</span> </div> </div> <button id="next-page" title="Next Page" data-astro-cid-v6ggcyrl> <span class="icon" data-astro-cid-v6ggcyrl>></span> <span class="text" data-astro-cid-v6ggcyrl>Next</span> </button> <span class="spacer" data-astro-cid-v6ggcyrl></span> <button id="zoom-out" class="zoom-button" title="Zoom Out" data-astro-cid-v6ggcyrl>-</button> <span id="zoom-level" class="zoom-level-display" data-astro-cid-v6ggcyrl>100%</span> <button id="zoom-in" class="zoom-button" title="Zoom In" data-astro-cid-v6ggcyrl>+</button> <span class="spacer" data-astro-cid-v6ggcyrl></span> <button id="fullscreen-btn" title="Toggle Fullscreen" data-astro-cid-v6ggcyrl> <span class="icon" data-astro-cid-v6ggcyrl>&#x2922;</span> <span class="text" style="display: none;" data-astro-cid-v6ggcyrl>Full Screen</span> </button> <!-- Hamburger Menu Button --> <button id="menu-btn" class="menu-button" title="More Options" data-astro-cid-v6ggcyrl> <span class="icon" data-astro-cid-v6ggcyrl>☰</span> </button> </div> <!-- Modal Overlay Menu --> <div id="pdf-menu-overlay" class="pdf-menu-overlay" style="display: none;" data-astro-cid-v6ggcyrl> <div class="pdf-menu-modal" data-astro-cid-v6ggcyrl> <div class="menu-header" data-astro-cid-v6ggcyrl> <h3 class="menu-title" data-astro-cid-v6ggcyrl>📖 PDF Viewer Options</h3> <button id="menu-close-btn" class="menu-close-btn" data-astro-cid-v6ggcyrl>&times;</button> </div> <div class="menu-content" data-astro-cid-v6ggcyrl> <div class="menu-section" data-astro-cid-v6ggcyrl> <h4 class="menu-section-title" data-astro-cid-v6ggcyrl>📚 How to Use</h4> <div class="menu-info" data-astro-cid-v6ggcyrl> <p data-astro-cid-v6ggcyrl>Use the controls below to navigate through the PDF document.</p> <ul data-astro-cid-v6ggcyrl> <li data-astro-cid-v6ggcyrl>🖱️ Use Previous/Next buttons to navigate pages</li> <li data-astro-cid-v6ggcyrl>🔍 Use +/- buttons to zoom in and out</li> <li data-astro-cid-v6ggcyrl>📱 Click page number to jump to specific page</li> <li data-astro-cid-v6ggcyrl>⛶ Use fullscreen button for immersive reading</li> </ul> </div> </div> </div> </div> </div> </div> <script>(function(){const pdfUrl = "/pdfs/explorations/glowney_jason_The_Strange_Attractor_of_the_Lorenz_Syst.pdf";
-const pdfjsWorkerSrc = "/pdf.worker.min.mjs";
+})();</script> <main class="content-area"> <div class="content-wrapper library-content-wrapper book-detail-active">  <article class="book-detail" data-astro-cid-y47snweo> <h1 data-astro-cid-y47snweo>The Strange Attractor of the Lorenz System</h1> <p class="author" data-astro-cid-y47snweo>By: Jason Glowney</p> <p class="summary" data-astro-cid-y47snweo>An article on the strange attractor of the Lorenz system.</p> <div class="pdf-embed-container" data-astro-cid-y47snweo> <div id="pdf-viewer-container" class="pdf-viewer-container" data-pdf-url="/pdfs/explorations/glowney_jason_The_Strange_Attractor_of_the_Lorenz_Syst.pdf" data-astro-cid-v6ggcyrl> <div class="canvas-wrapper" data-astro-cid-v6ggcyrl> <canvas id="pdf-canvas" style="display: none;" data-astro-cid-v6ggcyrl></canvas> <div class="loading-spinner" data-astro-cid-v6ggcyrl></div> </div> <div class="pdf-controls" data-astro-cid-v6ggcyrl> <button id="prev-page" title="Previous Page" data-astro-cid-v6ggcyrl> <span class="icon" data-astro-cid-v6ggcyrl><</span> <span class="text" data-astro-cid-v6ggcyrl>Previous</span> </button> <div id="page-indicator" class="page-indicator" title="Go to Page" data-astro-cid-v6ggcyrl> <span id="page-num-display" data-astro-cid-v6ggcyrl></span>&nbsp;/&nbsp;<span id="page-count-display" data-astro-cid-v6ggcyrl></span> </div> <div id="page-navigation-group" style="display: none;" data-astro-cid-v6ggcyrl> <div id="page-input-container" class="page-input-container" data-astro-cid-v6ggcyrl> <input type="number" id="page-input" min="1" data-astro-cid-v6ggcyrl> <button id="goto-page-btn" data-astro-cid-v6ggcyrl>Go</button> <span id="page-input-error-icon" class="page-input-error-icon" style="display: none;" data-astro-cid-v6ggcyrl>&#9432;</span> </div> </div> <button id="next-page" title="Next Page" data-astro-cid-v6ggcyrl> <span class="icon" data-astro-cid-v6ggcyrl>></span> <span class="text" data-astro-cid-v6ggcyrl>Next</span> </button> <span class="spacer" data-astro-cid-v6ggcyrl></span> <button id="zoom-out" class="zoom-button" title="Zoom Out" data-astro-cid-v6ggcyrl>-</button> <span id="zoom-level" class="zoom-level-display" data-astro-cid-v6ggcyrl>100%</span> <button id="zoom-in" class="zoom-button" title="Zoom In" data-astro-cid-v6ggcyrl>+</button> <span class="spacer" data-astro-cid-v6ggcyrl></span> <button id="fullscreen-btn" title="Toggle Fullscreen" data-astro-cid-v6ggcyrl> <span class="icon" data-astro-cid-v6ggcyrl>&#x2922;</span> <span class="text" style="display: none;" data-astro-cid-v6ggcyrl>Full Screen</span> </button> <!-- Hamburger Menu Button --> <button id="menu-btn" class="menu-button" title="More Options" data-astro-cid-v6ggcyrl> <span class="icon" data-astro-cid-v6ggcyrl>☰</span> </button> </div> <!-- Modal Overlay Menu --> <div id="pdf-menu-overlay" class="pdf-menu-overlay" style="display: none;" data-astro-cid-v6ggcyrl> <div class="pdf-menu-modal" data-astro-cid-v6ggcyrl> <div class="menu-header" data-astro-cid-v6ggcyrl> <h3 class="menu-title" data-astro-cid-v6ggcyrl>📖 PDF Viewer Options</h3> <button id="menu-close-btn" class="menu-close-btn" data-astro-cid-v6ggcyrl>&times;</button> </div> <div class="menu-content" data-astro-cid-v6ggcyrl> <div class="menu-section" data-astro-cid-v6ggcyrl> <h4 class="menu-section-title" data-astro-cid-v6ggcyrl>📚 How to Use</h4> <div class="menu-info" data-astro-cid-v6ggcyrl> <p data-astro-cid-v6ggcyrl>Use the controls below to navigate through the PDF document.</p> <ul data-astro-cid-v6ggcyrl> <li data-astro-cid-v6ggcyrl>🖱️ Use Previous/Next buttons to navigate pages</li> <li data-astro-cid-v6ggcyrl>🔍 Use +/- buttons to zoom in and out</li> <li data-astro-cid-v6ggcyrl>📱 Click page number to jump to specific page</li> <li data-astro-cid-v6ggcyrl>⛶ Use fullscreen button for immersive reading</li> </ul> </div> </div> </div> </div> </div> </div> <script>(function(){const pdfjsWorkerSrc = "/pdf.worker.min.mjs";
 
-  // Global variables
+  // --- State Management ---
   let currentPdfDoc = null;
   let currentPageNum = 1;
   let currentScale = 1.5;
   let totalPages = 0;
-  let isInitialized = false;
+  let activePdfUrl = ''; // This will be updated on each page load
+  let handlers = {}; // To store event listener references for cleanup
 
-  // Cleanup function to prevent multiple initializations
-  function cleanup() {
-    if (currentPdfDoc) {
-      console.log('Cleaning up existing PDF document');
-      currentPdfDoc = null;
-    }
-    currentPageNum = 1;
-    totalPages = 0;
-    isInitialized = false;
-  }
+  // --- Core Lifecycle Functions ---
 
-  // Initialize PDF viewer
   async function initializePdfViewer() {
-    if (isInitialized) {
-      console.log('PDF viewer already initialized, skipping...');
-      return;
-    }
-    
+    console.log('🚀 Starting PDF viewer initialization...');
+    const spinner = document.querySelector('.loading-spinner');
+    if (spinner) spinner.style.display = 'block';
+
     try {
-      console.log('🚀 Starting PDF viewer initialization...');
-      
-      // Wait for DOM to be ready with multiple checks
-      await waitForDOMReady();
-      
-      // Wait for required elements to be available
       await waitForRequiredElements();
-      
-      // Initialize PDF
       await loadPdf();
-      
-      // Setup event listeners
       setupEventListeners();
-      
+      setupKeyboardShortcuts();
       console.log('✅ PDF viewer initialization complete');
-      isInitialized = true;
-      
     } catch (error) {
       console.error('❌ Initialization failed:', error);
       const canvasWrapper = document.querySelector('.canvas-wrapper');
@@ -89,513 +66,217 @@ const pdfjsWorkerSrc = "/pdf.worker.min.mjs";
         canvasWrapper.innerHTML = `<div style="padding: 20px; text-align: center; color: #721c24; background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 8px;">
           <h3>❌ PDF Viewer Initialization Failed</h3>
           <p>Error: ${error.message}</p>
-          <p>Please refresh the page to try again.</p>
         </div>`;
       }
+    } finally {
+      if (spinner) spinner.style.display = 'none';
     }
   }
 
-  async function waitForDOMReady() {
-    if (document.readyState === 'loading') {
-      console.log('Waiting for DOM to be ready...');
-      await new Promise(resolve => {
-        document.addEventListener('DOMContentLoaded', resolve);
-      });
+  function cleanup() {
+    console.log('Cleaning up PDF viewer instance...');
+    removeEventListeners();
+    if (currentPdfDoc) {
+      console.log('Destroying previous PDF document instance.');
+      currentPdfDoc.destroy();
+      currentPdfDoc = null;
     }
-    console.log('DOM is ready');
+    currentPageNum = 1;
+    totalPages = 0;
+    currentScale = 1.5;
   }
 
-  async function waitForRequiredElements() {
-    const requiredSelectors = [
-      '.canvas-wrapper',
-      '#page-num-display',
-      '#page-count-display',
-      '#prev-page',
-      '#next-page'
-    ];
-    
-    const maxWaitTime = 5000; // 5 seconds max wait
-    const checkInterval = 100; // Check every 100ms
-    let waitTime = 0;
-    
-    while (waitTime < maxWaitTime) {
-      const missingElements = requiredSelectors.filter(selector => !document.querySelector(selector));
-      
-      if (missingElements.length === 0) {
-        console.log('All required elements found');
-        return;
-      }
-      
-      console.log(`Waiting for elements: ${missingElements.join(', ')}`);
-      await new Promise(resolve => setTimeout(resolve, checkInterval));
-      waitTime += checkInterval;
-    }
-    
-    const stillMissing = requiredSelectors.filter(selector => !document.querySelector(selector));
-    if (stillMissing.length > 0) {
-      console.warn(`Some elements still missing after ${maxWaitTime}ms: ${stillMissing.join(', ')}`);
-      // Continue anyway - some elements might be optional
+  function setupViewer() {
+    const container = document.getElementById('pdf-viewer-container');
+    if (container) {
+      activePdfUrl = container.dataset.pdfUrl;
+      console.log(`PDF Viewer container found for ${activePdfUrl}, running setup...`);
+      cleanup();
+      initializePdfViewer();
+    } else {
+      console.log('No PDF viewer on this page, cleaning up old listeners.');
+      cleanup();
     }
   }
 
-  async function loadPdf() {
-    console.log('Loading PDF:', pdfUrl);
-    
-    try {
-      // Dynamically import pdfjs-dist
-      const pdfjsLib = await import('/pdf.min.mjs');
-      
-      // Set worker source
-      pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorkerSrc;
-      console.log('PDF.js worker source set to:', pdfjsWorkerSrc);
+  // --- Astro Lifecycle Hook ---
 
-      const loadingTask = pdfjsLib.getDocument(pdfUrl);
-      currentPdfDoc = await loadingTask.promise;
-      totalPages = currentPdfDoc.numPages;
-      
-      console.log(`PDF loaded successfully: ${totalPages} pages`);
+  if (!window.astroPdfViewerListenerAttached) {
+    console.log('Attaching astro:page-load listener.');
+    document.addEventListener('astro:page-load', setupViewer);
+    window.astroPdfViewerListenerAttached = true;
+  }
 
-      // Update page display
-      const pageNumElement = document.getElementById('page-num-display');
-      const pageCountElement = document.getElementById('page-count-display');
-      
-      console.log('Updating page display:', { currentPageNum, totalPages });
-      
-      if (pageCountElement) {
-        pageCountElement.textContent = totalPages.toString();
-        console.log('Set page count to:', totalPages);
-      } else {
-        console.warn('Page count element not found');
-      }
-      
-      if (pageNumElement) {
-        pageNumElement.textContent = currentPageNum.toString();
-        console.log('Set current page to:', currentPageNum);
-      } else {
-        console.warn('Page number element not found');
-      }
+  // Initial run for the very first page load.
+  setupViewer();
 
-      // Set page input max value
-      const pageInput = document.getElementById('page-input');
-      if (pageInput) {
-        pageInput.max = totalPages.toString();
-        pageInput.min = "1";
-      }
+  // --- Event Listener Management ---
 
-      // Load saved reading progress
-      const savedPage = loadReadingProgress();
-      if (savedPage && savedPage !== currentPageNum && savedPage <= totalPages) {
-        currentPageNum = savedPage;
-      }
-
-      // Initial render
-      await renderPage(currentPageNum);
-      updateZoomLevelDisplay();
-      
-    } catch (error) {
-      console.error('Failed to load PDF:', error);
-      const canvasWrapper = document.querySelector('.canvas-wrapper');
-      if (canvasWrapper) {
-        canvasWrapper.innerHTML = `<div style="padding: 20px; text-align: center; color: #721c24; background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 8px;">
-          <h3>❌ Failed to load PDF</h3>
-          <p>Error: ${error.message}</p>
-          <p>PDF URL: ${pdfUrl}</p>
-          <p>Please check that the PDF file exists and is accessible.</p>
-        </div>`;
-      }
+  function addListener(id, element, event, handler) {
+    if (element) {
+      element.addEventListener(event, handler);
+      handlers[id] = { element, event, handler };
     }
   }
 
-
-  // PDF Rendering Functions
-  async function renderPage(num, scale = null) {
-    if (!currentPdfDoc) {
-      console.error('Cannot render page: PDF document not loaded');
-      return;
-    }
-    
-    if (num < 1 || num > totalPages) {
-      console.error(`Invalid page number: ${num}. Valid range: 1-${totalPages}`);
-      return;
-    }
-    
-    const useScale = scale || currentScale;
-    console.log(`Rendering page ${num} of ${totalPages} at scale ${useScale}`);
-    
-    try {
-      const page = await currentPdfDoc.getPage(num);
-      const viewport = page.getViewport({ scale: useScale });
-
-      // Get canvas container
-      const canvasWrapper = document.querySelector('.canvas-wrapper');
-      if (!canvasWrapper) {
-        console.error('Canvas wrapper not found');
-        return;
-      }
-
-      // Create fresh canvas
-      const oldCanvas = document.getElementById('pdf-canvas');
-      if (oldCanvas) {
-        oldCanvas.remove();
-      }
-      
-      const canvas = document.createElement('canvas');
-      canvas.id = 'pdf-canvas';
-      
-      // Set canvas dimensions properly
-      const devicePixelRatio = window.devicePixelRatio || 1;
-      canvas.width = viewport.width * devicePixelRatio;
-      canvas.height = viewport.height * devicePixelRatio;
-      canvas.style.width = viewport.width + 'px';
-      canvas.style.height = viewport.height + 'px';
-      
-      canvasWrapper.appendChild(canvas);
-
-      const ctx = canvas.getContext('2d');
-      
-      // Scale context for high DPI displays
-      ctx.scale(devicePixelRatio, devicePixelRatio);
-      
-      const renderContext = {
-        canvasContext: ctx,
-        viewport: viewport,
-      };
-      
-      console.log(`Starting render for page ${num}...`);
-      await page.render(renderContext).promise;
-      console.log(`✅ Successfully rendered page ${num}`);
-      
-      // Update state
-      currentPageNum = num;
-      currentScale = useScale;
-      
-      // Update UI
-      const pageNumElement = document.getElementById('page-num-display');
-      if (pageNumElement) {
-        pageNumElement.textContent = num.toString();
-        console.log('Updated page display to:', num);
-      } else {
-        console.warn('Page number element not found during render');
-      }
-
-      // Scroll canvas-wrapper to top of the page
-      if (canvasWrapper) {
-        canvasWrapper.scrollTop = 0;
-      } else {
-        console.warn('canvasWrapper not found, unable to scroll to top');
-      }
-
-      const prevButton = document.getElementById('prev-page');
-      const nextButton = document.getElementById('next-page');
-      if (prevButton) prevButton.disabled = num <= 1;
-      if (nextButton) nextButton.disabled = num >= totalPages;
-      
-      // Save reading progress
-      saveReadingProgress();
-      
-      console.log(`Successfully rendered page ${num}`);
-      
-    } catch (error) {
-      console.error('Error rendering page:', error);
-      const canvasWrapper = document.querySelector('.canvas-wrapper');
-      if (canvasWrapper) {
-        canvasWrapper.innerHTML = `<div style="padding: 20px; text-align: center; color: #721c24; background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 8px;">
-          <h3>❌ Failed to render page ${num}</h3>
-          <p>Error: ${error.message}</p>
-        </div>`;
-      }
-    }
+  function removeEventListeners() {
+    console.log(`Removing ${Object.keys(handlers).length} event listeners.`);
+    Object.values(handlers).forEach(({ element, event, handler }) => {
+      if (element) element.removeEventListener(event, handler);
+    });
+    handlers = {};
   }
 
-  function updateZoomLevelDisplay() {
-    const zoomLevelElement = document.getElementById('zoom-level');
-    if (zoomLevelElement) {
-      zoomLevelElement.textContent = `${Math.round(currentScale * 100)}%`;
-    }
-  }
-
-  // Reading Progress Functions
-  function saveReadingProgress() {
-    const progress = {
-      pdfUrl: pdfUrl,
-      currentPage: currentPageNum,
-      timestamp: Date.now()
-    };
-    localStorage.setItem('pdfReadingProgress', JSON.stringify(progress));
-  }
-
-  function loadReadingProgress() {
-    try {
-      const saved = localStorage.getItem('pdfReadingProgress');
-      if (saved) {
-        const progress = JSON.parse(saved);
-        if (progress.pdfUrl === pdfUrl) {
-          return progress.currentPage;
-        }
-      }
-    } catch (error) {
-      console.error('Failed to load reading progress:', error);
-    }
-    return 1;
-  }
-
-  // Event Listeners Setup
   function setupEventListeners() {
     console.log('🔧 Setting up event listeners...');
-    
-    // Navigation buttons
-    const prevButton = document.getElementById('prev-page');
-    const nextButton = document.getElementById('next-page');
-    
-    console.log('Navigation buttons found:', { prevButton: !!prevButton, nextButton: !!nextButton });
-    
-    if (prevButton) {
-      prevButton.addEventListener('click', async () => {
-        console.log('Previous button clicked');
-        if (currentPageNum > 1) {
-          await renderPage(currentPageNum - 1);
-        }
-      });
-    } else {
-      console.warn('Previous button not found');
-    }
-
-    if (nextButton) {
-      nextButton.addEventListener('click', async () => {
-        console.log('Next button clicked');
-        if (currentPageNum < totalPages) {
-          await renderPage(currentPageNum + 1);
-        }
-      });
-    } else {
-      console.warn('Next button not found');
-    }
-
-    // Zoom controls
-    const zoomInButton = document.getElementById('zoom-in');
-    const zoomOutButton = document.getElementById('zoom-out');
-    
-    console.log('Zoom buttons found:', { zoomInButton: !!zoomInButton, zoomOutButton: !!zoomOutButton });
-    
-    if (zoomInButton) {
-      zoomInButton.addEventListener('click', async () => {
-        console.log('Zoom in button clicked');
-        const newScale = currentScale + 0.25;
-        await renderPage(currentPageNum, newScale);
-        updateZoomLevelDisplay();
-      });
-    } else {
-      console.warn('Zoom in button not found');
-    }
-
-    if (zoomOutButton) {
-      zoomOutButton.addEventListener('click', async () => {
-        console.log('Zoom out button clicked');
-        if (currentScale > 0.25) {
-          const newScale = currentScale - 0.25;
-          await renderPage(currentPageNum, newScale);
-          updateZoomLevelDisplay();
-        }
-      });
-    } else {
-      console.warn('Zoom out button not found');
-    }
-
-    // Fullscreen
-    const fullscreenButton = document.getElementById('fullscreen-btn');
-    const pdfViewerContainer = document.getElementById('pdf-viewer-container');
-    
-    console.log('Other elements found:', { fullscreenButton: !!fullscreenButton, pdfViewerContainer: !!pdfViewerContainer });
-    
-    if (fullscreenButton && pdfViewerContainer) {
-      fullscreenButton.addEventListener('click', () => {
-        console.log('Fullscreen button clicked');
-        if (!document.fullscreenElement) {
-          pdfViewerContainer.requestFullscreen().catch(err => {
-            console.log('Fullscreen request failed:', err);
-          });
-        } else {
-          document.exitFullscreen().catch(err => {
-            console.log('Exit fullscreen failed:', err);
-          });
-        }
-      });
-    } else {
-      console.warn('Fullscreen button or container not found');
-    }
-
-    // Page navigation
-    setupPageNavigation();
-    
-    // Menu functionality
-    setupMenuControls();
-    
-    // Keyboard shortcuts
-    setupKeyboardShortcuts();
+    addListener('prevPage', document.getElementById('prev-page'), 'click', onPrevPage);
+    addListener('nextPage', document.getElementById('next-page'), 'click', onNextPage);
+    addListener('zoomIn', document.getElementById('zoom-in'), 'click', onZoomIn);
+    addListener('zoomOut', document.getElementById('zoom-out'), 'click', onZoomOut);
+    addListener('fullscreen', document.getElementById('fullscreen-btn'), 'click', toggleFullscreen);
+    addListener('docFullscreenChange', document, 'fullscreenchange', onFullscreenChange);
+    addListener('menuBtn', document.getElementById('menu-btn'), 'click', toggleMenu);
+    addListener('menuCloseBtn', document.getElementById('menu-close-btn'), 'click', toggleMenu);
+    addListener('pageIndicator', document.getElementById('page-indicator'), 'click', togglePageInput);
+    addListener('gotoPageBtn', document.getElementById('goto-page-btn'), 'click', gotoPage);
+    addListener('pageInputEnter', document.getElementById('page-input'), 'keypress', (e) => e.key === 'Enter' && gotoPage());
   }
-
-  function setupPageNavigation() {
-    const pageIndicator = document.getElementById('page-indicator');
-    const pageNavigationGroup = document.getElementById('page-navigation-group');
-    const pageInput = document.getElementById('page-input');
-    const gotoPageBtn = document.getElementById('goto-page-btn');
-
-    if (pageIndicator) {
-      pageIndicator.addEventListener('click', () => {
-        if (pageNavigationGroup) {
-          pageNavigationGroup.style.display = 'block';
-        }
-        if (pageIndicator) {
-          pageIndicator.style.display = 'none';
-        }
-        if (pageInput) {
-          pageInput.value = currentPageNum.toString();
-          pageInput.focus();
-          pageInput.select();
-        }
-      });
-    }
-
-    async function handleGoToPage() {
-      if (!pageInput) return;
-      const newPageNum = parseInt(pageInput.value, 10);
-      if (!isNaN(newPageNum) && newPageNum >= 1 && newPageNum <= totalPages) {
-        if (newPageNum !== currentPageNum) {
-          await renderPage(newPageNum);
-        }
-        switchToPageDisplayView();
-      } else {
-        pageInput.focus();
-        pageInput.select();
-      }
-    }
-
-    function switchToPageDisplayView() {
-      if (pageNavigationGroup) {
-        pageNavigationGroup.style.display = 'none';
-      }
-      if (pageIndicator) {
-        pageIndicator.style.display = 'inline-flex';
-      }
-    }
-
-    if (gotoPageBtn) {
-      gotoPageBtn.addEventListener('click', handleGoToPage);
-    }
-    
-    if (pageInput) {
-      pageInput.addEventListener('keypress', (event) => {
-        if (event.key === 'Enter') {
-          event.preventDefault();
-          handleGoToPage();
-        }
-      });
-    }
-  }
-
-  function setupMenuControls() {
-    const menuBtn = document.getElementById('menu-btn');
-    const menuOverlay = document.getElementById('pdf-menu-overlay');
-    const menuCloseBtn = document.getElementById('menu-close-btn');
-
-    if (menuBtn && menuOverlay) {
-      menuBtn.addEventListener('click', () => {
-        menuOverlay.style.display = 'flex';
-      });
-    }
-
-    if (menuCloseBtn && menuOverlay) {
-      menuCloseBtn.addEventListener('click', () => {
-        menuOverlay.style.display = 'none';
-      });
-    }
-
-    if (menuOverlay) {
-      menuOverlay.addEventListener('click', (e) => {
-        if (e.target === menuOverlay) {
-          menuOverlay.style.display = 'none';
-        }
-      });
-    }
-  }
-
 
   function setupKeyboardShortcuts() {
-    document.addEventListener('keydown', (event) => {
-      // Only handle shortcuts when not typing in inputs
-      if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
-        return;
-      }
-
-      if (event.ctrlKey || event.metaKey) {
-        switch (event.key) {
-          case 'ArrowRight': // Ctrl/Cmd + Right - Next page
-            event.preventDefault();
-            if (currentPageNum < totalPages) {
-              renderPage(currentPageNum + 1);
-            }
-            break;
-          case 'ArrowLeft': // Ctrl/Cmd + Left - Previous page
-            event.preventDefault();
-            if (currentPageNum > 1) {
-              renderPage(currentPageNum - 1);
-            }
-            break;
-        }
+    addListener('keyboard', document, 'keydown', (event) => {
+      if (event.target.tagName === 'INPUT') return;
+      switch(event.key) {
+        case 'ArrowLeft': onPrevPage(); break;
+        case 'ArrowRight': onNextPage(); break;
+        case 'f': toggleFullscreen(); break;
       }
     });
   }
 
-  // Initialize with multiple fallbacks and better timing
-  let initializationAttempted = false;
-  
-  function attemptInitialization() {
-    if (initializationAttempted) {
-      console.log('Initialization already attempted, skipping...');
-      return;
-    }
-    initializationAttempted = true;
+  // --- PDF & Rendering Logic ---
+
+  async function loadPdf() {
+    if (!activePdfUrl) throw new Error('PDF URL is not set.');
+    console.log('Loading PDF:', activePdfUrl);
+    const pdfjsLib = await import('/pdf.min.mjs');
+    pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorkerSrc;
+
+    const loadingTask = pdfjsLib.getDocument(activePdfUrl);
+    currentPdfDoc = await loadingTask.promise;
+    totalPages = currentPdfDoc.numPages;
+    console.log(`PDF loaded successfully: ${totalPages} pages`);
+
+    document.getElementById('page-count-display').textContent = totalPages;
+    document.getElementById('page-input').max = totalPages;
     
-    // Small delay to ensure all elements are rendered
-    setTimeout(() => {
-      initializePdfViewer();
-    }, 100);
+    const savedPage = loadReadingProgress();
+    currentPageNum = (savedPage && savedPage <= totalPages) ? savedPage : 1;
+    
+    await renderPage(currentPageNum);
+    updateZoomLevelDisplay();
   }
 
-  // Primary initialization
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', attemptInitialization);
-  } else if (document.readyState === 'interactive') {
-    // DOM is ready but resources might still be loading
-    attemptInitialization();
-  } else {
-    // DOM and resources are ready
-    attemptInitialization();
-  }
-  
-  // Fallback initialization on window load
-  window.addEventListener('load', () => {
-    if (!isInitialized && !currentPdfDoc) {
-      console.log('Fallback initialization on window load');
-      initializationAttempted = false; // Allow retry
-      attemptInitialization();
-    }
-  });
-  
-  // Additional fallback with delay for problematic cases
-  setTimeout(() => {
-    if (!isInitialized && !currentPdfDoc) {
-      console.log('Final fallback initialization after 2 seconds');
-      initializationAttempted = false; // Allow retry
-      attemptInitialization();
-    }
-  }, 2000);
+  async function renderPage(num, scale = null) {
+    if (!currentPdfDoc) return;
+    if (num < 1 || num > totalPages) return;
 
-  // Cleanup on page unload
-  window.addEventListener('beforeunload', cleanup);
-  
-  // Cleanup on page hide (for mobile browsers)
-  window.addEventListener('pagehide', cleanup);
+    currentScale = scale || currentScale;
+    console.log(`Rendering page ${num} at scale ${currentScale}`);
+
+    const page = await currentPdfDoc.getPage(num);
+    const viewport = page.getViewport({ scale: currentScale });
+    const canvasWrapper = document.querySelector('.canvas-wrapper');
+    if (!canvasWrapper) return;
+
+    const oldCanvas = document.getElementById('pdf-canvas');
+    if (oldCanvas) oldCanvas.remove();
+
+    const canvas = document.createElement('canvas');
+    canvas.id = 'pdf-canvas';
+    const devicePixelRatio = window.devicePixelRatio || 1;
+    canvas.width = viewport.width * devicePixelRatio;
+    canvas.height = viewport.height * devicePixelRatio;
+    canvas.style.width = `${viewport.width}px`;
+    canvas.style.height = `${viewport.height}px`;
+    canvas.style.display = 'inline-block';
+    canvasWrapper.appendChild(canvas);
+
+    const ctx = canvas.getContext('2d');
+    ctx.scale(devicePixelRatio, devicePixelRatio);
+
+    await page.render({ canvasContext: ctx, viewport }).promise;
+    console.log(`✅ Successfully rendered page ${num}`);
+
+    currentPageNum = num;
+    document.getElementById('page-num-display').textContent = num;
+    saveReadingProgress(num);
+    canvasWrapper.scrollTop = 0;
+  }
+
+  // --- UI Handlers & Helpers ---
+
+  function onPrevPage() { if (currentPageNum > 1) renderPage(currentPageNum - 1); }
+  function onNextPage() { if (currentPageNum < totalPages) renderPage(currentPageNum + 1); }
+  function onZoomIn() { renderPage(currentPageNum, currentScale + 0.25); updateZoomLevelDisplay(); }
+  function onZoomOut() { if (currentScale > 0.25) { renderPage(currentPageNum, currentScale - 0.25); updateZoomLevelDisplay(); } }
+
+  function toggleFullscreen() {
+    const viewer = document.getElementById('pdf-viewer-container');
+    if (!document.fullscreenElement) viewer.requestFullscreen().catch(err => console.error(err));
+    else document.exitFullscreen();
+  }
+
+  function onFullscreenChange() {
+    const btn = document.getElementById('fullscreen-btn');
+    if (!btn) return;
+    const isFullscreen = !!document.fullscreenElement;
+    btn.querySelector('.icon').innerHTML = isFullscreen ? '&#x2923;' : '&#x2922;';
+    btn.title = isFullscreen ? 'Exit Fullscreen' : 'Toggle Fullscreen';
+  }
+
+  function toggleMenu() {
+    const menuOverlay = document.getElementById('pdf-menu-overlay');
+    if (menuOverlay) menuOverlay.style.display = menuOverlay.style.display === 'none' ? 'flex' : 'none';
+  }
+
+  function togglePageInput() {
+    document.getElementById('page-navigation-group').style.display = 'block';
+    document.getElementById('page-indicator').style.display = 'none';
+  }
+
+  function gotoPage() {
+    const pageInput = document.getElementById('page-input');
+    const pageNum = parseInt(pageInput.value, 10);
+    if (!isNaN(pageNum) && pageNum >= 1 && pageNum <= totalPages) renderPage(pageNum);
+    pageInput.value = '';
+    document.getElementById('page-navigation-group').style.display = 'none';
+    document.getElementById('page-indicator').style.display = 'flex';
+  }
+
+  function updateZoomLevelDisplay() {
+    document.getElementById('zoom-level').textContent = `${Math.round(currentScale * 100)}%`;
+  }
+
+  function saveReadingProgress(page) {
+    if (!activePdfUrl) return;
+    try { localStorage.setItem(activePdfUrl, page.toString()); } catch (e) { console.warn(e); }
+  }
+
+  function loadReadingProgress() {
+    if (!activePdfUrl) return null;
+    try { return parseInt(localStorage.getItem(activePdfUrl), 10) || null; } catch (e) { return null; }
+  }
+
+  async function waitForRequiredElements() {
+    const selectors = ['#page-count-display', '#page-input', '#page-num-display'];
+    let attempts = 0;
+    while (attempts < 50) {
+      if (selectors.every(s => document.querySelector(s))) return;
+      await new Promise(res => setTimeout(res, 100));
+      attempts++;
+    }
+    throw new Error('Required UI elements did not appear in time.');
+  }
 })();</script>  </div>  </article>  </div> </main> </div> <footer data-astro-cid-sz7xmlte> <div class="footer-container library-page-footer" data-astro-cid-sz7xmlte> <div class="footer-columns" data-astro-cid-sz7xmlte> <div class="column" data-astro-cid-sz7xmlte> <h5 data-astro-cid-sz7xmlte>Menu</h5> <ul data-astro-cid-sz7xmlte> <li data-astro-cid-sz7xmlte><a href="/" data-astro-cid-sz7xmlte>Home</a></li> <li data-astro-cid-sz7xmlte><a href="/library/" data-astro-cid-sz7xmlte>Library</a></li> <li data-astro-cid-sz7xmlte><a href="/about/" data-astro-cid-sz7xmlte>About</a></li> <li data-astro-cid-sz7xmlte><a href="/contact/" data-astro-cid-sz7xmlte>Contact</a></li> </ul> </div> <div class="column" data-astro-cid-sz7xmlte> <h5 data-astro-cid-sz7xmlte>References</h5> <ul data-astro-cid-sz7xmlte> <li data-astro-cid-sz7xmlte><a href="https://arithmoi.org" data-astro-cid-sz7xmlte>Arithmoi Website</a></li> <li data-astro-cid-sz7xmlte><a href="/privacy-policy/" data-astro-cid-sz7xmlte>Privacy Policy</a></li> <li data-astro-cid-sz7xmlte><a href="/terms-conditions/" data-astro-cid-sz7xmlte>Terms and Conditions</a></li> <li data-astro-cid-sz7xmlte><a href="/social/" data-astro-cid-sz7xmlte>Social Links</a></li> </ul> </div> </div> <div class="copyright" data-astro-cid-sz7xmlte> <p data-astro-cid-sz7xmlte>&copy; 2025 Arithmoi Foundation. All rights reserved.</p> </div> </div></footer>  <script>
   function initializeSidebar() {
     const sidebarToggle = document.querySelector('.sidebar-toggle');
