@@ -12,7 +12,8 @@ const pdfjsWorkerSrc = `/pdf.worker.min.mjs`;
 
 <div id="pdf-viewer-container" class="pdf-viewer-container">
   <div class="canvas-wrapper">
-    <canvas id="pdf-canvas"></canvas>
+    <canvas id="pdf-canvas" style="display: none;"></canvas>
+    <div class="loading-spinner"></div>
   </div>
   <div class="pdf-controls">
     <button id="prev-page" title="Previous Page">
@@ -97,6 +98,10 @@ const pdfjsWorkerSrc = `/pdf.worker.min.mjs`;
 
   // Initialize PDF viewer
   async function initializePdfViewer() {
+    const spinner = document.querySelector('.loading-spinner');
+    if (spinner) {
+      spinner.style.display = 'block';
+    }
     if (isInitialized) {
       console.log('PDF viewer already initialized, skipping...');
       return;
@@ -119,6 +124,13 @@ const pdfjsWorkerSrc = `/pdf.worker.min.mjs`;
       
       console.log('✅ PDF viewer initialization complete');
       isInitialized = true;
+
+
+
+      const spinner = document.querySelector('.loading-spinner');
+      if (spinner) {
+        spinner.style.display = 'none';
+      }
       
     } catch (error) {
       console.error('❌ Initialization failed:', error);
@@ -286,6 +298,7 @@ const pdfjsWorkerSrc = `/pdf.worker.min.mjs`;
       canvas.height = viewport.height * devicePixelRatio;
       canvas.style.width = viewport.width + 'px';
       canvas.style.height = viewport.height + 'px';
+      canvas.style.display = 'inline-block';
       
       canvasWrapper.appendChild(canvas);
 
@@ -645,14 +658,35 @@ const pdfjsWorkerSrc = `/pdf.worker.min.mjs`;
   }
 
   .canvas-wrapper {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    flex-grow: 1;
     overflow: auto;
-    padding: 0;
-    background: transparent;
-    min-height: 0; /* Allow flex item to shrink */
+    padding: 20px;
+    background-color: #ffffff; /* Changed to white */
+    text-align: center;
+    position: relative; /* Needed for absolute positioning of canvas */
+    border-bottom: 1px solid #ccc;
+  }
+
+  .loading-spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border-left-color: #09f;
+    animation: spin 1s ease infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 
   #pdf-canvas {
