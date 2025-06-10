@@ -38,7 +38,7 @@ const pdfjsWorkerSrc = `/pdf.worker.min.mjs`;
     <span id="zoom-level" class="zoom-level-display">100%</span>
     <button id="zoom-in" class="zoom-button">+</button>
     <span class="spacer"></span>
-    <button id="fullscreen-btn">
+    <button id="fullscreen-btn" title="Toggle Fullscreen">
       <span class="icon">&#x2922;</span>
       <span class="text" style="display: none;">Full Screen</span>
     </button>
@@ -695,6 +695,16 @@ const pdfjsWorkerSrc = `/pdf.worker.min.mjs`;
     cursor: not-allowed;
   }
 
+      #fullscreen-btn {
+        padding: 8px 12px; /* Match default button padding */
+      }
+
+      #fullscreen-btn .icon {
+        font-size: 18px;    /* Match menu button icon size */
+        display: inline-flex; 
+        align-items: center;
+      }
+
   .page-indicator {
     display: flex;
     align-items: center;
@@ -927,6 +937,13 @@ const pdfjsWorkerSrc = `/pdf.worker.min.mjs`;
     .pdf-menu-modal {
       width: 95%;
       padding: 15px;
+    }
+
+    #fullscreen-btn {
+      padding: 6px 8px; /* Match other buttons on small screens */
+    }
+    #fullscreen-btn .icon {
+      font-size: 18px; /* Match menu button icon on small screens */
     }
   }
 </style>
