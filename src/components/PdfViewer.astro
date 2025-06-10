@@ -15,11 +15,11 @@ const pdfjsWorkerSrc = `/pdf.worker.min.mjs`;
     <canvas id="pdf-canvas"></canvas>
   </div>
   <div class="pdf-controls">
-    <button id="prev-page">
+    <button id="prev-page" title="Previous Page">
       <span class="icon"><</span>
       <span class="text">Previous</span>
     </button>
-    <div id="page-indicator" class="page-indicator">
+    <div id="page-indicator" class="page-indicator" title="Go to Page">
       <span id="page-num-display"></span>&nbsp;/&nbsp;<span id="page-count-display"></span>
     </div>
     <div id="page-navigation-group" style="display: none;">
@@ -29,14 +29,14 @@ const pdfjsWorkerSrc = `/pdf.worker.min.mjs`;
         <span id="page-input-error-icon" class="page-input-error-icon" style="display: none;">&#9432;</span>
       </div>
     </div>
-    <button id="next-page">
+    <button id="next-page" title="Next Page">
       <span class="icon">></span>
       <span class="text">Next</span>
     </button>
     <span class="spacer"></span>
-    <button id="zoom-out" class="zoom-button">-</button>
+    <button id="zoom-out" class="zoom-button" title="Zoom Out">-</button>
     <span id="zoom-level" class="zoom-level-display">100%</span>
-    <button id="zoom-in" class="zoom-button">+</button>
+    <button id="zoom-in" class="zoom-button" title="Zoom In">+</button>
     <span class="spacer"></span>
     <button id="fullscreen-btn" title="Toggle Fullscreen">
       <span class="icon">&#x2922;</span>
