@@ -31,9 +31,23 @@ All commands are run from the root of the project, from a terminal:
 | `npm run build`   | Builds your production site to `./dist/`       |
 | `npm run preview` | Previews your build locally, before deploying  |
 
-## ⚖️ License
+## License
 
-The content and code of this website are under the copyright of The Arithmoi Foundation. All Rights Reserved. Please see the `LICENSE` file for more details.
+**This repository contains proprietary and confidential information** - see the [LICENSE](LICENSE) file for details.
+
+### 🔒 Particular Implementation (Private)
+
+This is Arithmoi's particular implementation of the library, part of the Universalis ecosystem's **dual licensing model**:
+
+- **🔒 This Implementation (Private)**: Arithmoi's customized library with specific branding and content
+- **🌐 Universal Template (FOSS)**: The base template is freely available under Apache 2.0
+
+### 🌐 Open Source Alternative
+
+For the **free and open source version** of this library template, see:
+- **[UCLI-Tools Library](https://github.com/ucli-tools/library)** - Apache 2.0 licensed universal template
+
+You can use the universal template to create your own library implementation with your own content and branding.
 
 ## 📞 Contact
 
