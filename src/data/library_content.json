@@ -2,14 +2,6 @@
   "insights": [
     {
       "type": "article",
-      "title": "Foundations for Mathematical Reality",
-      "slug": "foundations-for-mathematical-reality",
-      "author": "Arithmoi Foundation",
-      "summary": "An exploration of mathematics as the fundamental structure of reality, introducing group theory and the elegant foundations that underlie number theory, symmetry, and the mathematical nature of existence.",
-      "pdfUrl": "/pdfs/insights/foundation.pdf"
-    },
-    {
-      "type": "article",
       "title": "Ontological Mathematics and Eastern Philosophy",
       "slug": "ontological-mathematics-and-eastern-philosophy",
       "author": "Arithmoi Foundation",
@@ -18,11 +10,19 @@
     },
     {
       "type": "article",
-      "title": "Pondering on the God Equation",
-      "slug": "pondering-on-the-god-equation",
+      "title": "The Mathematical and Medical Alliance",
+      "slug": "mathematical-and-medical-alliance",
       "author": "Arithmoi Foundation",
-      "summary": "An exploration of Euler's formula as the fundamental equation of existence, examining how this elegant mathematical relationship encodes the logic of reality itself through ontological mathematics.",
-      "pdfUrl": "/pdfs/insights/god_equation.pdf"
+      "summary": "The medical and mathematical fields can grow together.",
+      "pdfUrl": "/pdfs/insights/math-medi-alliance.pdf"
+    },
+    {
+      "type": "article",
+      "title": "The Power of Mathematics and Numbers",
+      "slug": "power-of-mathematics-and-numbers",
+      "author": "Arithmoi Foundation",
+      "summary": "The power of numbers can be unlocked with the right mindset and approach.",
+      "pdfUrl": "/pdfs/insights/3_6_9_guide.pdf"
     },
     {
       "type": "article",
@@ -42,22 +42,46 @@
     },
     {
       "type": "article",
-      "title": "The Mathematical and Medical Alliance",
-      "slug": "mathematical-and-medical-alliance",
+      "title": "The Calculus of Monism: A Dual Aspect Journey",
+      "slug": "the-calculus-of-monism-a-dual-aspect-journey",
       "author": "Arithmoi Foundation",
-      "summary": "The medical and mathematical fields can grow together.",
-      "pdfUrl": "/pdfs/insights/math-medi-alliance.pdf"
+      "summary": "Discovering mathematics as the fabric of reality through the lens of Isaac Newton and Gottfried Wilhelm Leibniz.",
+      "pdfUrl": "/pdfs/insights/calculus_monism.pdf"
     },
     {
       "type": "article",
-      "title": "The Power of Mathematics and Numbers",
-      "slug": "power-of-mathematics-and-numbers",
+      "title": "Foundations for Mathematical Reality",
+      "slug": "foundations-for-mathematical-reality",
       "author": "Arithmoi Foundation",
-      "summary": "The power of numbers can be unlocked with the right mindset and approach.",
-      "pdfUrl": "/pdfs/insights/3_6_9_guide.pdf"
+      "summary": "An exploration of mathematics as the fundamental structure of reality, introducing group theory and the elegant foundations that underlie number theory, symmetry, and the mathematical nature of existence.",
+      "pdfUrl": "/pdfs/insights/foundation.pdf"
+    },
+    {
+      "type": "article",
+      "title": "Pondering on the God Equation",
+      "slug": "pondering-on-the-god-equation",
+      "author": "Arithmoi Foundation",
+      "summary": "An exploration of Euler's formula as the fundamental equation of existence, examining how this elegant mathematical relationship encodes the logic of reality itself through ontological mathematics.",
+      "pdfUrl": "/pdfs/insights/god_equation.pdf"
     }
   ],
   "foundations": [
+    {
+      "type": "article",
+      "title": "Prime Numbers as a Way to Sublime Mathematics",
+      "slug": "prime-numbers-as-a-way-to-sublime-mathematics",
+      "author": "Arithmoi Foundation",
+      "summary": "An introduction to prime numbers allowing readers to develop a strong intuition of the mathematical objects.",
+      "pdfUrl": "/pdfs/foundations/prime_numbers.pdf"
+    },
+    {
+      "type": "article",
+      "title": "Real and Complex Mathematical Analysis",
+      "slug": "real-and-complex-mathematical-analysis",
+      "author": "Arithmoi Foundation",
+      "summary": "A comprehensive guide to real and complex mathematical analysis, covering foundations, sequences, series, continuity, differentiation, integration, and complex function theory.",
+      "pdfUrl": "/pdfs/foundations/analysis.pdf"
+    },
     {
       "type": "article",
       "title": "Bell's Theorem and the Mathematical Universe",
@@ -73,22 +97,6 @@
       "author": "Arithmoi Foundation",
       "summary": "Calculus theorems are essential to a strong mathematical education.",
       "pdfUrl": "/pdfs/foundations/calculus_theorems.pdf"
-    },
-    {
-      "type": "article",
-      "title": "Real and Complex Mathematical Analysis",
-      "slug": "real-and-complex-mathematical-analysis",
-      "author": "Arithmoi Foundation",
-      "summary": "A comprehensive guide to real and complex mathematical analysis, covering foundations, sequences, series, continuity, differentiation, integration, and complex function theory.",
-      "pdfUrl": "/pdfs/foundations/analysis.pdf"
-    },
-    {
-      "type": "article",
-      "title": "Prime Numbers as a Way to Sublime Mathematics",
-      "slug": "prime-numbers-as-a-way-to-sublime-mathematics",
-      "author": "Arithmoi Foundation",
-      "summary": "An introduction to prime numbers allowing readers to develop a strong intuition of the mathematical objects.",
-      "pdfUrl": "/pdfs/foundations/prime_numbers.pdf"
     }
   ],
   "explorations": [
@@ -171,6 +179,14 @@
       "author": "Jason Glowney",
       "summary": "An article on the strange attractor of the Lorenz system.",
       "pdfUrl": "/pdfs/explorations/glowney_jason_The_Strange_Attractor_of_the_Lorenz_Syst.pdf"
+    },
+    {
+      "type": "article",
+      "title": "Polyplex Lie Geometry",
+      "slug": "polyplex-lie-geometry",
+      "author": "Jason Glowney",
+      "summary": "A Multi-Metric Complex Geometry Structured by Lie Algebras in a Hilbertian Framework.",
+      "pdfUrl": "/pdfs/explorations/glowney_jason_Polyplex-Lie-Geometry.pdf"
     }
   ],
   "masteries": []
